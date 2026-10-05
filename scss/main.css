@@ -2773,9 +2773,10 @@ section:not(#section-banner, .section-bottom, #section-related) .comment-block .
   }
 
   #section-banner .banner-block {
+    align-items: flex-end;
     height: 100svh;
     min-height: 620px;
-    padding: 0 20px;
+    padding: 0 20px 14svh;
   }
 }
 
@@ -2812,7 +2813,7 @@ section:not(#section-banner, .section-bottom, #section-related) .comment-block .
 @media only screen and (width <= 768px) {
   #section-banner .banner-block .container {
     margin-bottom: 0;
-    padding-top: 10vh;
+    padding-top: 0;
   }
 }
 
