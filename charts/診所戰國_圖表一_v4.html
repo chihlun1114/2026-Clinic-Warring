@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>診所戰國｜圖表一 v3</title>
+<style>
+  :root{
+    --bg:#f6f4ef;
+    --ink:#252a2d;
+    --muted:#727a80;
+    --grid:#d9d7d0;
+    --accent:#e06b3d;
+    --accent-soft:#f6dfd2;
+    --blue:#2c6fb0;
+    --teal:#15998c;
+    --green:#6f9a1f;
+    --white:#fff;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    color:var(--ink);
+    background:var(--bg);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .story{
+    width:min(1080px, calc(100% - 40px));
+    margin:0 auto;
+    padding:72px 0 84px;
+  }
+
+  .eyebrow{
+    margin:0 0 14px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.14em;
+    color:var(--accent);
+  }
+
+  h1{
+    max-width:900px;
+    margin:0;
+    font-size:clamp(32px,5vw,58px);
+    line-height:1.15;
+    letter-spacing:-.04em;
+    font-weight:900;
+  }
+
+  .dek{
+    max-width:790px;
+    margin:24px 0 0;
+    font-size:17px;
+    line-height:1.9;
+    color:#4f575c;
+  }
+
+  .chart-panel{
+    margin-top:52px;
+    padding-top:22px;
+    border-top:1px solid #d7d4cd;
+  }
+
+  .chart-meta{
+    margin:0 0 12px;
+    font-size:14px;
+    line-height:1.6;
+    color:var(--muted);
+  }
+
+  .chart-wrap{
+    position:relative;
+    width:100%;
+    min-height:520px;
+  }
+
+  #chart{
+    display:block;
+    width:100%;
+    height:auto;
+    overflow:visible;
+  }
+
+  .tooltip{
+    position:absolute;
+    min-width:180px;
+    padding:13px 14px;
+    border-radius:8px;
+    background:rgba(37,42,45,.94);
+    color:#fff;
+    font-size:12px;
+    line-height:1.65;
+    pointer-events:none;
+    opacity:0;
+    transform:translate(-50%,-108%);
+    transition:opacity .12s ease;
+    box-shadow:0 10px 28px rgba(0,0,0,.14);
+  }
+
+  .tooltip strong{
+    display:block;
+    margin-bottom:4px;
+    font-size:15px;
+  }
+
+  .tooltip .total{
+    font-size:17px;
+    font-weight:800;
+    color:#ffd7c7;
+  }
+
+  .breakdown{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:18px;
+  }
+
+  .breakdown-card{
+    position:relative;
+    min-height:172px;
+    padding:22px 22px 20px;
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(37,42,45,.10);
+    border-top:5px solid var(--c);
+  }
+
+  .breakdown-card::after{
+    content:"";
+    position:absolute;
+    top:22px;
+    right:22px;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:var(--c);
+  }
+
+  .breakdown-card .name{
+    font-size:20px;
+    line-height:1.2;
+    font-weight:900;
+    letter-spacing:.02em;
+  }
+
+  .breakdown-card .growth{
+    margin-top:18px;
+    font-size:46px;
+    line-height:1;
+    font-weight:950;
+    letter-spacing:-.045em;
+    color:var(--c);
+  }
+
+  .breakdown-card .growth-label{
+    margin-top:7px;
+    font-size:12px;
+    font-weight:700;
+    color:var(--muted);
+    letter-spacing:.08em;
+  }
+
+  .breakdown-card .nums{
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px solid rgba(37,42,45,.10);
+    font-size:14px;
+    line-height:1.5;
+    font-weight:700;
+    color:#50585d;
+  }
+
+  .breakdown-card .nums strong{
+    color:var(--ink);
+    font-size:16px;
+  }
+
+  .source{
+    margin:18px 0 0;
+    padding-top:12px;
+    border-top:1px solid #dfdcd5;
+    color:#8a9094;
+    font-size:11.5px;
+    line-height:1.7;
+  }
+
+  .axis-label{
+    fill:#7f8589;
+    font-size:12px;
+  }
+
+  .grid{
+    stroke:var(--grid);
+    stroke-width:1;
+  }
+
+  .trend-area{
+    fill:url(#areaFill);
+    opacity:.62;
+  }
+
+  .trend-line{
+    fill:none;
+    stroke:var(--accent);
+    stroke-width:5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+
+  .guide{
+    stroke:#8d9295;
+    stroke-width:1;
+    stroke-dasharray:3 4;
+    opacity:0;
+  }
+
+  .hover-dot{
+    fill:var(--bg);
+    stroke:var(--accent);
+    stroke-width:4;
+    opacity:0;
+  }
+
+  .hit{
+    fill:transparent;
+    cursor:crosshair;
+  }
+
+
+  .point-value{
+    fill:var(--ink);
+    font-size:28px;
+    font-weight:950;
+    letter-spacing:-.03em;
+  }
+
+  .point-year{
+    fill:var(--muted);
+    font-size:12px;
+    font-weight:700;
+  }
+
+  .mid-badge .big{
+    fill:var(--accent);
+    font-size:52px;
+    font-weight:950;
+    letter-spacing:-.05em;
+  }
+
+  .mid-badge .small{
+    fill:#8a5a45;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.08em;
+  }
+
+  .anim-line{
+    stroke-dasharray:2200;
+    stroke-dashoffset:2200;
+  }
+
+  .is-visible .anim-line{
+    animation:drawLine 1.8s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+
+  .chart-annotation{
+    opacity:0;
+    transform:translateY(10px);
+  }
+
+  .is-visible .chart-annotation{
+    animation:annotationIn .55s ease 1.35s forwards;
+  }
+
+  @keyframes drawLine{
+    to{ stroke-dashoffset:0; }
+  }
+
+  @keyframes annotationIn{
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  @media (max-width:720px){
+    .story{
+      width:min(100% - 28px, 680px);
+      padding:44px 0 60px;
+    }
+
+    .dek{
+      font-size:15px;
+      line-height:1.8;
+    }
+
+    .chart-panel{
+      margin-top:38px;
+      padding-top:18px;
+    }
+
+    .chart-wrap{
+      min-height:400px;
+    }
+
+    .breakdown{
+      grid-template-columns:1fr;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .breakdown-card{
+      min-height:0;
+      padding:18px 18px 16px;
+    }
+
+    .breakdown-card .name{
+      font-size:18px;
+    }
+
+    .breakdown-card .growth{
+      margin-top:12px;
+      font-size:40px;
+    }
+
+    .breakdown-card .nums{
+      margin-top:12px;
+      padding-top:11px;
+      font-size:13px;
+    }
+
+    .breakdown-card .nums strong{
+      font-size:15px;
+    }
+
+    .tooltip{
+      min-width:164px;
+      font-size:11px;
+    }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .anim-line{ stroke-dashoffset:0; }
+    .chart-annotation{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<main class="story">
+  <p class="eyebrow">診所戰國時代｜20 年變化</p>
+
+  <h1>20年間，全台多了近5千家診所</h1>
+
+  <p class="dek">
+    過去20年，台灣街頭診所持續增加。從西醫、牙醫到中醫，
+    三類診所合計已由約18,877家增至23,800家，20年間增加4,923家。
+    這不只是醫療服務更可近，也反映基層醫療市場持續擴張。
+  </p>
+
+  <section id="chartSection" class="chart-panel">
+    <p class="chart-meta">2005～2024年全國西醫、牙醫、中醫診所總數變化（家）</p>
+
+    <div class="chart-wrap">
+      <svg id="chart" viewBox="0 0 1000 500" role="img" aria-label="2005至2024年全國診所總數持續增加的趨勢圖">
+        <defs>
+          <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#e06b3d" stop-opacity=".20"></stop>
+            <stop offset="100%" stop-color="#e06b3d" stop-opacity="0"></stop>
+          </linearGradient>
+        </defs>
+
+        <g id="grid"></g>
+        <path id="area" class="trend-area"></path>
+        <path id="line" class="trend-line anim-line"></path>
+        <g id="annotations" class="chart-annotation"></g>
+        <line id="guide" class="guide"></line>
+        <circle id="hoverDot" class="hover-dot" r="7"></circle>
+        <g id="hits"></g>
+      </svg>
+
+      <div class="tooltip" id="tooltip"></div>
+    </div>
+
+    <div class="breakdown" aria-label="三類診所補充資訊">
+      <div class="breakdown-card" style="--c:var(--blue)">
+        <div class="name">西醫診所</div>
+        <div class="growth">+25.2%</div>
+        <div class="growth-label">20 年成長幅度</div>
+        <div class="nums"><strong>9,948</strong> 家 → <strong>12,454</strong> 家</div>
+      </div>
+
+      <div class="breakdown-card" style="--c:var(--teal)">
+        <div class="name">牙醫診所</div>
+        <div class="growth">+17.7%</div>
+        <div class="growth-label">20 年成長幅度</div>
+        <div class="nums"><strong>6,029</strong> 家 → <strong>7,097</strong> 家</div>
+      </div>
+
+      <div class="breakdown-card" style="--c:var(--green)">
+        <div class="name">中醫診所</div>
+        <div class="growth">+46.5%</div>
+        <div class="growth-label">20 年成長幅度</div>
+        <div class="nums"><strong>2,900</strong> 家 → <strong>4,249</strong> 家</div>
+      </div>
+    </div>
+
+    <p class="source">
+      資料來源：衛生福利部統計處《113年醫事機構服務量統計年報》。
+      總診所數為西醫、牙醫、中醫診所家數加總。
+    </p>
+  </section>
+</main>
+
+<script>
+const years = [
+  2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,
+  2015,2016,2017,2018,2019,2020,2021,2022,2023,2024
+];
+
+const west = [
+  9948,10064,10197,10326,10361,10599,10815,10997,11105,11277,
+  11313,11395,11499,11580,11663,11724,11835,11998,12200,12454
+];
+
+const dental = [
+  6029,6065,6104,6173,6214,6295,6402,6476,6565,6630,
+  6665,6727,6791,6836,6874,6893,6922,6969,7026,7097
+];
+
+const chinese = [
+  2900,3006,3069,3160,3217,3289,3411,3462,3548,3637,
+  3705,3772,3839,3917,3975,4036,4043,4131,4194,4249
+];
+
+const total = years.map((_, i) => west[i] + dental[i] + chinese[i]);
+
+const svg = document.getElementById('chart');
+const grid = document.getElementById('grid');
+const line = document.getElementById('line');
+const area = document.getElementById('area');
+const hits = document.getElementById('hits');
+const annotations = document.getElementById('annotations');
+const guide = document.getElementById('guide');
+const hoverDot = document.getElementById('hoverDot');
+const tooltip = document.getElementById('tooltip');
+const chartWrap = document.querySelector('.chart-wrap');
+
+const W = 1000;
+const H = 500;
+const margin = {top:26, right:28, bottom:52, left:58};
+const innerW = W - margin.left - margin.right;
+const innerH = H - margin.top - margin.bottom;
+
+const yMin = 18000;
+const yMax = 24500;
+
+const x = i => margin.left + i * (innerW / (years.length - 1));
+const y = v => margin.top + (yMax - v) / (yMax - yMin) * innerH;
+
+const fmt = n => n.toLocaleString('zh-TW');
+
+function svgEl(tag, attrs = {}, text = ''){
+  const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  Object.entries(attrs).forEach(([k,v]) => el.setAttribute(k,v));
+  if(text) el.textContent = text;
+  return el;
+}
+
+function buildGrid(){
+  const ticks = [18000,20000,22000,24000];
+
+  ticks.forEach(v => {
+    const yy = y(v);
+    grid.appendChild(svgEl('line',{
+      x1:margin.left, y1:yy, x2:W-margin.right, y2:yy, class:'grid'
+    }));
+    grid.appendChild(svgEl('text',{
+      x:margin.left-12, y:yy+4, 'text-anchor':'end', class:'axis-label'
+    }, fmt(v)));
+  });
+
+  const yearTicks = [2005,2010,2015,2020,2024];
+  yearTicks.forEach(yr => {
+    const i = years.indexOf(yr);
+    const anchor = yr===2005 ? 'start' : (yr===2024 ? 'end' : 'middle');
+    grid.appendChild(svgEl('text',{
+      x:x(i), y:H-18, 'text-anchor':anchor, class:'axis-label'
+    }, String(yr)));
+  });
+}
+
+function buildLine(){
+  const points = total.map((v,i)=>[x(i),y(v)]);
+  const d = points.map((p,i)=>(i?'L':'M')+p[0].toFixed(2)+','+p[1].toFixed(2)).join(' ');
+  line.setAttribute('d', d);
+
+  const areaD = d +
+    ` L ${x(years.length-1)},${H-margin.bottom}` +
+    ` L ${x(0)},${H-margin.bottom} Z`;
+  area.setAttribute('d', areaD);
+}
+
+function buildPointTag(group, xPos, yPos, width, height, valueText, yearText, align='left'){
+  const g = svgEl('g', {'class':'point-tag'});
+  let textX = xPos + 14;
+  let anchor = 'start';
+
+  if(align === 'right'){
+    textX = xPos - 14;
+    anchor = 'end';
+  }
+
+  g.appendChild(svgEl('text',{
+    x:textX, y:yPos+30, 'text-anchor':anchor, class:'point-value'
+  }, valueText));
+  g.appendChild(svgEl('text',{
+    x:textX, y:yPos+48, 'text-anchor':anchor, class:'point-year'
+  }, yearText));
+  return g;
+}
+
+function buildAnnotations(){
+  const firstX = x(0), firstY = y(total[0]);
+  const lastX = x(total.length-1), lastY = y(total.at(-1));
+
+  annotations.appendChild(svgEl('circle',{
+    cx:firstX, cy:firstY, r:5, fill:'#e06b3d'
+  }));
+  annotations.appendChild(svgEl('circle',{
+    cx:lastX, cy:lastY, r:6, fill:'#e06b3d'
+  }));
+
+  // 起點標籤：避免壓線，往右下側移
+  const firstTag = buildPointTag(annotations, firstX+8, firstY+8, 108, 58, fmt(total[0]), '2005 年', 'left');
+  annotations.appendChild(firstTag);
+
+  // 終點標籤：靠右上
+  const lastTag = buildPointTag(annotations, lastX-4, lastY-72, 106, 58, fmt(total.at(-1)), '2024 年', 'right');
+  annotations.appendChild(lastTag);
+
+  // 中央主標註：4923 放到圖表中央
+  const midX = x(10.1);
+  const midY = y(22950);
+  const badge = svgEl('g', {'class':'mid-badge'});
+  badge.appendChild(svgEl('text',{
+    x:midX, y:midY-2, 'text-anchor':'middle', class:'big'
+  }, '+4,923'));
+  badge.appendChild(svgEl('text',{
+    x:midX, y:midY+22, 'text-anchor':'middle', class:'small'
+  }, '20 年新增診所'));
+  annotations.appendChild(badge);
+}
+
+function buildHits(){
+  years.forEach((yr,i)=>{
+    const left = i===0 ? margin.left : (x(i-1)+x(i))/2;
+    const right = i===years.length-1 ? W-margin.right : (x(i)+x(i+1))/2;
+
+    const rect = svgEl('rect',{
+      x:left,
+      y:margin.top,
+      width:right-left,
+      height:innerH,
+      class:'hit'
+    });
+
+    rect.addEventListener('mouseenter',()=>showPoint(i));
+    rect.addEventListener('mousemove',(e)=>showTooltipAtEvent(e,i));
+    rect.addEventListener('mouseleave',hidePoint);
+    hits.appendChild(rect);
+  });
+}
+
+function showPoint(i){
+  const px = x(i), py = y(total[i]);
+
+  guide.setAttribute('x1',px);
+  guide.setAttribute('x2',px);
+  guide.setAttribute('y1',margin.top);
+  guide.setAttribute('y2',H-margin.bottom);
+  guide.style.opacity = 1;
+
+  hoverDot.setAttribute('cx',px);
+  hoverDot.setAttribute('cy',py);
+  hoverDot.style.opacity = 1;
+
+  tooltip.innerHTML = `
+    <strong>${years[i]} 年</strong>
+    <div class="total">總計 ${fmt(total[i])} 家</div>
+    <div>西醫 ${fmt(west[i])}</div>
+    <div>牙醫 ${fmt(dental[i])}</div>
+    <div>中醫 ${fmt(chinese[i])}</div>
+  `;
+  tooltip.style.opacity = 1;
+}
+
+function showTooltipAtEvent(e,i){
+  const wrap = chartWrap.getBoundingClientRect();
+  const svgBox = svg.getBoundingClientRect();
+  const pxRatio = svgBox.width / W;
+
+  let left = x(i) * pxRatio + (svgBox.left - wrap.left);
+  let top = y(total[i]) * (svgBox.height / H) + (svgBox.top - wrap.top);
+
+  const minLeft = 95;
+  const maxLeft = wrap.width - 95;
+  left = Math.max(minLeft, Math.min(maxLeft, left));
+
+  tooltip.style.left = left + 'px';
+  tooltip.style.top = top + 'px';
+}
+
+function hidePoint(){
+  guide.style.opacity = 0;
+  hoverDot.style.opacity = 0;
+  tooltip.style.opacity = 0;
+}
+
+buildGrid();
+buildLine();
+buildAnnotations();
+buildHits();
+
+const section = document.getElementById('chartSection');
+let played = false;
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting && !played){
+      played = true;
+      section.classList.add('is-visible');
+    }
+  });
+},{threshold:.2});
+
+observer.observe(section);
+</script>
+
+</body>
+</html>

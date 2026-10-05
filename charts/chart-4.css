@@ -1,0 +1,267 @@
+#chart-4 {
+  --hospital: #6e8ba8;
+  --other: #e2762b;
+  --dental: #15998c;
+  --west: #2c6fb0;
+  --chinese: #6f9a1f;
+}
+
+#chart-4 #chart4-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+#chart-4 .axis-label {
+  fill: #9e9e9e;
+  font-size: 11px;
+}
+
+#chart-4 .grid {
+  stroke: var(--grid);
+  stroke-width: 1;
+}
+
+#chart-4 .total-area {
+  fill: url(#chart4-areaFill);
+  opacity: .62;
+}
+
+#chart-4 .total-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#chart-4 .guide {
+  stroke: #9e9e9e;
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  opacity: 0;
+}
+
+#chart-4 .hover-dot {
+  fill: var(--bg);
+  stroke: var(--accent);
+  stroke-width: 3;
+  opacity: 0;
+}
+
+#chart-4 .hit {
+  fill: transparent;
+  cursor: crosshair;
+}
+
+#chart-4 .point-main {
+  fill: var(--ink);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+#chart-4 .point-year {
+  fill: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+#chart-4 .growth-main {
+  fill: var(--accent);
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: -.05em;
+}
+
+#chart-4 .growth-sub {
+  fill: #8a5a45;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+#chart-4 .anim-line {
+  stroke-dasharray: 2200;
+  stroke-dashoffset: 2200;
+}
+
+#chart-4 .is-visible .anim-line {
+  animation: chart4-drawLine 1.8s cubic-bezier(.2, .7, .2, 1) forwards;
+}
+
+#chart-4 .chart-annotation {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+#chart-4 .is-visible .chart-annotation {
+  animation: chart4-annotationIn .55s ease 1.35s forwards;
+}
+
+@keyframes chart4-drawLine {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes chart4-annotationIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#chart-4 p.rank-title {
+  width: 100%;
+  max-width: none;
+  margin: 24px 0 8px;
+  color: #252a2d;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+#chart-4 p.rank-note {
+  width: 100%;
+  max-width: none;
+  margin: 0 0 16px;
+  color: #727a80;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+#chart-4 .growth-list {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+}
+
+#chart-4 .growth-row {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) max-content;
+  gap: 10px;
+  align-items: center;
+}
+
+#chart-4 .cat {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+#chart-4 .bar-track {
+  position: relative;
+  height: 12px;
+  background: rgba(45, 44, 40, .07);
+  overflow: hidden;
+}
+
+#chart-4 .bar-fill {
+  width: 0;
+  height: 100%;
+  background: var(--c);
+}
+
+#chart-4.is-visible .bar-fill {
+  animation: chart4-growBar 1.05s cubic-bezier(.2, .7, .2, 1) forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes chart4-growBar {
+  to { width: var(--w); }
+}
+
+#chart-4 .percent {
+  text-align: right;
+  color: var(--c);
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+#chart-4 .growth-row.other {
+  margin-top: 2px;
+  padding: 12px 10px;
+  background: rgba(226, 118, 43, .08);
+  border-top: 2px solid var(--other);
+  border-bottom: 2px solid var(--other);
+}
+
+#chart-4 .growth-row.other .percent {
+  font-size: 22px;
+}
+
+#chart-4 .value-pair {
+  grid-column: 2 / 4;
+  margin-top: -2px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+#chart-4 .value-pair strong {
+  color: var(--ink);
+  font-size: 12px;
+  background: none;
+  padding: 0;
+  font-weight: 700;
+}
+
+#chart-4 p.other-note {
+  width: 100%;
+  max-width: none;
+  margin: 16px 0 0;
+  padding-left: 12px;
+  border-left: 3px solid var(--other);
+  color: #676e73;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+@media (max-width: 576px) {
+  #chart-4 .axis-label,
+  #chart-4 .point-year,
+  #chart-4 .growth-sub {
+    font-size: 28px;
+  }
+
+  #chart-4 .point-main {
+    font-size: 40px;
+  }
+
+  #chart-4 .growth-main {
+    font-size: 84px;
+  }
+
+  #chart-4 .total-line {
+    stroke-width: 6;
+  }
+
+  #chart-4 .growth-row {
+    grid-template-columns: 78px minmax(0, 1fr) max-content;
+    gap: 8px;
+  }
+
+  #chart-4 .cat {
+    font-size: 13px;
+  }
+
+  #chart-4 .percent {
+    font-size: 16px;
+  }
+
+  #chart-4 .growth-row.other .percent {
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #chart-4 .anim-line { stroke-dashoffset: 0; }
+  #chart-4 .chart-annotation { opacity: 1; transform: none; }
+  #chart-4 .bar-fill { width: var(--w); }
+}

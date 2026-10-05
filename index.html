@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>康健</title>
+	<meta name="description" content="康健">
+	<meta name="keywords" content="康健">
+	<meta property="og:url" content="https://www.commonhealth.com.tw/">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="康健">
+	<meta property="og:description" content="康健">
+	<meta property="og:image" content="https://as.chdev.tw/ch/share/CH_1200x630.png">
+	<meta property="fb:app_id" content="788399774562640">
+	<link rel="icon" type="image/x-icon" href="https://web.commonhealth.com.tw/online-source/commonhealth/favicon.ico" />
+	<link rel="stylesheet" href="scss/main.css">
+	<link rel="stylesheet" href="charts/chart-1.css">
+	<link rel="stylesheet" href="charts/chart-4.css">
+	<link rel="stylesheet" href="charts/chart-5.css">
+	<link rel="stylesheet" href="charts/chart-3.css">
+	<!-- Google Tag Manager -->
+	<script>(function (w, d, s, l, i) {
+		w[l] = w[l] || []; w[l].push({
+			'gtm.start':
+			new Date().getTime(), event: 'gtm.js'
+		}); var f = d.getElementsByTagName(s)[0],
+			j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+				'//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-MCMN77');</script>
+	<!-- End Google Tag Manager -->
+</head>
+
+<body>
+<header id="ch-header">
+  <div id="ch-container">
+      <h1>
+          <a href="/"><img class="logo" src="https://web.commonhealth.com.tw/assets/global/image/CH-logo-w.svg" alt="康健 logo" /></a>
+      </h1>
+      <div id="ch-button-toggle"><span></span></div>
+      <ul id="ch-nav-wrap">
+          <li><a href="#header">首頁</a></li>
+          <li><a href="#about">關於</a></li>
+          <!-- 新增 <li></li> -->
+          <li id="ch-social-group">
+              <div class="ch-social">
+			      <a id="facebookShare" class="gtm-event">
+                      <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                          <path
+                              d="M22.67 2.667h-3.49c-3.922 0-6.454 2.574-6.454 6.562v3.028H9.215a.546.546 0 0 0-.548.541v4.385c0 .302.245.54.548.54h3.511v11.07c0 .302.246.54.548.54h4.58a.546.546 0 0 0 .548-.54v-11.07h4.103a.546.546 0 0 0 .548-.54v-4.385a.54.54 0 0 0-.548-.54h-4.103V9.69c0-1.233.295-1.86 1.918-1.86h2.35a.548.548 0 0 0 .549-.548V3.207a.542.542 0 0 0-.548-.54Z"
+                              fill="#1877F2"></path>
+                      </svg>
+                  </a>
+              </div>
+              <div class="ch-social">
+                  <a class="gtm-event" href="https://social-plugins.line.me/lineit/share?url=網址&amp;text=網站說明"
+                      target="_blank">
+                      <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M25.342 12.248a.272.272 0 0 1-.267.274H22.44v1.03h2.636c.152 0 .267.123.267.274v.98a.272.272 0 0 1-.267.274H22.44v1.03h2.636c.152 0 .267.122.267.274v.98a.272.272 0 0 1-.267.273H21.2a.262.262 0 0 1-.188-.079h-.007a.324.324 0 0 1-.072-.195V11.27c0-.072.029-.137.072-.188h.007a.243.243 0 0 1 .188-.086h3.875c.152 0 .267.122.267.274v.98Zm-5.36 5.115a.272.272 0 0 1-.267.274h-.972s-.05 0-.072-.007H18.642s-.007 0-.014-.007h-.022l-.014-.022s-.05-.043-.065-.072l-2.767-3.775v3.617a.272.272 0 0 1-.266.273h-.973a.268.268 0 0 1-.267-.273v-6.095c0-.152.123-.274.267-.274h1.045l.014.014h.022v.015h.021v.014h.022v.015l.022.014s.007.014.014.022c0 0 .014.021.022.028l2.766 3.776v-3.624c0-.152.123-.274.267-.274h.972c.152 0 .267.122.267.274v6.095l.007-.008Zm-6.686 0a.272.272 0 0 1-.266.274h-.973a.267.267 0 0 1-.266-.274V11.27c0-.152.122-.274.266-.274h.973c.151 0 .266.122.266.274v6.094Zm-2.341 0a.272.272 0 0 1-.267.274H6.812a.262.262 0 0 1-.187-.079h-.007a.323.323 0 0 1-.072-.195V11.27c0-.152.122-.274.266-.274h.973c.151 0 .267.122.267.274v4.84h2.636c.152 0 .267.123.267.275v.98Zm18.724-3.342c0-6.26-6.21-11.354-13.84-11.354C8.21 2.667 2 7.76 2 14.02c0 5.612 4.92 10.309 11.577 11.202.454.101 1.067.303 1.218.692.137.353.094.908.043 1.268 0 0-.166.987-.194 1.196-.058.353-.281 1.383 1.195.756 1.477-.626 7.969-4.74 10.872-8.119 2.003-2.226 2.968-4.481 2.968-6.98v-.015Z"
+                              fill="#06C755"></path>
+                      </svg>
+                  </a>
+              </div>
+          </li>
+      </ul>
+  </div>
+</header>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+<script>
+  // 點擊選單開關按鈕
+  $('#ch-button-toggle').click(function (e) {
+      e.preventDefault();
+      $(this).toggleClass('active');
+      $('#ch-nav-wrap').toggleClass('opening');
+  });
+
+  // 點擊導覽區塊收合選單
+  $('#ch-nav-wrap').click(function () {
+      $(this).toggleClass('opening');
+      $('#ch-button-toggle').toggleClass('active');
+  });
+
+  // 點擊導覽內部連結，平滑滾動
+  $('#ch-nav-wrap a[href^="#"]').on('click', function (e) {
+      const target = $(this.getAttribute('href'));
+      if (target.length) {
+          e.preventDefault();
+          $('html, body').stop().animate({
+              scrollTop: target.offset().top
+          }, 1000);
+      }
+  });
+</script>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: '788399774562640',
+      cookie: true,
+      xfbml: false,
+      version: 'v24.0'
+    });
+    console.log('Facebook SDK ready');
+  };
+
+  // 載入 Facebook SDK
+  (function(d, s, id) {
+    var js,
+      fjs = d.getElementsByTagName(s)[0];
+
+    if (d.getElementById(id)) {
+      return;
+    }
+
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://connect.facebook.net/zh_TW/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // 點擊分享
+  document.getElementById('facebookShare').onclick = function() {
+    FB.ui({
+      display: 'popup',
+      method: 'share',
+      href: '網址',
+    }, function(response) {});
+  }
+</script>
+    <main class="flex flex-col items-center">
+        <section id="section-banner">
+            <div class="banner-block">
+                <picture class="banner-photo">
+                    <source media="(max-width: 768px)" srcset="images/hero-mobile.webp" type="image/webp">
+                    <img src="images/hero-desktop.webp" alt="台北街頭診所招牌林立" width="1920" height="1080" fetchpriority="high">
+                </picture>
+                <div class="banner-mask" aria-hidden="true"></div>
+                <div class="container flex">
+                    <div class="banner-title flex flex-col items-center">
+                        <p class="banner-kicker">比超商還多，走50步就一家</p>
+                        <h1>診所戰國時代來臨！</h1>
+                        <p class="banner-sub">繁榮與危機並存，醫師如何走出新路</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="section-intro" class="section-preface" data-id="section-intro" data-track="true" page="ClinicWarring" event_title="重點區塊曝光" content_title="前言">
+            <div class="wrapper flex flex-col items-center">
+                <p>台灣診所家數已經超過便利商店，不到百米就好幾家，找診所掛號跟找餐廳一樣方便。</p>
+                <p>診所經濟蓬勃發展，加速金流與人流挪移，從醫院流向診所，健保流向自費，病房流向門診，且因為診所搶病人、搶醫師、省成本都需要專業，自詡為「醫療營運軍火庫」的一批新興產業，儼然成形，正式宣告診所戰國時代來臨。</p>
+                <p>診所遍地開花，對病患而言就醫更為方便，但便利的背後卻需付出代價。首先是醫院醫師大量流往診所，造成原應負起急重症醫療責任的醫學中心空洞化，其次是受到少子化影響的婦兒科人力捉襟見肘，且因診所分布極度不均，醫療稀缺的偏鄉就醫問題更加惡化。</p>
+                <p>最令人擔憂的是，因年輕醫師大量從醫院出走，台大醫院前院長吳明賢甚至預言，當2045年X世代醫師退出職場，也是台灣醫療全面崩盤的時候。</p>
+            </div>
+        </section>
+        <section id="section-1" data-id="section-1" data-track="true" page="ClinicWarring" event_title="重點區塊曝光" content_title="診所比超商還多，台灣醫療版圖正在改寫">
+            <h2 class="h2-section maxw-794">診所比超商還多，<br>台灣醫療版圖正在改寫</h2>
+            <div class="wrapper flex flex-col items-center">
+                <p>根據經濟部2024年發布的資料，2023年底全台便利商店約1萬3,706家，密度已經高於日本、僅次於南韓，媒體戲稱為「超商之國」，但現在可能要改名叫「診所之國」。從2005到2024年的20年間，診所家數從1萬8千多家成長到2萬3千多家，增幅逾2成，家數超越便利商店，台灣的基層醫療正式邁入前所未有高度競爭的戰國時代。</p>
+                <p>診所如雨後春筍大量冒出，和年輕醫師從醫院大量出走有關，也造成醫院急重症人力短缺。曾任台大醫院院長、台大醫學院院長吳明賢受訪時甚至斷言，台灣醫療崩盤可能發生在X世代全面退出職場的2045年。這不僅是醫療現象，而是攸關你我未來生重病時，是否找得到醫生的國安危機。</p>
+                <div id="chart-1" class="chart-block w-full maxw-794">
+                  <p class="eyebrow">診所戰國時代｜20 年變化</p>
+                  <h3 class="chart-title">20年間，全台多了近5千家診所</h3>
+                  <p class="dek">過去20年，台灣街頭診所持續增加。從西醫、牙醫到中醫，三類診所合計已由約18,877家增至23,800家，<br>20年間增加4,923家。這不只是醫療服務更可近，也反映基層醫療市場持續擴張。</p>
+                  <div class="chart-panel">
+                    <p class="chart-meta">2005～2024年全國西醫、牙醫、中醫診所總數變化（家）</p>
+                    <div id="chart1-section" class="chart-wrap chart-style">
+                    <svg id="chart1-svg" viewBox="0 0 1000 500" role="img" aria-label="2005至2024年全國診所總數持續增加的趨勢圖">
+                      <defs>
+                        <linearGradient id="chart1-areaFill" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#e06b3d" stop-opacity=".20"></stop>
+                          <stop offset="100%" stop-color="#e06b3d" stop-opacity="0"></stop>
+                        </linearGradient>
+                      </defs>
+                      <g id="chart1-grid"></g>
+                      <path id="chart1-area" class="trend-area"></path>
+                      <path id="chart1-line" class="trend-line anim-line"></path>
+                      <g id="chart1-annotations" class="chart-annotation"></g>
+                      <line id="chart1-guide" class="guide"></line>
+                      <circle id="chart1-hoverDot" class="hover-dot" r="7"></circle>
+                      <g id="chart1-hits"></g>
+                    </svg>
+                    <div class="tooltip" id="chart1-tooltip"></div>
+                  </div>
+                  <div class="breakdown" aria-label="三類診所補充資訊">
+                    <div class="breakdown-card" style="--c:var(--blue)">
+                      <div class="name">西醫診所</div>
+                      <div class="growth">+25.2%</div>
+                      <div class="growth-label">20 年成長幅度</div>
+                      <div class="nums"><strong>9,948</strong> 家 → <strong>12,454</strong> 家</div>
+                    </div>
+                    <div class="breakdown-card" style="--c:var(--teal)">
+                      <div class="name">牙醫診所</div>
+                      <div class="growth">+17.7%</div>
+                      <div class="growth-label">20 年成長幅度</div>
+                      <div class="nums"><strong>6,029</strong> 家 → <strong>7,097</strong> 家</div>
+                    </div>
+                    <div class="breakdown-card" style="--c:var(--green)">
+                      <div class="name">中醫診所</div>
+                      <div class="growth">+46.5%</div>
+                      <div class="growth-label">20 年成長幅度</div>
+                      <div class="nums"><strong>2,900</strong> 家 → <strong>4,249</strong> 家</div>
+                    </div>
+                  </div>
+                  </div>
+                  <p class="info">
+                    資料來源：衛生福利部統計處《113年醫事機構服務量統計年報》。總診所數為西醫、牙醫、中醫診所家數加總。
+                  </p>
+                </div>
+            </div>
+        </section>
+        <section id="section-2" data-id="section-2" data-track="true" page="ClinicWarring" event_title="重點區塊曝光" content_title="1.3兆醫療市場，錢正流向健保之外">
+            <h2 class="h2-section maxw-794">1.3兆醫療市場，<br>錢正流向健保之外</h2>
+            <div class="wrapper flex flex-col items-center">
+                <p>事實上，基層醫療體系不只表面上的版圖擴張，真正的劇變暗藏在收入來源的轉向。</p>
+                <p>10年間，個人醫療照護支出膨脹了65%，但金流已經改道。健保醫療的餅雖變大，要吃得飽卻愈來愈難，因為有更高比例的醫療花費，是流向不吃健保的長照機構、民俗醫療、月子中心等「其他專業機構」。</p>
+                <p>值得注意的是，完全脫離健保約束的診所更是快速增加。全台已有1,915家診所完全自費、不收健保，大約每12間診所就有1間是全自費。自費診所高度集中在消費力強的都會，光台北市就有818家，健保特約率全台最低，只有79.2%，等於大約每5間診所就有1間全自費。</p>
+                <div id="chart-4" class="chart-block w-full maxw-794">
+                  <p class="eyebrow">診所戰國時代｜醫療支出變化</p>
+                  <h3 class="chart-title">醫療支出全面增加，「其他專業機構」10年成長1.3倍</h3>
+                  <p class="dek">近10年，個人醫療照護服務支出持續攀升。醫院仍是最大支出項目，<br>但成長最快的不是醫院，而是包含長照機構、月子中心、民俗醫療機構等在內的「其他專業機構」。</p>
+                  <div class="chart-panel">
+                    <p class="chart-meta">2014～2024年個人醫療照護服務支出，按醫療服務提供者分類（億元）</p>
+                    <div id="chart4-section" class="chart-wrap chart-style">
+                      <svg id="chart4-svg" viewBox="0 0 1000 450" role="img" aria-label="2014到2024年個人醫療照護服務總支出由8064億元增加至13268億元">
+                        <defs>
+                          <linearGradient id="chart4-areaFill" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#e06b3d" stop-opacity=".18"></stop>
+                            <stop offset="100%" stop-color="#e06b3d" stop-opacity="0"></stop>
+                          </linearGradient>
+                        </defs>
+                        <g id="chart4-grid"></g>
+                        <path id="chart4-area" class="total-area"></path>
+                        <path id="chart4-line" class="total-line anim-line"></path>
+                        <g id="chart4-annotations" class="chart-annotation"></g>
+                        <line id="chart4-guide" class="guide"></line>
+                        <circle id="chart4-hoverDot" class="hover-dot" r="7"></circle>
+                        <g id="chart4-hits"></g>
+                      </svg>
+                      <div class="tooltip" id="chart4-tooltip"></div>
+                    </div>
+                    <p class="rank-title">各類支出都增加，但成長速度差很大</p>
+                    <p class="rank-note">以下比較 2014 → 2024 的支出成長幅度；橫條長度代表成長率。</p>
+                    <div class="growth-list" aria-label="各類醫療支出成長幅度">
+                      <div class="growth-row other" style="--c:var(--other)">
+                        <div class="cat">其他專業機構</div>
+                        <div class="bar-track"><div class="bar-fill" style="--w:100%;--delay:.05s"></div></div>
+                        <div class="percent">+129.9%</div>
+                        <div class="value-pair"><strong>1,082</strong> 億 → <strong>2,487</strong> 億</div>
+                      </div>
+                      <div class="growth-row" style="--c:var(--dental)">
+                        <div class="cat">牙醫診所</div>
+                        <div class="bar-track"><div class="bar-fill" style="--w:53.2%;--delay:.12s"></div></div>
+                        <div class="percent">+69.4%</div>
+                        <div class="value-pair"><strong>1,003</strong> 億 → <strong>1,699</strong> 億</div>
+                      </div>
+                      <div class="growth-row" style="--c:var(--hospital)">
+                        <div class="cat">醫院</div>
+                        <div class="bar-track"><div class="bar-fill" style="--w:44.5%;--delay:.19s"></div></div>
+                        <div class="percent">+58.0%</div>
+                        <div class="value-pair"><strong>4,541</strong> 億 → <strong>7,174</strong> 億</div>
+                      </div>
+                      <div class="growth-row" style="--c:var(--chinese)">
+                        <div class="cat">中醫診所</div>
+                        <div class="bar-track"><div class="bar-fill" style="--w:27.8%;--delay:.26s"></div></div>
+                        <div class="percent">+36.2%</div>
+                        <div class="value-pair"><strong>232</strong> 億 → <strong>316</strong> 億</div>
+                      </div>
+                      <div class="growth-row" style="--c:var(--west)">
+                        <div class="cat">西醫診所</div>
+                        <div class="bar-track"><div class="bar-fill" style="--w:24.6%;--delay:.33s"></div></div>
+                        <div class="percent">+32.0%</div>
+                        <div class="value-pair"><strong>1,206</strong> 億 → <strong>1,592</strong> 億</div>
+                      </div>
+                    </div>
+                    <p class="other-note">＊「其他專業機構」包含長照機構、月子中心、民俗醫療機構，以及精神專科機構、健保境外給付等。</p>
+                  </div>
+                  <p class="info">資料來源：衛生福利部《113年國民醫療保健支出（NHE）》，2026年2月發布。</p>
+                </div>
+                <div id="chart-5" class="chart-block w-full maxw-794">
+                  <p class="eyebrow">診所戰國時代｜自費市場</p>
+                  <h3 class="chart-title">全台約1,915家診所未與健保特約，台北市就占逾4成</h3>
+                  <p class="dek">以113年底登記診所家數扣除健保特約診所家數估算，全台約有1,915家診所未與健保特約。<br>其中臺北市就有818家，未特約診所明顯集中在都會區。</p>
+                  <div class="chart-panel">
+                    <p class="chart-meta">113年底各縣市未與健保特約診所家數</p>
+                    <div class="chart-layout">
+                      <div>
+                        <div class="donut-wrap">
+                          <svg id="chart5-donut" viewBox="0 0 520 520" role="img" aria-label="全台未與健保特約診所分布圓餅圖"></svg>
+                          <div class="center-total">
+                            <span class="num">1,915</span>
+                            <span class="unit">家未與健保特約診所</span>
+                          </div>
+                          <div class="tooltip" id="chart5-tooltip"></div>
+                        </div>
+                        <div class="legend">
+                          <div class="legend-item"><span class="swatch" style="background:#E2762B"></span><span>臺北市 <strong>818</strong></span></div>
+                          <div class="legend-item"><span class="swatch" style="background:#2C6FB0"></span><span>臺中市 <strong>339</strong></span></div>
+                          <div class="legend-item"><span class="swatch" style="background:#15998C"></span><span>高雄市 <strong>193</strong></span></div>
+                          <div class="legend-item"><span class="swatch" style="background:#6F9A1F"></span><span>桃園市 <strong>156</strong></span></div>
+                          <div class="legend-item"><span class="swatch" style="background:#C94F8A"></span><span>臺南市 <strong>113</strong></span></div>
+                          <div class="legend-item"><span class="swatch" style="background:#5DADE2"></span><span>新北市 <strong>101</strong></span></div>
+                          <div class="legend-item"><span class="swatch" style="background:#AEB4BA"></span><span>其他16縣市 <strong>195</strong></span></div>
+                        </div>
+                      </div>
+                      <aside class="insights">
+                        <div class="insight">
+                          <div class="kicker">臺北市</div>
+                          <span class="big">818 家</span>
+                          <div class="text">占全台未與健保特約診所 <strong>42.7%</strong>，超過4成。</div>
+                        </div>
+                        <div class="insight">
+                          <div class="kicker">六都合計</div>
+                          <span class="big">1,720 家</span>
+                          <div class="text">占全台約 <strong>89.8%</strong>，顯示未特約診所高度集中於都會區。</div>
+                        </div>
+                      </aside>
+                    </div>
+                    <p class="other-note">＊「其他16縣市」合計195家：新竹縣45、新竹市32、彰化縣28、嘉義市28、屏東縣16、基隆市9、宜蘭縣9、雲林縣8、南投縣6、苗栗縣5、嘉義縣4、花蓮縣4、澎湖縣1、臺東縣0、金門縣0、連江縣0。</p>
+                  </div>
+                  <p class="info">資料來源：健保署《表51 特約醫事服務機構家數》113年底、衛生福利部統計處《診所科別統計》113年。未與健保特約診所家數＝登記診所家數－健保特約診所家數。</p>
+                </div>
+            </div>
+        </section>
+        <section id="section-3" data-id="section-3" data-track="true" page="ClinicWarring" event_title="重點區塊曝光" content_title="哪些科別正在成長？醫師選擇重新洗牌">
+            <h2 class="h2-section maxw-794">哪些科別正在成長？<br>醫師選擇重新洗牌</h2>
+            <div class="wrapper flex flex-col items-center">
+                <p>錢流向自費，人也跟著流向自費需求高的科別——精神科、泌尿科幾乎翻倍，復健與骨科大幅成長；同一時間發生的少子化現象，卻導致婦產科、兒科一路萎縮。</p>
+                <div id="chart-3" class="chart-block w-full maxw-794">
+                  <p class="eyebrow">診所戰國時代｜科別洗牌</p>
+                  <h3 class="chart-title">精神、泌尿、復健快速成長，婦產兒科反向萎縮</h3>
+                  <p class="dek">診所總數增加，不代表每個科別都同步擴張。2012到2024年間，不同科別的增減差距明顯，<br>精神科、泌尿科、復健科等快速增加，兒科與婦產科則呈現負成長。</p>
+                  <div class="chart-panel">
+                    <p class="chart-meta">2012 → 2024 年開設各科別的診所家數變化（%）</p>
+                    <div class="legend">
+                      <span><i style="background:var(--orange)"></i>快速成長</span>
+                      <span><i style="background:var(--blue)"></i>成長</span>
+                      <span><i style="background:var(--red)"></i>減少</span>
+                    </div>
+                    <div id="chart3-section" class="chart-wrap chart-style">
+                      <svg id="chart3-svg" viewBox="0 0 1040 700" role="img" aria-label="2012到2024年診所科別變遷正負向長條圖"></svg>
+                      <div class="tooltip" id="chart3-tooltip"></div>
+                    </div>
+                    <p class="tap-note">手機版：點選任一科別，可查看2012、2024家數與實際增減。</p>
+                    <div id="chart3-mobile-detail" class="mobile-detail" style="--detailColor:#e2762b">
+                      <div class="title">精神科</div>
+                      <div class="stats">
+                        <div><span class="label">2012</span><span class="value">204 家</span></div>
+                        <div><span class="label">2024</span><span class="value">426 家</span></div>
+                        <div><span class="label">實際增減</span><span class="value">+222 家</span></div>
+                      </div>
+                    </div>
+                    <p class="other-note">＊數字為「開設該科別的診所數」，一間診所可同時掛多個科別，因此各科加總不等於全國診所總數。已排除麻醉科、解剖病理科等極小基數科別，避免百分比造成誤讀。</p>
+                  </div>
+                  <p class="info">資料來源：衛生福利部統計處《診所科別統計》101年、113年。</p>
+                </div>
+            </div>
+        </section>
+        <section id="section-4" data-id="section-4" data-track="true" page="ClinicWarring" event_title="重點區塊曝光" content_title="診所更多，但缺醫的地方仍然缺醫">
+            <h2 class="h2-section maxw-794">診所更多，<br>但缺醫的地方仍然缺醫</h2>
+            <div class="wrapper flex flex-col items-center">
+                <p>雖然診所看似遍地開花，分布卻極不平均，從嘉義市、台北每萬人十幾家，到離島的個位數，落差近10倍，造成都會區或人口集中區域的診所競爭更加激烈，但資源稀缺區域要就醫依然不便。</p>
+                <p>這代表診所增加，主要改善的是人口密集地區的選擇與便利，對偏鄉的幫助有限。同樣的失衡也發生在不同科別。民眾感冒、復健有更多選擇；但真正需要急診、住院、手術、兒科或婦產科醫療時，診所數量再多，也無法取代醫院。</p>
+                <p>台灣不缺診所，缺的是能在特定地區、特定科別與關鍵時刻提供服務的醫療人力。</p>
+                <p>圖⑥：每萬人診所數：前五名 vs 倒數五名（城鄉差距顯著，資源高度集中於都會區）</p>
+            </div>
+        </section>
+        <section id="section-5" data-id="section-5" data-track="true" page="ClinicWarring" event_title="重點區塊曝光" content_title="診所戰國成形，醫師行醫方式正在改變">
+            <h2 class="h2-section maxw-794">診所戰國成形，<br>醫師行醫方式正在改變</h2>
+            <div class="wrapper flex flex-col items-center">
+                <p>診所戰國儼然成形，人才、地盤、來客，通通都是兵家必爭。</p>
+                <p>在這風起雲湧的變化中，首當其衝的醫師，行醫的思維與方式都在改變。愈來愈多醫師把經營個人品牌、學稅務財務與人資當成標準配備。</p>
+                <p>一批「專門服務診所」的新興產業悄悄成形，他們是這場戰國時代真正的軍火商。這些產業的服務，是許多診所求生與求勝的關鍵，也重塑了人們的就醫旅程，改變了就醫經驗與期待。本專題將一次呈現這個嶄新醫療生態背後的幾個最重要的隱形推手。</p>
+                <p>商業化帶來便利、數位化提升品質、個人品牌帶動專業資訊流通，但同時，急重症醫療韌性在走弱，醫病間的資訊不對等也絲毫不減。</p>
+                <p>診所戰國繁榮，醫院體系空洞化，贏家看似是站上金流浪潮的診所與醫師，以及經濟較無虞的消費者。但自費真的等於更健康、更美麗、效果更好嗎？在獲利為王的邏輯下，醫師又該如何看待自身工作的價值？</p>
+                <p>答案絕對不只一個，但每一個答案都很重要。因為這已經不只是產業競爭，更是攸關健康平等、社會安全的警訊，每個人都已經是這場戰局的關係人。</p>
+            </div>
+        </section>
+    </main>
+<!-- Social Media -->
+<div class="ch-section-social">
+  <div class="ch-wrap">
+    <div class="ch-wrapper">
+      <h2>追蹤我們，最新資訊不漏接</h2>
+      <div class="ch-social-media">
+        <a class="ch-social-group" href="https://line.me/ti/p/@commonhealth" target="_blank">
+          <img src="https://www.commonhealth.com.tw/vendor/feature-frontend/images/index/icon-line.svg" alt="加入 LINE 好友">
+          <p>加入 LINE 好友</p>
+        </a>
+        <a class="ch-social-group" href="https://www.facebook.com/commonhealth/" target="_blank">
+          <img src="https://www.commonhealth.com.tw/vendor/feature-frontend/images/index/icon-fb.svg" alt="追蹤 Facebook">
+          <p>追蹤 Facebook</p>
+        </a>
+        <a class="ch-social-group" href="https://www.instagram.com/commonhealth.official/" target="_blank">
+          <img src="https://www.commonhealth.com.tw/vendor/feature-frontend/images/index/icon-instagram.svg" alt="追蹤 Instagram">
+          <p>追蹤 Instagram</p>
+        </a>
+        <a class="ch-social-group" href="https://www.youtube.com/user/CommonHealthTV" target="_blank">
+          <img src="https://www.commonhealth.com.tw/vendor/feature-frontend/images/index/icon-youtube.svg" alt="訂閱 Youtube">
+          <p>訂閱 Youtube</p>
+        </a>
+        <a class="ch-social-group" href="https://solink.soundon.fm/commonhealth">
+          <img src="https://www.commonhealth.com.tw/vendor/feature-frontend/images/index/icon-podcast.svg" alt="訂閱 Podcast">
+          <p>訂閱 Podcast</p>
+        </a>
+        <a class="ch-social-group" href="https://www.commonhealth.com.tw/member/member_newsletter" target="_blank">
+          <img src="https://www.commonhealth.com.tw/vendor/feature-frontend/images/index/icon-edm.svg" alt="訂閱電子報">
+          <p>訂閱電子報</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer>
+  <ul>
+    <li><a href="https://www.commonhealth.com.tw" target="_blank">康健官網</a></li>
+    <li><a href="https://www.commonhealth.com.tw/magazine_list" target="_blank">康健雜誌</a></li>
+    <li><a href="https://www.commonhealth.com.tw/book" target="_blank">康健出版</a></li>
+    <li><a href="https://www.youtube.com/user/CommonHealthTV" target="_blank">康健影音</a></li>
+    <li><a href="https://kb.commonhealth.com.tw" target="_blank">康健知識庫</a></li>
+    <li><a href="https://club.commonhealth.com.tw" target="_blank">大人社團</a></li>
+    <li><a href="https://cancer.commonhealth.com.tw" target="_blank">癌症問康健</a></li>
+  </ul>
+  <p>Copyright © 2026 康健雜誌（天下生活出版股份有限公司）All rights reserved.</p>
+  <ul>
+    <li><a href="https://member.cwg.tw/privacy-policy" target="_blank">隱私權政策</a></li>
+    <li><a href="https://member.cwg.tw/register-rule" target="_blank">會員服務條款</a></li>
+  </ul>
+</footer>
+<script src="charts/chart-1.js"></script>
+<script src="charts/chart-4.js"></script>
+<script src="charts/chart-5.js"></script>
+<script src="charts/chart-3.js"></script>
+</body>
+
+</html>

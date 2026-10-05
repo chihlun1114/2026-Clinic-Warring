@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>診所戰國｜個人醫療照護服務支出 v1</title>
+<style>
+:root{
+  --bg:#f6f4ef;
+  --ink:#252a2d;
+  --muted:#737a80;
+  --grid:#d9d7d0;
+  --accent:#e06b3d;
+  --hospital:#6e8ba8;
+  --west:#2c6fb0;
+  --dental:#15998c;
+  --chinese:#6f9a1f;
+  --other:#e2762b;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.story{
+  width:min(1080px,calc(100% - 40px));
+  margin:0 auto;
+  padding:72px 0 84px;
+}
+.eyebrow{
+  margin:0 0 14px;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.14em;
+  color:var(--accent);
+}
+h1{
+  max-width:900px;
+  margin:0;
+  font-size:clamp(32px,5vw,56px);
+  line-height:1.15;
+  letter-spacing:-.04em;
+  font-weight:900;
+}
+.dek{
+  max-width:800px;
+  margin:24px 0 0;
+  font-size:17px;
+  line-height:1.9;
+  color:#50585d;
+}
+.chart-panel{
+  margin-top:52px;
+  padding-top:22px;
+  border-top:1px solid #d7d4cd;
+}
+.chart-meta{
+  margin:0 0 14px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+}
+.trend-wrap{
+  position:relative;
+  width:100%;
+  min-height:470px;
+}
+#trend{
+  display:block;
+  width:100%;
+  height:auto;
+  overflow:visible;
+}
+.axis-label{fill:#80868b;font-size:12px}
+.grid{stroke:var(--grid);stroke-width:1}
+.total-line{
+  fill:none;
+  stroke:var(--accent);
+  stroke-width:5;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.total-area{
+  fill:url(#areaFill);
+  opacity:.62;
+}
+.anim-line{
+  stroke-dasharray:2200;
+  stroke-dashoffset:2200;
+}
+.is-visible .anim-line{
+  animation:drawLine 1.8s cubic-bezier(.2,.7,.2,1) forwards;
+}
+@keyframes drawLine{to{stroke-dashoffset:0}}
+
+.point-main{
+  fill:var(--ink);
+  font-size:29px;
+  font-weight:950;
+  letter-spacing:-.04em;
+}
+.point-year{
+  fill:var(--muted);
+  font-size:12px;
+  font-weight:700;
+}
+.growth-main{
+  fill:var(--accent);
+  font-size:50px;
+  font-weight:950;
+  letter-spacing:-.05em;
+}
+.growth-sub{
+  fill:#8a5a45;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.06em;
+}
+.guide{
+  stroke:#8d9295;
+  stroke-width:1;
+  stroke-dasharray:3 4;
+  opacity:0;
+}
+.hover-dot{
+  fill:var(--bg);
+  stroke:var(--accent);
+  stroke-width:4;
+  opacity:0;
+}
+.hit{fill:transparent;cursor:crosshair}
+
+.tooltip{
+  position:absolute;
+  min-width:205px;
+  padding:13px 14px;
+  border-radius:8px;
+  background:rgba(37,42,45,.95);
+  color:#fff;
+  font-size:12px;
+  line-height:1.65;
+  pointer-events:none;
+  opacity:0;
+  transform:translate(-50%,-108%);
+  transition:opacity .12s ease;
+  box-shadow:0 10px 28px rgba(0,0,0,.15);
+}
+.tooltip strong{
+  display:block;
+  margin-bottom:4px;
+  font-size:15px;
+}
+.tooltip .total{
+  color:#ffd7c7;
+  font-size:17px;
+  font-weight:900;
+}
+
+.rank-title{
+  margin:26px 0 8px;
+  font-size:22px;
+  line-height:1.4;
+  font-weight:900;
+}
+.rank-note{
+  margin:0 0 22px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.7;
+}
+.growth-list{
+  display:grid;
+  gap:13px;
+}
+.growth-row{
+  display:grid;
+  grid-template-columns:150px 1fr 110px;
+  gap:18px;
+  align-items:center;
+}
+.cat{
+  font-size:16px;
+  font-weight:850;
+}
+.bar-track{
+  position:relative;
+  height:18px;
+  background:rgba(37,42,45,.07);
+  overflow:hidden;
+}
+.bar-fill{
+  width:0;
+  height:100%;
+  background:var(--c);
+}
+.is-visible .bar-fill{
+  animation:growBar 1.05s cubic-bezier(.2,.7,.2,1) forwards;
+  animation-delay:var(--delay);
+}
+@keyframes growBar{to{width:var(--w)}}
+.percent{
+  text-align:right;
+  color:var(--c);
+  font-size:27px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:-.04em;
+}
+.growth-row.other{
+  margin-top:4px;
+  padding:16px 14px;
+  background:rgba(226,118,43,.08);
+  border-top:2px solid var(--other);
+  border-bottom:2px solid var(--other);
+}
+.growth-row.other .cat{font-size:18px}
+.growth-row.other .percent{font-size:38px}
+
+.value-pair{
+  grid-column:2 / 4;
+  margin-top:-6px;
+  color:var(--muted);
+  font-size:12px;
+}
+.value-pair strong{
+  color:var(--ink);
+  font-size:13px;
+}
+
+.other-note{
+  margin:22px 0 0;
+  padding-left:14px;
+  border-left:3px solid var(--other);
+  color:#676e73;
+  font-size:12.5px;
+  line-height:1.75;
+}
+
+.source{
+  margin:20px 0 0;
+  padding-top:12px;
+  border-top:1px solid #dfdcd5;
+  color:#8a9094;
+  font-size:11.5px;
+  line-height:1.7;
+}
+
+@media(max-width:720px){
+  .story{
+    width:min(100% - 28px,680px);
+    padding:44px 0 60px;
+  }
+  .dek{
+    font-size:15px;
+    line-height:1.8;
+  }
+  .chart-panel{
+    margin-top:38px;
+    padding-top:18px;
+  }
+  .trend-wrap{min-height:370px}
+  .growth-row{
+    grid-template-columns:95px 1fr 76px;
+    gap:10px;
+  }
+  .cat{font-size:14px}
+  .percent{font-size:22px}
+  .growth-row.other .cat{font-size:15px}
+  .growth-row.other .percent{font-size:30px}
+  .value-pair{
+    grid-column:2 / 4;
+    font-size:11px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .anim-line{stroke-dashoffset:0}
+  .bar-fill{width:var(--w)}
+}
+</style>
+</head>
+<body>
+
+<main class="story">
+  <p class="eyebrow">診所戰國時代｜醫療支出變化</p>
+
+  <h1>醫療支出全面增加，「其他專業機構」10年成長1.3倍</h1>
+
+  <p class="dek">
+    近10年，個人醫療照護服務支出持續攀升。醫院仍是最大支出項目，
+    但成長最快的不是醫院，而是包含長照機構、月子中心、民俗醫療機構等在內的「其他專業機構」。
+  </p>
+
+  <section id="chartSection" class="chart-panel">
+    <p class="chart-meta">2014～2024年個人醫療照護服務支出，按醫療服務提供者分類（億元）</p>
+
+    <div class="trend-wrap">
+      <svg id="trend" viewBox="0 0 1000 450" role="img" aria-label="2014到2024年個人醫療照護服務總支出由8064億元增加至13268億元">
+        <defs>
+          <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#e06b3d" stop-opacity=".18"></stop>
+            <stop offset="100%" stop-color="#e06b3d" stop-opacity="0"></stop>
+          </linearGradient>
+        </defs>
+        <g id="grid"></g>
+        <path id="area" class="total-area"></path>
+        <path id="line" class="total-line anim-line"></path>
+        <g id="anno"></g>
+        <line id="guide" class="guide"></line>
+        <circle id="hoverDot" class="hover-dot" r="7"></circle>
+        <g id="hits"></g>
+      </svg>
+      <div class="tooltip" id="tooltip"></div>
+    </div>
+
+    <h2 class="rank-title">各類支出都增加，但成長速度差很大</h2>
+    <p class="rank-note">以下比較 2014 → 2024 的支出成長幅度；橫條長度代表成長率。</p>
+
+    <div class="growth-list">
+      <div class="growth-row" style="--c:var(--other)">
+        <div class="cat">其他專業機構</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:100%;--delay:.05s"></div></div>
+        <div class="percent">+129.9%</div>
+        <div class="value-pair"><strong>1,082</strong> 億 → <strong>2,487</strong> 億</div>
+      </div>
+
+      <div class="growth-row" style="--c:var(--dental)">
+        <div class="cat">牙醫診所</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:53.2%;--delay:.12s"></div></div>
+        <div class="percent">+69.4%</div>
+        <div class="value-pair"><strong>1,003</strong> 億 → <strong>1,699</strong> 億</div>
+      </div>
+
+      <div class="growth-row" style="--c:var(--hospital)">
+        <div class="cat">醫院</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:44.5%;--delay:.19s"></div></div>
+        <div class="percent">+58.0%</div>
+        <div class="value-pair"><strong>4,541</strong> 億 → <strong>7,174</strong> 億</div>
+      </div>
+
+      <div class="growth-row" style="--c:var(--chinese)">
+        <div class="cat">中醫診所</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:27.8%;--delay:.26s"></div></div>
+        <div class="percent">+36.2%</div>
+        <div class="value-pair"><strong>232</strong> 億 → <strong>316</strong> 億</div>
+      </div>
+
+      <div class="growth-row" style="--c:var(--west)">
+        <div class="cat">西醫診所</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:24.6%;--delay:.33s"></div></div>
+        <div class="percent">+32.0%</div>
+        <div class="value-pair"><strong>1,206</strong> 億 → <strong>1,592</strong> 億</div>
+      </div>
+    </div>
+
+    <p class="other-note">
+      ＊「其他專業機構」包含長照機構、月子中心、民俗醫療機構，以及精神專科機構、健保境外給付等。
+    </p>
+
+    <p class="source">
+      資料來源：衛生福利部《113年國民醫療保健支出（NHE）》，2026年2月發布。
+    </p>
+  </section>
+</main>
+
+<script>
+const years = ['2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'];
+
+const hospital = [4541,4727,4983,5306,5585,5712,5947,6543,6411,6762,7174];
+const west     = [1206,1201,1247,1289,1327,1411,1410,1559,1631,1504,1592];
+const dental   = [1003,1064,1093,1128,1241,1289,1325,1333,1520,1595,1699];
+const chinese  = [232,229,238,248,258,267,275,267,336,311,316];
+const other    = [1082,1106,1184,1353,1508,1753,1951,1998,2049,2249,2487];
+
+const total = years.map((_,i)=>hospital[i]+west[i]+dental[i]+chinese[i]+other[i]);
+
+const svg = document.getElementById('trend');
+const grid = document.getElementById('grid');
+const line = document.getElementById('line');
+const area = document.getElementById('area');
+const anno = document.getElementById('anno');
+const hits = document.getElementById('hits');
+const guide = document.getElementById('guide');
+const hoverDot = document.getElementById('hoverDot');
+const tooltip = document.getElementById('tooltip');
+const trendWrap = document.querySelector('.trend-wrap');
+
+const W=1000,H=450;
+const margin={top:28,right:28,bottom:52,left:66};
+const innerW=W-margin.left-margin.right;
+const innerH=H-margin.top-margin.bottom;
+
+const yMin=7500,yMax=13800;
+const x=i=>margin.left+i*(innerW/(years.length-1));
+const y=v=>margin.top+(yMax-v)/(yMax-yMin)*innerH;
+const fmt=n=>n.toLocaleString('zh-TW');
+
+function el(tag,attrs={},text=''){
+  const e=document.createElementNS('http://www.w3.org/2000/svg',tag);
+  Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));
+  if(text)e.textContent=text;
+  return e;
+}
+
+function buildGrid(){
+  [8000,10000,12000].forEach(v=>{
+    const yy=y(v);
+    grid.appendChild(el('line',{x1:margin.left,y1:yy,x2:W-margin.right,y2:yy,class:'grid'}));
+    grid.appendChild(el('text',{x:margin.left-12,y:yy+4,'text-anchor':'end',class:'axis-label'},fmt(v)));
+  });
+  ['2014','2016','2018','2020','2022','2024'].forEach(yr=>{
+    const i=years.indexOf(yr);
+    const anchor=yr==='2014'?'start':(yr==='2024'?'end':'middle');
+    grid.appendChild(el('text',{x:x(i),y:H-18,'text-anchor':anchor,class:'axis-label'},yr));
+  });
+}
+
+function buildTrend(){
+  const pts=total.map((v,i)=>[x(i),y(v)]);
+  const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(2)+','+p[1].toFixed(2)).join(' ');
+  line.setAttribute('d',d);
+  area.setAttribute('d',d+` L ${x(total.length-1)},${H-margin.bottom} L ${x(0)},${H-margin.bottom} Z`);
+}
+
+function buildAnno(){
+  const sx=x(0), sy=y(total[0]);
+  const ex=x(total.length-1), ey=y(total.at(-1));
+
+  anno.appendChild(el('circle',{cx:sx,cy:sy,r:5,fill:'#e06b3d'}));
+  anno.appendChild(el('text',{x:sx+12,y:sy-12,class:'point-main'},fmt(total[0])));
+  anno.appendChild(el('text',{x:sx+12,y:sy+9,class:'point-year'},'2014 年'));
+
+  anno.appendChild(el('circle',{cx:ex,cy:ey,r:6,fill:'#e06b3d'}));
+  anno.appendChild(el('text',{x:ex-6,y:ey-22,'text-anchor':'end',class:'point-main'},fmt(total.at(-1))));
+  anno.appendChild(el('text',{x:ex-6,y:ey-3,'text-anchor':'end',class:'point-year'},'2024 年'));
+
+  const mx=x(5.35), my=y(11150);
+  anno.appendChild(el('text',{x:mx,y:my,'text-anchor':'middle',class:'growth-main'},'+65%'));
+  anno.appendChild(el('text',{x:mx,y:my+24,'text-anchor':'middle',class:'growth-sub'},'10 年總支出成長'));
+}
+
+function buildHits(){
+  years.forEach((yr,i)=>{
+    const left=i===0?margin.left:(x(i-1)+x(i))/2;
+    const right=i===years.length-1?W-margin.right:(x(i)+x(i+1))/2;
+    const rect=el('rect',{x:left,y:margin.top,width:right-left,height:innerH,class:'hit'});
+    rect.addEventListener('mouseenter',()=>showPoint(i));
+    rect.addEventListener('mousemove',()=>moveTip(i));
+    rect.addEventListener('mouseleave',hidePoint);
+    hits.appendChild(rect);
+  });
+}
+
+function showPoint(i){
+  const px=x(i),py=y(total[i]);
+  guide.setAttribute('x1',px);guide.setAttribute('x2',px);
+  guide.setAttribute('y1',margin.top);guide.setAttribute('y2',H-margin.bottom);
+  guide.style.opacity=1;
+  hoverDot.setAttribute('cx',px);hoverDot.setAttribute('cy',py);hoverDot.style.opacity=1;
+
+  tooltip.innerHTML=`
+    <strong>${years[i]} 年</strong>
+    <div class="total">總計 ${fmt(total[i])} 億元</div>
+    <div>醫院 ${fmt(hospital[i])}</div>
+    <div>西醫診所 ${fmt(west[i])}</div>
+    <div>牙醫診所 ${fmt(dental[i])}</div>
+    <div>中醫診所 ${fmt(chinese[i])}</div>
+    <div>其他專業機構 ${fmt(other[i])}</div>
+  `;
+  tooltip.style.opacity=1;
+}
+
+function moveTip(i){
+  const wrap=trendWrap.getBoundingClientRect();
+  const box=svg.getBoundingClientRect();
+  let left=x(i)*(box.width/W)+(box.left-wrap.left);
+  let top=y(total[i])*(box.height/H)+(box.top-wrap.top);
+  left=Math.max(110,Math.min(wrap.width-110,left));
+  tooltip.style.left=left+'px';
+  tooltip.style.top=top+'px';
+}
+function hidePoint(){
+  guide.style.opacity=0;
+  hoverDot.style.opacity=0;
+  tooltip.style.opacity=0;
+}
+
+buildGrid();
+buildTrend();
+buildAnno();
+buildHits();
+
+const section=document.getElementById('chartSection');
+let played=false;
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting&&!played){
+      played=true;
+      section.classList.add('is-visible');
+    }
+  })
+},{threshold:.2});
+obs.observe(section);
+</script>
+
+</body>
+</html>

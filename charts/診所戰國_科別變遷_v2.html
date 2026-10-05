@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>診所戰國｜診所科別變遷 v2</title>
+<style>
+:root{
+  --bg:#f6f4ef;
+  --ink:#252a2d;
+  --muted:#767d82;
+  --grid:#dedbd4;
+  --orange:#e2762b;
+  --blue:#3d7fb8;
+  --red:#d6453c;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.story{
+  width:min(1080px,calc(100% - 40px));
+  margin:0 auto;
+  padding:72px 0 84px;
+}
+.eyebrow{
+  margin:0 0 14px;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.14em;
+  color:var(--orange);
+}
+h1{
+  margin:0;
+  max-width:920px;
+  font-size:clamp(32px,5vw,56px);
+  line-height:1.15;
+  letter-spacing:-.04em;
+  font-weight:950;
+}
+.dek{
+  max-width:830px;
+  margin:24px 0 0;
+  font-size:17px;
+  line-height:1.9;
+  color:#50585d;
+}
+.panel{
+  margin-top:48px;
+  padding-top:22px;
+  border-top:1px solid #d7d4cd;
+}
+.meta{
+  margin:0 0 16px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+}
+.legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  margin:0 0 20px;
+  font-size:13px;
+  color:#596166;
+}
+.legend span{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+}
+.legend i{
+  width:11px;
+  height:11px;
+  display:inline-block;
+}
+.chart-wrap{
+  position:relative;
+  width:100%;
+}
+#chart{
+  display:block;
+  width:100%;
+  height:auto;
+  overflow:visible;
+}
+.axis{
+  fill:#7f8589;
+  font-size:12px;
+}
+.grid{
+  stroke:var(--grid);
+  stroke-width:1;
+}
+.zero{
+  stroke:#aeb3b6;
+  stroke-width:1.2;
+}
+.name{
+  fill:var(--ink);
+  font-size:15px;
+  font-weight:850;
+}
+.change{
+  font-size:17px;
+  font-weight:950;
+}
+.bar{
+  rx:4;
+  ry:4;
+  transform-box:fill-box;
+  transform-origin:left center;
+  transform:scaleX(0);
+}
+.bar.negative{
+  transform-origin:right center;
+}
+.is-visible .bar{
+  animation:grow .8s cubic-bezier(.2,.7,.2,1) forwards;
+  animation-delay:var(--delay);
+}
+@keyframes grow{to{transform:scaleX(1)}}
+
+.tooltip{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+  transform:translate(-50%,-112%);
+  background:rgba(37,42,45,.95);
+  color:#fff;
+  border-radius:8px;
+  padding:10px 12px;
+  font-size:12px;
+  line-height:1.6;
+  white-space:nowrap;
+  box-shadow:0 10px 28px rgba(0,0,0,.14);
+  transition:opacity .12s ease;
+}
+.tooltip strong{
+  display:block;
+  font-size:14px;
+  margin-bottom:3px;
+}
+
+.mobile-detail{
+  display:none;
+  margin-top:14px;
+  padding:16px 18px;
+  background:rgba(255,255,255,.68);
+  border-top:3px solid var(--detailColor,var(--blue));
+}
+.mobile-detail .title{
+  font-size:16px;
+  font-weight:900;
+}
+.mobile-detail .stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:10px;
+}
+.mobile-detail .label{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:2px;
+}
+.mobile-detail .value{
+  font-size:16px;
+  font-weight:900;
+}
+.tap-note{
+  display:none;
+  margin:10px 0 0;
+  color:#8a9094;
+  font-size:11.5px;
+}
+
+.note{
+  margin:18px 0 0;
+  color:#7d8488;
+  font-size:12px;
+  line-height:1.75;
+}
+.source{
+  margin:20px 0 0;
+  padding-top:12px;
+  border-top:1px solid var(--grid);
+  color:#8a9094;
+  font-size:11.5px;
+  line-height:1.7;
+}
+
+@media(max-width:720px){
+  .story{
+    width:min(100% - 28px,680px);
+    padding:44px 0 60px;
+  }
+  .dek{
+    font-size:15px;
+    line-height:1.8;
+  }
+  .legend{
+    gap:10px 15px;
+  }
+  .tooltip{
+    display:none;
+  }
+  .mobile-detail,
+  .tap-note{
+    display:block;
+  }
+}
+
+@media(max-width:520px){
+  .mobile-detail .stats{
+    grid-template-columns:1fr 1fr;
+  }
+  .mobile-detail .stats > div:last-child{
+    grid-column:1 / -1;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .bar{transform:scaleX(1)}
+}
+</style>
+</head>
+<body>
+<main class="story">
+  <p class="eyebrow">診所戰國時代｜科別洗牌</p>
+  <h1>精神、泌尿、復健快速成長，婦產兒科反向萎縮</h1>
+  <p class="dek">
+    診所總數增加，不代表每個科別都同步擴張。2012到2024年間，不同科別的增減差距明顯，
+    精神科、泌尿科、復健科等快速增加，兒科與婦產科則呈現負成長。
+  </p>
+
+  <section id="section" class="panel">
+    <p class="meta">2012 → 2024 年開設各科別的診所家數變化（%）</p>
+
+    <div class="legend">
+      <span><i style="background:var(--orange)"></i>快速成長</span>
+      <span><i style="background:var(--blue)"></i>成長</span>
+      <span><i style="background:var(--red)"></i>減少</span>
+    </div>
+
+    <div class="chart-wrap">
+      <svg id="chart" viewBox="0 0 1040 700" role="img" aria-label="2012到2024年診所科別變遷正負向長條圖"></svg>
+      <div id="tooltip" class="tooltip"></div>
+    </div>
+
+    <p class="tap-note">手機版：點選任一科別，可查看2012、2024家數與實際增減。</p>
+
+    <div id="mobileDetail" class="mobile-detail" style="--detailColor:#e2762b">
+      <div class="title">精神科</div>
+      <div class="stats">
+        <div><span class="label">2012</span><span class="value">204 家</span></div>
+        <div><span class="label">2024</span><span class="value">426 家</span></div>
+        <div><span class="label">實際增減</span><span class="value">+222 家</span></div>
+      </div>
+    </div>
+
+    <p class="note">
+      ＊數字為「開設該科別的診所數」，一間診所可同時掛多個科別，因此各科加總不等於全國診所總數。
+      已排除麻醉科、解剖病理科等極小基數科別，避免百分比造成誤讀。
+    </p>
+
+    <p class="source">資料來源：衛生福利部統計處《診所科別統計》101年、113年。</p>
+  </section>
+</main>
+
+<script>
+const data = [{"name": "精神科", "start": 204, "end": 426, "change": 108.8, "group": "fast"}, {"name": "泌尿科", "start": 62, "end": 120, "change": 93.5, "group": "fast"}, {"name": "神經科", "start": 105, "end": 179, "change": 70.5, "group": "fast"}, {"name": "復健科", "start": 298, "end": 499, "change": 67.4, "group": "fast"}, {"name": "骨科", "start": 328, "end": 503, "change": 53.4, "group": "fast"}, {"name": "整形外科", "start": 213, "end": 281, "change": 31.9, "group": "normal"}, {"name": "中醫一般科", "start": 3380, "end": 4207, "change": 24.5, "group": "normal"}, {"name": "皮膚科", "start": 463, "end": 540, "change": 16.6, "group": "normal"}, {"name": "內科", "start": 1597, "end": 1835, "change": 14.9, "group": "normal"}, {"name": "牙醫一般科", "start": 6513, "end": 7123, "change": 9.4, "group": "normal"}, {"name": "兒科", "start": 1604, "end": 1414, "change": -11.8, "group": "down"}, {"name": "婦產科", "start": 835, "end": 713, "change": -14.6, "group": "down"}];
+
+const svg = document.getElementById('chart');
+const tooltip = document.getElementById('tooltip');
+const wrap = document.querySelector('.chart-wrap');
+const mobileDetail = document.getElementById('mobileDetail');
+
+const W=1040,H=700;
+const m={top:36,right:95,bottom:54,left:165};
+const innerW=W-m.left-m.right;
+const min=-24,max=120;
+const rowH=48;
+const barH=23;
+
+const x=v=>m.left+(v-min)/(max-min)*innerW;
+
+function el(tag,attrs={},text=''){
+  const e=document.createElementNS('http://www.w3.org/2000/svg',tag);
+  Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));
+  if(text)e.textContent=text;
+  return e;
+}
+
+[-20,0,20,40,60,80,100,120].forEach(v=>{
+  const xx=x(v);
+  svg.appendChild(el('line',{
+    x1:xx,y1:m.top-10,x2:xx,y2:H-m.bottom,
+    class:v===0?'zero':'grid'
+  }));
+  svg.appendChild(el('text',{
+    x:xx,y:H-20,'text-anchor':'middle',class:'axis'
+  },(v>0?'+':'')+v+'%'));
+});
+
+function colorFor(d){
+  return d.group==='fast' ? '#e2762b' : (d.group==='down' ? '#d6453c' : '#3d7fb8');
+}
+
+function updateMobileDetail(d){
+  const diff=d.end-d.start;
+  const c=colorFor(d);
+  mobileDetail.style.setProperty('--detailColor',c);
+  mobileDetail.innerHTML=`
+    <div class="title">${d.name}</div>
+    <div class="stats">
+      <div><span class="label">2012</span><span class="value">${d.start.toLocaleString('zh-TW')} 家</span></div>
+      <div><span class="label">2024</span><span class="value">${d.end.toLocaleString('zh-TW')} 家</span></div>
+      <div><span class="label">實際增減</span><span class="value">${diff>0?'+':''}${diff.toLocaleString('zh-TW')} 家</span></div>
+    </div>
+  `;
+}
+
+data.forEach((d,i)=>{
+  const cy=m.top+i*rowH+18;
+  const color=colorFor(d);
+  const x0=x(Math.min(0,d.change));
+  const x1=x(Math.max(0,d.change));
+  const w=Math.max(1,x1-x0);
+
+  svg.appendChild(el('text',{
+    x:m.left-18,y:cy+5,'text-anchor':'end',class:'name'
+  },d.name));
+
+  const bar=el('rect',{
+    x:x0,y:cy-barH/2,width:w,height:barH,fill:color,
+    class:'bar '+(d.change<0?'negative':''),
+    style:`--delay:${(i*0.045).toFixed(2)}s`
+  });
+  svg.appendChild(bar);
+
+  // 只留下百分比；負值放到長條左側，避免與0軸擠在一起。
+  const labelX=d.change>=0 ? x1+10 : x0-10;
+  const anchor=d.change>=0 ? 'start' : 'end';
+
+  svg.appendChild(el('text',{
+    x:labelX,y:cy+6,'text-anchor':anchor,class:'change',fill:color
+  },(d.change>0?'+':'')+d.change.toFixed(1)+'%'));
+
+  const hit=el('rect',{
+    x:m.left-155,y:cy-rowH/2,width:W-m.left+125,height:rowH,
+    fill:'transparent',style:'cursor:pointer'
+  });
+
+  hit.addEventListener('mouseenter',()=>{
+    if(window.matchMedia('(max-width:720px)').matches) return;
+    const diff=d.end-d.start;
+    tooltip.innerHTML=`<strong>${d.name}</strong>
+      2012：${d.start.toLocaleString('zh-TW')} 家<br>
+      2024：${d.end.toLocaleString('zh-TW')} 家<br>
+      增減：${diff>0?'+':''}${diff.toLocaleString('zh-TW')} 家<br>
+      成長率：${d.change>0?'+':''}${d.change.toFixed(1)}%`;
+    tooltip.style.opacity=1;
+  });
+
+  hit.addEventListener('mousemove',(e)=>{
+    if(window.matchMedia('(max-width:720px)').matches) return;
+    const r=wrap.getBoundingClientRect();
+    tooltip.style.left=(e.clientX-r.left)+'px';
+    tooltip.style.top=(e.clientY-r.top)+'px';
+  });
+
+  hit.addEventListener('mouseleave',()=>{
+    tooltip.style.opacity=0;
+  });
+
+  hit.addEventListener('click',()=>{
+    updateMobileDetail(d);
+  });
+
+  svg.appendChild(hit);
+});
+
+const section=document.getElementById('section');
+let played=false;
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting&&!played){
+      played=true;
+      section.classList.add('is-visible');
+    }
+  });
+},{threshold:.2});
+obs.observe(section);
+</script>
+</body>
+</html>
