@@ -2375,8 +2375,9 @@ section:not(#section-banner, .section-bottom) p {
 
 #section-intro.section-preface p {
   font-family: "Noto Serif TC", "Noto Serif CJK TC", "Source Han Serif TC", PMingLiU, serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
+  line-height: 200%;
 }
 
 #section-intro.section-preface p:last-of-type {
@@ -2396,7 +2397,8 @@ section:not(#section-banner, .section-bottom) p:last-of-type {
   }
 
   #section-intro.section-preface p {
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 200%;
   }
 }
 
