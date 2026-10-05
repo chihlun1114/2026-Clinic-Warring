@@ -1,0 +1,117 @@
+#chart-6 {
+  --top: #f45500;
+  --bottom: #7ea9a3;
+  --avg: #9aa0a4;
+}
+
+#chart-6 .legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin: 0 0 12px;
+  color: #596166;
+  font-size: 12px;
+}
+
+#chart-6 .legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+#chart-6 .legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+#chart-6 .legend i.avg {
+  width: 18px;
+  height: 0;
+  border-radius: 0;
+  border-top: 1px dashed var(--avg);
+  background: transparent;
+}
+
+#chart-6 .chart-wrap {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+#chart-6 #chart6-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#chart-6 .axis {
+  fill: #7f8589;
+  font-size: 15px;
+}
+
+#chart-6 .grid {
+  stroke: var(--grid);
+  stroke-width: 1;
+}
+
+#chart-6 .avg-line {
+  stroke: var(--avg);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 5;
+}
+
+#chart-6 .avg-label {
+  fill: #6b7176;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+#chart-6 .dot {
+  transition: transform .18s ease;
+}
+
+#chart-6 .dot:hover {
+  transform: scale(1.08);
+}
+
+#chart-6 .label {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+#chart-6 .label.top {
+  fill: var(--top);
+}
+
+#chart-6 .label.bottom {
+  fill: var(--bottom);
+}
+
+#chart-6 .direction {
+  fill: #6f767a;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+@media (max-width: 576px) {
+  #chart-6 .axis,
+  #chart-6 .avg-label,
+  #chart-6 .direction {
+    font-size: 22px;
+  }
+
+  #chart-6 .label {
+    font-size: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #chart-6 .dot {
+    transition: none;
+  }
+}

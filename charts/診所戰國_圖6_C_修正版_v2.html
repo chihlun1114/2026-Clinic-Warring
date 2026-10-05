@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>圖⑥C｜前五 vs 倒數五名 v2</title>
+<style>
+:root{
+  --bg:#f6f4ef;
+  --ink:#252a2d;
+  --muted:#727a80;
+  --grid:#ddd9d1;
+  --top:#f45500;
+  --bottom:#7ea9a3;
+  --avg:#9aa0a4;
+  --accent:#e2762b;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.story{
+  width:min(1080px,calc(100% - 40px));
+  margin:0 auto;
+  padding:72px 0 84px;
+}
+.eyebrow{
+  margin:0 0 14px;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.14em;
+  color:var(--accent);
+}
+h1{
+  margin:0;
+  max-width:900px;
+  font-size:clamp(32px,5vw,54px);
+  line-height:1.15;
+  letter-spacing:-.04em;
+  font-weight:950;
+}
+.panel{
+  margin-top:34px;
+  padding-top:22px;
+  border-top:1px solid #d7d4cd;
+}
+.meta{
+  margin:0 0 16px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+}
+.legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  margin:0 0 12px;
+  font-size:13px;
+  color:#596166;
+}
+.legend span{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+}
+.legend i{
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  display:inline-block;
+}
+.chart-wrap{
+  position:relative;
+}
+#chart{
+  display:block;
+  width:100%;
+  height:auto;
+  overflow:visible;
+}
+.axis{
+  fill:#7f8589;
+  font-size:12px;
+}
+.grid{
+  stroke:var(--grid);
+  stroke-width:1;
+}
+.avg-line{
+  stroke:var(--avg);
+  stroke-width:1.5;
+  stroke-dasharray:5 5;
+}
+.avg-label{
+  fill:#6b7176;
+  font-size:12px;
+  font-weight:800;
+}
+.dot{
+  transition:transform .18s ease;
+}
+.dot:hover{
+  transform:scale(1.08);
+}
+.label{
+  font-size:12.5px;
+  font-weight:850;
+}
+.label.top{
+  fill:var(--top);
+}
+.label.bottom{
+  fill:var(--bottom);
+}
+.direction{
+  fill:#6f767a;
+  font-size:12px;
+  font-weight:800;
+}
+.source{
+  margin:18px 0 0;
+  padding-top:12px;
+  border-top:1px solid var(--grid);
+  color:#8a9094;
+  font-size:11.5px;
+  line-height:1.7;
+}
+.tooltip{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+  transform:translate(-50%,-115%);
+  background:rgba(37,42,45,.95);
+  color:#fff;
+  border-radius:8px;
+  padding:10px 12px;
+  font-size:12px;
+  line-height:1.55;
+  white-space:nowrap;
+  box-shadow:0 10px 28px rgba(0,0,0,.14);
+  transition:opacity .12s ease;
+}
+.tooltip strong{
+  display:block;
+  font-size:14px;
+  margin-bottom:3px;
+}
+@media(max-width:760px){
+  .story{
+    width:min(100% - 28px,680px);
+    padding:44px 0 60px;
+  }
+  .legend{
+    gap:10px 14px;
+  }
+}
+</style>
+</head>
+<body>
+<main class="story">
+  <p class="eyebrow">診所戰國時代｜圖⑥ C 方案修正版</p>
+  <h1>每萬人診所數：前五名 vs 倒數五名</h1>
+
+  <section class="panel">
+    <p class="meta">115年3月各縣市每萬人診所數（健保特約診所）｜全國平均 9.38</p>
+
+    <div class="legend">
+      <span><i style="background:var(--top)"></i>前五名</span>
+      <span><i style="background:var(--bottom)"></i>倒數五名</span>
+      <span><i style="background:transparent;border-top:1px dashed var(--avg);width:18px;height:0;border-radius:0"></i>全國平均</span>
+    </div>
+
+    <div class="chart-wrap">
+      <svg id="chart" viewBox="0 0 1040 320" role="img" aria-label="前五名與倒數五名各縣市每萬人診所數分布圖，含全國平均9.38"></svg>
+      <div id="tooltip" class="tooltip"></div>
+    </div>
+
+    <p class="source">資料來源：健保署《特約醫事服務機構家數統計表》115年3月、內政部戶政司115年3月戶籍人口。</p>
+  </section>
+</main>
+
+<script>
+const points = [{"city": "連江縣", "value": 1.47}, {"city": "金門縣", "value": 4.26}, {"city": "嘉義縣", "value": 5.74}, {"city": "苗栗縣", "value": 7.0}, {"city": "桃園市", "value": 7.09}, {"city": "臺南市", "value": 10.26}, {"city": "高雄市", "value": 10.51}, {"city": "臺中市", "value": 11.68}, {"city": "臺北市", "value": 12.84}, {"city": "嘉義市", "value": 13.99}];
+const topNames = new Set(["嘉義市", "臺北市", "臺中市", "高雄市", "臺南市"]);
+const avg = 9.38;
+const svg = document.getElementById('chart');
+const tooltip = document.getElementById('tooltip');
+const wrap = document.querySelector('.chart-wrap');
+
+const W = 1040, H = 320;
+const m = {top:54, right:42, bottom:62, left:56};
+const innerW = W - m.left - m.right;
+const min = 1, max = 14.5;
+const x = v => m.left + (v - min) / (max - min) * innerW;
+
+function el(tag, attrs={}, text=''){
+  const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  Object.entries(attrs).forEach(([k,v]) => e.setAttribute(k,v));
+  if(text) e.textContent = text;
+  return e;
+}
+
+for(let v=2; v<=14; v+=2){
+  const xx = x(v);
+  svg.appendChild(el('line',{x1:xx,y1:m.top,x2:xx,y2:H-m.bottom,class:'grid'}));
+  svg.appendChild(el('text',{x:xx,y:H-26,'text-anchor':'middle',class:'axis'}, v.toFixed(0)));
+}
+svg.appendChild(el('text',{x:m.left,y:H-6,class:'axis'}, '每萬人診所數'));
+
+const ax = x(avg);
+svg.appendChild(el('line',{x1:ax,y1:m.top-12,x2:ax,y2:H-m.bottom+12,class:'avg-line'}));
+svg.appendChild(el('text',{x:ax+8,y:m.top-18,class:'avg-label'}, `全國平均 ${avg.toFixed(2)}`));
+
+svg.appendChild(el('text',{x:m.left+2,y:m.top+18,class:'direction'}, '較低'));
+svg.appendChild(el('text',{x:W-m.right-26,y:m.top+18,'text-anchor':'end',class:'direction'}, '較高'));
+
+const yMap = {
+  "連江縣": 182,
+  "金門縣": 198,
+  "嘉義縣": 190,
+  "苗栗縣": 142,
+  "桃園市": 166,
+  "臺南市": 176,
+  "高雄市": 154,
+  "臺中市": 170,
+  "臺北市": 202,
+  "嘉義市": 188
+};
+
+points.forEach((d) => {
+  const xx = x(d.value);
+  const yy = yMap[d.city];
+  const isTop = topNames.has(d.city);
+  const color = isTop ? '#f45500' : '#7ea9a3';
+
+  const g = el('g', {class:'dot'});
+  const c = el('circle', {
+    cx:xx, cy:yy, r:8, fill:color, stroke:'#f6f4ef', 'stroke-width':3
+  });
+  g.appendChild(c);
+
+  let tx = xx;
+  let ty = yy - 14;
+
+  if(d.city === '苗栗縣') ty = yy - 18;
+  if(d.city === '桃園市') ty = yy + 22;
+  if(d.city === '連江縣') ty = yy - 16;
+  if(d.city === '臺北市') ty = yy - 16;
+
+  const label = el('text', {
+    x:tx, y:ty, 'text-anchor':'middle', class:'label ' + (isTop ? 'top' : 'bottom')
+  }, `${d.city} ${d.value.toFixed(2)}`);
+  g.appendChild(label);
+
+  g.addEventListener('mouseenter', () => {
+    const kind = isTop ? '前五名' : '倒數五名';
+    tooltip.innerHTML = `<strong>${d.city}</strong>${d.value.toFixed(2)} 間／每萬人<br>${kind}`;
+    tooltip.style.opacity = 1;
+  });
+  g.addEventListener('mousemove', (e) => {
+    const r = wrap.getBoundingClientRect();
+    tooltip.style.left = (e.clientX - r.left) + 'px';
+    tooltip.style.top = (e.clientY - r.top) + 'px';
+  });
+  g.addEventListener('mouseleave', () => tooltip.style.opacity = 0);
+
+  svg.appendChild(g);
+});
+</script>
+</body>
+</html>

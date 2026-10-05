@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="charts/chart-4.css">
 	<link rel="stylesheet" href="charts/chart-5.css">
 	<link rel="stylesheet" href="charts/chart-3.css">
+	<link rel="stylesheet" href="charts/chart-6.css">
 	<!-- Google Tag Manager -->
 	<script>(function (w, d, s, l, i) {
 		w[l] = w[l] || []; w[l].push({
@@ -366,7 +367,24 @@
                 <p>雖然診所看似遍地開花，分布卻極不平均，從嘉義市、台北每萬人十幾家，到離島的個位數，落差近10倍，造成都會區或人口集中區域的診所競爭更加激烈，但資源稀缺區域要就醫依然不便。</p>
                 <p>這代表診所增加，主要改善的是人口密集地區的選擇與便利，對偏鄉的幫助有限。同樣的失衡也發生在不同科別。民眾感冒、復健有更多選擇；但真正需要急診、住院、手術、兒科或婦產科醫療時，診所數量再多，也無法取代醫院。</p>
                 <p>台灣不缺診所，缺的是能在特定地區、特定科別與關鍵時刻提供服務的醫療人力。</p>
-                <p>圖⑥：每萬人診所數：前五名 vs 倒數五名（城鄉差距顯著，資源高度集中於都會區）</p>
+                <div id="chart-6" class="chart-block w-full maxw-794">
+                  <p class="eyebrow">診所戰國時代｜城鄉差距</p>
+                  <h3 class="chart-title">每萬人診所數：前五名 vs 倒數五名</h3>
+                  <p class="dek">各縣市每萬人診所數差距極大。前五名多集中都會，倒數五名則以離島與非都會縣市為主，<br>顯示診所增加主要改善的是人口密集地區的選擇與便利。</p>
+                  <div class="chart-panel">
+                    <p class="chart-meta">115年3月各縣市每萬人診所數（健保特約診所）｜全國平均 9.38</p>
+                    <div class="legend">
+                      <span><i style="background:var(--top)"></i>前五名</span>
+                      <span><i style="background:var(--bottom)"></i>倒數五名</span>
+                      <span><i class="avg"></i>全國平均</span>
+                    </div>
+                    <div class="chart-wrap chart-style">
+                      <svg id="chart6-svg" viewBox="0 0 1040 320" role="img" aria-label="前五名與倒數五名各縣市每萬人診所數分布圖，含全國平均9.38"></svg>
+                      <div class="tooltip" id="chart6-tooltip"></div>
+                    </div>
+                  </div>
+                  <p class="info">資料來源：健保署《特約醫事服務機構家數統計表》115年3月、內政部戶政司115年3月戶籍人口。</p>
+                </div>
             </div>
         </section>
         <section id="section-5" data-id="section-5" data-track="true" page="ClinicWarring" event_title="重點區塊曝光" content_title="診所戰國成形，醫師行醫方式正在改變">
@@ -378,6 +396,50 @@
                 <p>商業化帶來便利、數位化提升品質、個人品牌帶動專業資訊流通，但同時，急重症醫療韌性在走弱，醫病間的資訊不對等也絲毫不減。</p>
                 <p>診所戰國繁榮，醫院體系空洞化，贏家看似是站上金流浪潮的診所與醫師，以及經濟較無虞的消費者。但自費真的等於更健康、更美麗、效果更好嗎？在獲利為王的邏輯下，醫師又該如何看待自身工作的價值？</p>
                 <p>答案絕對不只一個，但每一個答案都很重要。因為這已經不只是產業競爭，更是攸關健康平等、社會安全的警訊，每個人都已經是這場戰局的關係人。</p>
+            </div>
+        </section>
+        <section id="section-related" data-id="section-related" data-track="true" page="ClinicWarring" event_title="重點區塊曝光" content_title="延伸閱讀">
+            <div class="related-list">
+                <a class="related-item" href="#">
+                    <div class="related-copy">
+                        <p class="related-kicker">直擊診所市場背後的「軍火庫」</p>
+                        <h3 class="related-title">開診所不只靠醫術！<br>3家新創搶進行政、品牌與人力新戰場</h3>
+                        <p class="related-dek">找診所，已經像找餐廳——先先看Google幾顆星、能不能線上預約。當看病被服務業的邏輯重寫，是誰在背後替診所打理行政、品牌與人力？我們直擊3家新創的「軍火庫」，公開他們不為人知的初衷。</p>
+                    </div>
+                    <div class="related-visual">
+                        <img src="images/related-01-arsenal.jpg" alt="開診所不只靠醫術！3家新創搶進行政、品牌與人力新戰場" width="800" height="600">
+                    </div>
+                </a>
+                <a class="related-item" href="#">
+                    <div class="related-visual">
+                        <img src="images/related-02-gen-y.jpg" alt="留下來當旁觀者，還是轉身做業務？5位Y世代醫師的告白與抉擇" width="800" height="600">
+                    </div>
+                    <div class="related-copy">
+                        <p class="related-kicker">Y世代醫師為什麼離開醫院？</p>
+                        <h3 class="related-title">留下來當旁觀者，還是轉身做業務？<br>5位Y世代醫師的告白與抉擇</h3>
+                        <p class="related-dek">為什麼愈來愈多年輕醫師，完訓沒幾年就離開醫院？因為舉凡評鑑、工時、收入、稅負、被告風險，幾乎每項都是診所划算，但做出選擇之後還糾結什麼？</p>
+                    </div>
+                </a>
+                <a class="related-item" href="#">
+                    <div class="related-copy">
+                        <p class="related-kicker">2045，誰還留在醫院救命？</p>
+                        <h3 class="related-title">醫療崩盤倒數，X世代醫師憂：<br>我們正在失去救命的能力</h3>
+                        <p class="related-dek">總有一天，X世代醫師會全面退場，交棒Y世代。但台大醫學院長吳明賢預言，2045年的台灣恐會失去救命的能力。Ｘ世代醫師並非全都如此悲觀，但都一樣迫切，畢竟守護台灣醫療的未來，現在就有太多該做的事。</p>
+                    </div>
+                    <div class="related-visual">
+                        <img src="images/related-03-gen-x.jpg" alt="醫療崩盤倒數，X世代醫師憂：我們正在失去救命的能力" width="800" height="600">
+                    </div>
+                </a>
+                <a class="related-item" href="#">
+                    <div class="related-visual">
+                        <img src="images/related-04-imbalance.jpg" alt="診所愈開愈多，醫院卻留不住人：台灣如何回應醫療失衡？" width="800" height="600">
+                    </div>
+                    <div class="related-copy">
+                        <p class="related-kicker">失衡之後，台灣準備怎麼辦？</p>
+                        <h3 class="related-title">診所愈開愈多，醫院卻留不住人：<br>台灣如何回應醫療失衡？</h3>
+                        <p class="related-dek">面對同樣的失衡，日本已經出手施行新法，用更高的門檻矯正醫師流向，不僅嚴管醫美、拉高診所負責醫師資格，甚至對門診過剩地區的新診所祭出開業管制。台灣呢？我們帶著第一線的聲音與醫改會的建言，尋求衛福部部長的回應。</p>
+                    </div>
+                </a>
             </div>
         </section>
     </main>
@@ -436,6 +498,7 @@
 <script src="charts/chart-4.js"></script>
 <script src="charts/chart-5.js"></script>
 <script src="charts/chart-3.js"></script>
+<script src="charts/chart-6.js"></script>
 </body>
 
 </html>

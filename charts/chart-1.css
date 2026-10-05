@@ -1,7 +1,8 @@
 #chart-1,
 #chart-4,
 #chart-5,
-#chart-3 {
+#chart-3,
+#chart-6 {
   --bg: #f7f5f2;
   --ink: #2d2c28;
   --muted: #616161;
@@ -21,7 +22,8 @@
 #chart-1 p.info,
 #chart-4 p.info,
 #chart-5 p.info,
-#chart-3 p.info {
+#chart-3 p.info,
+#chart-6 p.info {
   max-width: none;
   margin: 40px 0 0;
   color: #2d2c28;
@@ -36,7 +38,8 @@
   #chart-1 p.info,
   #chart-4 p.info,
 #chart-5 p.info,
-#chart-3 p.info {
+#chart-3 p.info,
+#chart-6 p.info {
     margin-top: 16px;
   }
 }
@@ -44,7 +47,8 @@
 #chart-1 p.eyebrow,
 #chart-4 p.eyebrow,
 #chart-5 p.eyebrow,
-#chart-3 p.eyebrow {
+#chart-3 p.eyebrow,
+#chart-6 p.eyebrow {
   width: 100%;
   max-width: none;
   margin: 0 0 11px;
@@ -59,7 +63,8 @@
 #chart-1 h3.chart-title,
 #chart-4 h3.chart-title,
 #chart-5 h3.chart-title,
-#chart-3 h3.chart-title {
+#chart-3 h3.chart-title,
+#chart-6 h3.chart-title {
   width: 100%;
   max-width: none;
   margin: 0;
@@ -74,7 +79,8 @@
 #chart-1 p.dek,
 #chart-4 p.dek,
 #chart-5 p.dek,
-#chart-3 p.dek {
+#chart-3 p.dek,
+#chart-6 p.dek {
   width: 100%;
   max-width: none;
   margin: 19px 0 0;
@@ -91,7 +97,8 @@
 #chart-1 .chart-panel,
 #chart-4 .chart-panel,
 #chart-5 .chart-panel,
-#chart-3 .chart-panel {
+#chart-3 .chart-panel,
+#chart-6 .chart-panel {
   width: 100%;
   margin-top: 32px;
   padding-top: 16px;
@@ -101,7 +108,8 @@
 #chart-1 p.chart-meta,
 #chart-4 p.chart-meta,
 #chart-5 p.chart-meta,
-#chart-3 p.chart-meta {
+#chart-3 p.chart-meta,
+#chart-6 p.chart-meta {
   width: 100%;
   max-width: none;
   margin: 0 0 10px;
@@ -134,7 +142,8 @@
 #chart-1 .tooltip,
 #chart-4 .tooltip,
 #chart-5 .tooltip,
-#chart-3 .tooltip {
+#chart-3 .tooltip,
+#chart-6 .tooltip {
 
   position: absolute;
   min-width: 160px;
@@ -153,7 +162,8 @@
 #chart-1 .tooltip strong,
 #chart-4 .tooltip strong,
 #chart-5 .tooltip strong,
-#chart-3 .tooltip strong {
+#chart-3 .tooltip strong,
+#chart-6 .tooltip strong {
   display: block;
   margin-bottom: 2px;
   font-size: 13px;
@@ -165,7 +175,8 @@
 #chart-1 .tooltip .total,
 #chart-4 .tooltip .total,
 #chart-5 .tooltip .total,
-#chart-3 .tooltip .total {
+#chart-3 .tooltip .total,
+#chart-6 .tooltip .total {
   font-size: 15px;
   font-weight: 700;
   color: #ffd7c7;
@@ -324,7 +335,8 @@
   #chart-1 p.dek,
   #chart-4 p.dek,
 #chart-5 p.dek,
-#chart-3 p.dek {
+#chart-3 p.dek,
+#chart-6 p.dek {
     margin-top: 14px;
     font-size: 12px;
     line-height: 1.8;
@@ -333,7 +345,8 @@
   #chart-1 .chart-panel,
   #chart-4 .chart-panel,
 #chart-5 .chart-panel,
-#chart-3 .chart-panel {
+#chart-3 .chart-panel,
+#chart-6 .chart-panel {
     margin-top: 26px;
     padding-top: 13px;
   }
