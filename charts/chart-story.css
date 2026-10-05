@@ -1,11 +1,19 @@
+html {
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
+}
+
 #section-story {
   --story-header: 64px;
   align-self: stretch;
   box-sizing: border-box;
   width: 100%;
-  max-width: none;
+  max-width: 100%;
   height: 820vh;
-  margin: 0;
+  margin: 80px 0 200px;
   padding: 0;
   color: #17191d;
   background: #f45500;
@@ -15,6 +23,8 @@
 @media (width <= 768px) {
   #section-story {
     --story-header: 52px;
+    margin-top: 56px;
+    margin-bottom: 160px;
   }
 }
 
@@ -29,14 +39,18 @@
   top: 0;
   overflow: hidden;
   width: 100%;
+  max-width: 100%;
   height: 100vh;
+  min-height: 100svh;
   background: #f45500;
 }
 
 #section-story svg {
   position: absolute;
   inset: 0;
+  overflow: visible;
   width: 100%;
+  max-width: 100%;
   height: 100%;
 }
 
@@ -69,46 +83,13 @@
   stroke-linecap: round;
 }
 
-#section-story .markers {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-}
-
 #section-story .dot {
-  position: absolute;
   opacity: 0;
-  transform: translate(-50%, -100%) scale(0);
-  transform-origin: 50% 100%;
-  transition: opacity .18s, transform .22s cubic-bezier(.2, .9, .2, 1.25);
+  transition: opacity .18s;
 }
 
 #section-story .dot.on {
   opacity: 1;
-  transform: translate(-50%, -100%) scale(1);
-}
-
-#section-story .pin {
-  position: absolute;
-  width: 18px;
-  height: 24px;
-  background: #fff5df;
-  border: 2.5px solid #17191d;
-  border-radius: 10px 10px 10px 0;
-  transform: rotate(-45deg);
-}
-
-#section-story .pin::after {
-  content: "";
-  position: absolute;
-  top: 5px;
-  left: 4px;
-  width: 5px;
-  height: 5px;
-  background: #f45500;
-  border: 2px solid #17191d;
-  border-radius: 50%;
 }
 
 #section-story .copy {
@@ -318,23 +299,264 @@
 }
 
 @media (width <= 760px) {
+  #section-story {
+    height: 720svh;
+  }
+
+  #section-story .stage {
+    height: 100svh;
+    min-height: 100svh;
+  }
+
+  #section-story .stage::after {
+    content: "";
+    position: absolute;
+    z-index: 4;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 48svh;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(244, 85, 0, 0), rgba(244, 85, 0, .88) 38%, #f45500 76%);
+  }
+
+  #section-story svg {
+    top: 0;
+    right: -22vw;
+    left: auto;
+    width: 145vw;
+    max-width: none;
+    height: 100svh;
+    transform: none;
+    transform-origin: center center;
+  }
+
+  #section-story .brand {
+    top: calc(var(--story-header) + 8px);
+    left: 6vw;
+    max-width: 68vw;
+    font-size: 9px;
+    line-height: 1.4;
+    letter-spacing: .12em;
+  }
+
+  #section-story .counter {
+    top: calc(var(--story-header) + 8px);
+    right: 6vw;
+    font-size: 11px;
+  }
+
   #section-story .copy {
-    top: calc(var(--story-header) + 10vh);
-    left: 7vw;
-    width: 86vw;
+    z-index: 7;
+    top: auto;
+    bottom: 9svh;
+    left: 6vw;
+    width: 88vw;
+    max-width: none;
+    min-height: 30svh;
+  }
+
+  #section-story .step {
+    width: 100%;
+    bottom: 0;
+    transform: translateY(14px);
+  }
+
+  #section-story .step.on {
+    transform: none;
   }
 
   #section-story .copy h1,
   #section-story .copy h2 {
-    font-size: 39px;
+    margin: 0 0 14px;
+    font-size: clamp(34px, 10.5vw, 48px);
+    line-height: 1.02;
+    letter-spacing: -.03em;
   }
 
   #section-story .copy p {
+    width: 100%;
+    max-width: 88vw;
+    margin: 0;
     font-size: 15px;
+    line-height: 1.65;
   }
 
-  #section-story svg {
-    transform: scale(1.35);
-    transform-origin: 70% 55%;
+  #section-story .metric {
+    margin-bottom: 18px;
+    font-size: clamp(82px, 27vw, 132px);
+    line-height: .78;
+    letter-spacing: -.06em;
+  }
+
+  #section-story .metric small {
+    margin-left: 5px;
+    font-size: .21em;
+  }
+
+  #section-story .note {
+    max-width: 82vw;
+    margin-top: 12px;
+    font-size: 9px;
+    line-height: 1.45;
+  }
+
+  #section-story .hint {
+    z-index: 7;
+    bottom: 3svh;
+    left: 6vw;
+    font-size: 9px;
+    letter-spacing: .09em;
+  }
+
+  #section-story .national {
+    z-index: 8;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 0 6vw 9svh;
+    background: transparent;
+  }
+
+  #section-story .national::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 38svh 0 0;
+    background: linear-gradient(to bottom, rgba(244, 85, 0, 0), rgba(244, 85, 0, .92) 28%, #f45500 70%);
+  }
+
+  #section-story .national-inner {
+    width: 88vw;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+  }
+
+  #section-story .yearrow {
+    margin-bottom: 20px;
+    padding-bottom: 9px;
+    font-size: 10px;
+  }
+
+  #section-story .countup {
+    font-size: clamp(84px, 25vw, 126px);
+    line-height: .82;
+    white-space: nowrap;
+  }
+
+  #section-story .countlabel {
+    margin-top: 18px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  #section-story .delta {
+    max-width: 88vw;
+    margin-top: 18px;
+    font-size: clamp(20px, 5.8vw, 28px);
+    line-height: 1.35;
+  }
+
+  #section-story .closing {
+    padding: 0 7vw;
+  }
+
+  #section-story .closing .small {
+    margin-bottom: 20px;
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  #section-story .closing h3 {
+    font-size: clamp(58px, 19vw, 96px);
+    line-height: .88;
+    word-break: keep-all;
+  }
+
+  #section-story .closing p {
+    max-width: 84vw;
+    margin-top: 26px;
+    font-size: 18px;
+    line-height: 1.45;
+  }
+}
+
+@media (width <= 390px) {
+  #section-story {
+    height: 760svh;
+  }
+
+  #section-story .copy {
+    bottom: 8svh;
+  }
+
+  #section-story .copy h1,
+  #section-story .copy h2 {
+    font-size: 32px;
+  }
+
+  #section-story .copy p {
+    font-size: 14px;
+  }
+
+  #section-story .metric {
+    font-size: 88px;
+  }
+
+  #section-story .countup {
+    font-size: 82px;
+  }
+
+  #section-story .delta {
+    font-size: 20px;
+  }
+}
+
+@media (width <= 900px) and (orientation: landscape) {
+  #section-story {
+    height: 700vh;
+  }
+
+  #section-story .stage {
+    height: 100vh;
+    min-height: 100vh;
+  }
+
+  #section-story .copy {
+    bottom: 8vh;
+    left: 5vw;
+    width: 48vw;
+    min-height: 0;
+  }
+
+  #section-story .copy h1,
+  #section-story .copy h2 {
+    font-size: 32px;
+  }
+
+  #section-story .copy p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  #section-story .metric {
+    font-size: 80px;
+  }
+
+  #section-story .national {
+    padding: 0 5vw 8vh;
+  }
+
+  #section-story .national-inner {
+    width: 50vw;
+  }
+
+  #section-story .countup {
+    font-size: 80px;
+  }
+
+  #section-story .delta {
+    font-size: 20px;
   }
 }
