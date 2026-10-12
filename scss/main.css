@@ -2373,18 +2373,6 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
 
 }
 
-#section-intro.section-preface p {
-  font-family: "Noto Serif TC", "Noto Serif CJK TC", "Source Han Serif TC", PMingLiU, serif;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 200%;
-}
-
-#section-intro.section-preface p:last-of-type {
-  padding-bottom: 40px;
-  border-bottom: 1px solid #404040;
-}
-
 section:not(#section-banner, .section-bottom, #section-related, #section-story) p:last-of-type {
   margin-bottom: 0;
 }
@@ -2396,10 +2384,6 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
     font-size: 16px;
   }
 
-  #section-intro.section-preface p {
-    font-size: 16px;
-    line-height: 200%;
-  }
 }
 
 section:not(#section-banner, .section-bottom, #section-related, #section-story) p b {
@@ -2751,7 +2735,7 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
 #section-banner {
   background: #111;
   width: 100%;
-  margin-bottom: 80px;
+  margin-bottom: 0;
   overflow: hidden;
 }
 
@@ -2769,7 +2753,7 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
 
 @media only screen and (width <= 768px) {
   #section-banner {
-    margin-bottom: 48px;
+    margin-bottom: 0;
   }
 
   #section-banner .banner-block {
