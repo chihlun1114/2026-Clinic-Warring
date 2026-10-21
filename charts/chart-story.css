@@ -250,3 +250,135 @@ body {
 #section-story #approvedTaiwanScene .growth-desc{font-size:clamp(16px,1.5vw,25px)!important;line-height:1.45!important}
 #section-story #approvedTaiwanScene .visual-disclaimer{position:absolute;bottom:1.4%;left:4.7%;font-size:10px;color:#17191d;z-index:10}
 @media(max-width:760px){#approvedTaiwanScene{display:block!important}#approvedTaiwanScene .locked-art{top:37%!important;height:60%!important;left:-24%!important;width:160%!important}#approvedTaiwanScene .growth-copy{top:5%!important;left:5%!important;width:88%!important}#approvedTaiwanScene .growth-value{font-size:clamp(55px,14vw,110px)!important}#approvedTaiwanScene .growth-desc{font-size:15px!important}#approvedTaiwanScene .visual-disclaimer{font-size:8px;bottom:0.5%}}
+
+/* Mobile: stack image above copy so the desktop left/right split does not overflow. */
+@media (max-width: 760px) {
+  #section-story .copy-zone {
+    top: auto !important;
+    bottom: 0 !important;
+    left: 6vw !important;
+    width: 88vw !important;
+    height: 42svh !important;
+    min-height: 0 !important;
+    transform: none !important;
+    z-index: 22;
+  }
+
+  #section-story .scene-copy {
+    justify-content: flex-end !important;
+    padding-bottom: calc(4.8svh + env(safe-area-inset-bottom, 0px));
+  }
+
+  #section-story .scene-copy h2 {
+    font-size: clamp(26px, 7.2vw, 36px) !important;
+    line-height: 1.2 !important;
+  }
+
+  #section-story .scene-copy p {
+    font-size: 15px !important;
+    margin-top: 12px !important;
+  }
+
+  #section-story .scene-copy .number {
+    font-size: clamp(64px, 17vw, 92px) !important;
+  }
+
+  #section-story .map-world {
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 40% !important;
+    overflow: hidden;
+  }
+
+  #section-story .safe-mask {
+    width: 100%;
+    height: 48%;
+    left: 0;
+    top: auto;
+    bottom: 0;
+    background: linear-gradient(0deg, var(--orange) 0 70%, rgba(244, 85, 0, 0) 100%);
+  }
+
+  #section-story #approvedTaiwanScene .locked-art {
+    top: 0 !important;
+    left: -18% !important;
+    width: 136% !important;
+    height: 54% !important;
+  }
+
+  #section-story #approvedTaiwanScene .growth-copy {
+    top: auto !important;
+    bottom: 0 !important;
+    left: 6vw !important;
+    width: 88vw !important;
+    height: 46svh !important;
+    transform: none !important;
+    justify-content: flex-end !important;
+    padding-bottom: calc(5.2svh + env(safe-area-inset-bottom, 0px));
+  }
+
+  #section-story #approvedTaiwanScene .growth-value {
+    font-size: clamp(48px, 13vw, 84px) !important;
+    margin-top: 10px !important;
+  }
+
+  #section-story #approvedTaiwanScene .growth-desc {
+    font-size: 14px !important;
+    margin-top: 12px !important;
+    line-height: 1.45 !important;
+  }
+
+  #section-story #approvedTaiwanScene .visual-disclaimer {
+    left: 6vw;
+    right: 6vw;
+    bottom: 1.1svh;
+    font-size: 8px;
+  }
+
+  #section-story #searchScene {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: minmax(0, 1fr) auto !important;
+  }
+
+  #section-story #searchVisual {
+    grid-row: 1;
+    min-height: 0;
+  }
+
+  #section-story #searchScene .search-copy-fixed {
+    grid-row: 2;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 16px 22px calc(22px + env(safe-area-inset-bottom, 0px)) !important;
+    justify-content: flex-start !important;
+  }
+
+  #section-story #searchScene .search-copy-fixed h2 {
+    font-size: clamp(26px, 7.4vw, 36px) !important;
+  }
+
+  #section-story #searchScene .search-copy-fixed p {
+    font-size: 14px !important;
+    margin-top: 8px !important;
+  }
+
+  #section-story #demoPhone {
+    width: min(188px, 48vw);
+    height: min(360px, 48svh);
+    left: 50%;
+    top: 48%;
+    border-width: 7px;
+    border-radius: 28px;
+  }
+
+  #section-story #burstCards .burst {
+    width: min(132px, 34vw);
+    padding: 8px 10px;
+  }
+}
