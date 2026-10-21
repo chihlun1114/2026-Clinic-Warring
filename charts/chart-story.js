@@ -1,178 +1,121 @@
 (function () {
   const story = document.getElementById('section-story');
-  if (!story) return;
+  if (!story || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-  const P=[{"name": "陳尚志診所洗腎中心", "addr": "新北市板橋區文化路二段388號3F", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.031, "lon": 121.474, "house": 388, "est": false, "x": 1270.0, "y": 80.0}, {"name": "新象眼科診所", "addr": "新北市板橋區文化路二段394號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.031, "lon": 121.474, "house": 394, "est": true, "x": 1270.0, "y": 80.0}, {"name": "療寮診所", "addr": "新北市板橋區文化路二段441巷2弄2號1樓", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.031, "lon": 121.474, "house": 441, "est": true, "x": 1270.0, "y": 80.0}, {"name": "福霖堂中醫診所", "addr": "新北市板橋區文化路二段410巷1弄2號", "cat": "中醫", "seg": "二段", "lat": 25.031, "lon": 121.474, "house": 410, "est": true, "x": 1270.0, "y": 80.0}, {"name": "志善眼科診所", "addr": "新北市板橋區文化路二段386號、386之1號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.030961538461536, "lon": 121.47396153846154, "house": 386, "est": true, "x": 1268.413461538274, "y": 81.50183150187088}, {"name": "原力復健科診所", "addr": "新北市板橋區文化路二段370號1樓、372號1樓", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.030653846153847, "lon": 121.47365384615385, "house": 370, "est": true, "x": 1255.7211538462257, "y": 93.51648351642177}, {"name": "昇陽診所", "addr": "新北市板橋區文化路二段326號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.03, "lon": 121.473, "house": 326, "est": false, "x": 1228.7499999998167, "y": 119.04761904753317}, {"name": "愛爾麗診所(新北板橋店)", "addr": "新北市板橋區文化路二段293號3F", "cat": "無健保特約", "seg": "二段", "lat": 25.03, "lon": 121.472, "house": 293, "est": false, "x": 1187.4999999996335, "y": 119.04761904753317}, {"name": "樂洋診所(醫學美容)", "addr": "新北市板橋區文化路二段317號3F", "cat": "醫美", "seg": "二段", "lat": 25.03, "lon": 121.472, "house": 317, "est": false, "x": 1187.4999999996335, "y": 119.04761904753317}, {"name": "Belléesse研知診所(板橋醫美)", "addr": "新北市板橋區文化路二段330號", "cat": "醫美", "seg": "二段", "lat": 25.03, "lon": 121.473, "house": 330, "est": false, "x": 1228.7499999998167, "y": 119.04761904753317}, {"name": "詩宓診所 Smile Muse", "addr": "新北市板橋區文化路二段287號20F", "cat": "無健保特約", "seg": "二段", "lat": 25.03, "lon": 121.472, "house": 287, "est": false, "x": 1187.4999999996335, "y": 119.04761904753317}, {"name": "德聲牙醫診所(板橋)", "addr": "新北市板橋區文化路二段324號", "cat": "牙醫", "seg": "二段", "lat": 25.03, "lon": 121.473, "house": 324, "est": false, "x": 1228.7499999998167, "y": 119.04761904753317}, {"name": "康維牙醫診所", "addr": "新北市板橋區文化路二段336號", "cat": "牙醫", "seg": "二段", "lat": 25.03, "lon": 121.473, "house": 336, "est": false, "x": 1228.7499999998167, "y": 119.04761904753317}, {"name": "芯悅牙醫診所", "addr": "新北市板橋區文化路二段333號", "cat": "牙醫", "seg": "二段", "lat": 25.03, "lon": 121.472, "house": 333, "est": false, "x": 1187.4999999996335, "y": 119.04761904753317}, {"name": "板橋澄清眼科診所", "addr": "新北市板橋區文化路二段288號1、2樓及夾層", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.03, "lon": 121.472, "house": 288, "est": true, "x": 1187.4999999996335, "y": 119.04761904753317}, {"name": "新板婦產科診所", "addr": "新北市板橋區文化路二段285、287號5樓及293號5樓", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.029960000000003, "lon": 121.47196, "house": 285, "est": true, "x": 1185.8499999996966, "y": 120.609523809379}, {"name": "豐樺婦產科診所", "addr": "新北市板橋區文化路二段282號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.0299, "lon": 121.47189999999999, "house": 282, "est": true, "x": 1183.374999999498, "y": 122.95238095228649}, {"name": "東壕牙醫診所", "addr": "新北市板橋區文化路二段241號1、2樓", "cat": "牙醫", "seg": "二段", "lat": 25.02908, "lon": 121.47108, "house": 241, "est": true, "x": 1149.5499999999106, "y": 154.97142857137464}, {"name": "家樺診所", "addr": "新北市板橋區文化路二段182巷3弄51號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.029, "lon": 121.472, "house": 182, "est": false, "x": 1187.4999999996335, "y": 158.09523809520505}, {"name": "星幸福美學診所(板橋)", "addr": "新北市板橋區文化路二段182巷1弄77號", "cat": "醫美", "seg": "二段", "lat": 25.029, "lon": 121.472, "house": 182, "est": false, "x": 1187.4999999996335, "y": 158.09523809520505}, {"name": "有好美學診所", "addr": "新北市板橋區文化路二段182巷1弄79號", "cat": "無健保特約", "seg": "二段", "lat": 25.029, "lon": 121.472, "house": 182, "est": false, "x": 1187.4999999996335, "y": 158.09523809520505}, {"name": "板橋英倫牙醫診所", "addr": "新北市板橋區文化路二段237號", "cat": "牙醫", "seg": "二段", "lat": 25.029, "lon": 121.471, "house": 237, "est": false, "x": 1146.2500000000366, "y": 158.09523809520505}, {"name": "高端眼科診所", "addr": "新北市板橋區文化路二段182巷3弄46號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.028, "lon": 121.472, "house": 182, "est": false, "x": 1187.4999999996335, "y": 197.14285714287695}, {"name": "諺康美學牙醫診所", "addr": "新北市板橋區文化路二段175號1F", "cat": "牙醫", "seg": "二段", "lat": 25.028, "lon": 121.47, "house": 175, "est": false, "x": 1104.9999999998536, "y": 197.14285714287695}, {"name": "晶耀牙醫診所", "addr": "新北市板橋區文化路二段182巷3弄46號", "cat": "牙醫", "seg": "二段", "lat": 25.028, "lon": 121.473, "house": 182, "est": false, "x": 1228.7499999998167, "y": 197.14285714287695}, {"name": "蕭正輝兒科診所", "addr": "新北市板橋區文化路二段137號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.027, "lon": 121.47, "house": 137, "est": false, "x": 1104.9999999998536, "y": 236.19047619041012}, {"name": "板橋恩典復健家醫科診所", "addr": "新北市板橋區文化路二段155號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.027, "lon": 121.47, "house": 155, "est": false, "x": 1104.9999999998536, "y": 236.19047619041012}, {"name": "陳東熙中醫診所", "addr": "新北市板橋區文化路二段165號", "cat": "中醫", "seg": "二段", "lat": 25.027, "lon": 121.47, "house": 165, "est": false, "x": 1104.9999999998536, "y": 236.19047619041012}, {"name": "向陽澄思診所", "addr": "新北市板橋區文化路二段113號(1、2樓)", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.026142857142858, "lon": 121.47, "house": 113, "est": true, "x": 1104.9999999998536, "y": 269.6598639455178}, {"name": "佑幼診所", "addr": "新北市板橋區文化路二段57號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.026, "lon": 121.469, "house": 57, "est": false, "x": 1063.7499999996703, "y": 275.238095238082}, {"name": "蔡眼科診所", "addr": "新北市板橋區文化路二段109-3號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.026, "lon": 121.47, "house": 109, "est": false, "x": 1104.9999999998536, "y": 275.238095238082}, {"name": "向德中醫診所", "addr": "新北市板橋區文化路二段109號", "cat": "無健保特約", "seg": "二段", "lat": 25.026, "lon": 121.469, "house": 109, "est": false, "x": 1063.7499999996703, "y": 275.238095238082}, {"name": "板橋醫憲診所", "addr": "新北市板橋區文化路二段55號1樓、2樓、3樓", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.0255, "lon": 121.469, "house": 55, "est": true, "x": 1063.7499999996703, "y": 294.7619047618486}, {"name": "板橋黃皮膚科診所", "addr": "新北市板橋區文化路二段53號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.025, "lon": 121.469, "house": 53, "est": false, "x": 1063.7499999996703, "y": 314.2857142857539}, {"name": "立潔牙醫診所", "addr": "新北市板橋區文化路二段23號", "cat": "牙醫", "seg": "二段", "lat": 25.025, "lon": 121.469, "house": 23, "est": false, "x": 1063.7499999996703, "y": 314.2857142857539}, {"name": "詠心牙醫診所", "addr": "新北市板橋區文化路二段41號", "cat": "牙醫", "seg": "二段", "lat": 25.025, "lon": 121.469, "house": 41, "est": false, "x": 1063.7499999996703, "y": 314.2857142857539}, {"name": "麗德牙醫診所", "addr": "新北市板橋區文化路二段20號2樓", "cat": "牙醫", "seg": "二段", "lat": 25.024250000000002, "lon": 121.469, "house": 20, "est": true, "x": 1063.7499999996703, "y": 343.5714285713345}, {"name": "周耳鼻喉科診所", "addr": "新北市板橋區文化路二段5號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.024, "lon": 121.468, "house": 5, "est": false, "x": 1022.5000000000732, "y": 353.33333333328704}, {"name": "樂田耳鼻喉/家醫科診所", "addr": "新北市板橋區文化路二段10號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.024, "lon": 121.469, "house": 10, "est": false, "x": 1063.7499999996703, "y": 353.33333333328704}, {"name": "維力骨科診所", "addr": "新北市板橋區文化路二段19號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.024, "lon": 121.469, "house": 19, "est": false, "x": 1063.7499999996703, "y": 353.33333333328704}, {"name": "禾家美學診所·板橋", "addr": "新北市板橋區文化路二段15號", "cat": "無健保特約", "seg": "二段", "lat": 25.024, "lon": 121.468, "house": 15, "est": false, "x": 1022.5000000000732, "y": 353.33333333328704}, {"name": "小岩井醫美診所板橋店", "addr": "新北市板橋區文化路二段10號2F", "cat": "無健保特約", "seg": "二段", "lat": 25.024, "lon": 121.469, "house": 10, "est": false, "x": 1063.7499999996703, "y": 353.33333333328704}, {"name": "新埔牙醫診所", "addr": "新北市板橋區文化路二段17號", "cat": "牙醫", "seg": "二段", "lat": 25.024, "lon": 121.469, "house": 17, "est": false, "x": 1063.7499999996703, "y": 353.33333333328704}, {"name": "詹婦產科診所", "addr": "新北市板橋區文化路二段2號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.024, "lon": 121.468, "house": 2, "est": true, "x": 1022.5000000000732, "y": 353.33333333328704}, {"name": "楊思亮診所", "addr": "新北市板橋區文化路二段4號", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.024, "lon": 121.468, "house": 4, "est": true, "x": 1022.5000000000732, "y": 353.33333333328704}, {"name": "沐林親子診所", "addr": "新北市板橋區文化路二段18號(1樓)", "cat": "西醫(含洗腎)", "seg": "二段", "lat": 25.024, "lon": 121.469, "house": 18, "est": true, "x": 1063.7499999996703, "y": 353.33333333328704}, {"name": "德川中醫診所", "addr": "新北市板橋區文化路二段13號1樓", "cat": "中醫", "seg": "二段", "lat": 25.024, "lon": 121.4684, "house": 13, "est": true, "x": 1039.0000000000293, "y": 353.33333333328704}, {"name": "板橋信德診所", "addr": "新北市板橋區文化路一段310號", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.022, "lon": 121.468, "house": 310, "est": false, "x": 1022.5000000000732, "y": 431.4285714286309}, {"name": "祐新中醫診所", "addr": "新北市板橋區文化路一段306號", "cat": "中醫", "seg": "一段", "lat": 25.022, "lon": 121.468, "house": 306, "est": false, "x": 1022.5000000000732, "y": 431.4285714286309}, {"name": "豐禾文化婦產科診所", "addr": "新北市板橋區文化路一段322號1～4樓", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.021692307692305, "lon": 121.4676923076923, "house": 322, "est": true, "x": 1009.8076923074386, "y": 443.4432234433205}, {"name": "熠美時尚醫美診所", "addr": "新北市板橋區文化路一段351號2F", "cat": "無健保特約", "seg": "一段", "lat": 25.021, "lon": 121.467, "house": 351, "est": false, "x": 981.2499999998901, "y": 470.47619047616405}, {"name": "安信牙醫診所", "addr": "新北市板橋區文化路一段355號", "cat": "牙醫", "seg": "一段", "lat": 25.021, "lon": 121.467, "house": 355, "est": false, "x": 981.2499999998901, "y": 470.47619047616405}, {"name": "潔品牙醫聯合診所", "addr": "新北市板橋區文化路一段359號", "cat": "牙醫", "seg": "一段", "lat": 25.021, "lon": 121.467, "house": 359, "est": false, "x": 981.2499999998901, "y": 470.47619047616405}, {"name": "翰醫堂新板中醫診所", "addr": "新北市板橋區文化路一段349號", "cat": "中醫", "seg": "一段", "lat": 25.021, "lon": 121.467, "house": 349, "est": false, "x": 981.2499999998901, "y": 470.47619047616405}, {"name": "陳恩哲診所", "addr": "新北市板橋區文化路一段216號", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.02, "lon": 121.466, "house": 216, "est": false, "x": 939.9999999997069, "y": 509.52380952383595}, {"name": "胡牙醫診所", "addr": "新北市板橋區文化路一段188巷16號", "cat": "牙醫", "seg": "一段", "lat": 25.02, "lon": 121.466, "house": 188, "est": false, "x": 939.9999999997069, "y": 509.52380952383595}, {"name": "陳志洪診所", "addr": "新北市板橋區文化路一段216號1樓、2樓", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.02, "lon": 121.466, "house": 216, "est": true, "x": 939.9999999997069, "y": 509.52380952383595}, {"name": "昕新智慧診所", "addr": "新北市板橋區文化路一段188巷51號4樓", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.02, "lon": 121.466, "house": 188, "est": true, "x": 939.9999999997069, "y": 509.52380952383595}, {"name": "茂盛板橋生殖診所", "addr": "新北市板橋區文化路一段188巷51號2、3樓", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.02, "lon": 121.466, "house": 188, "est": true, "x": 939.9999999997069, "y": 509.52380952383595}, {"name": "晶美牙醫診所", "addr": "新北市板橋區文化路一段219-1號(1至3樓)", "cat": "牙醫", "seg": "一段", "lat": 25.019846153846153, "lon": 121.46584615384614, "house": 219, "est": true, "x": 933.6538461533896, "y": 515.5311355311808}, {"name": "怡兒診所", "addr": "新北市板橋區文化路一段303號", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.019, "lon": 121.465, "house": 303, "est": false, "x": 898.7500000001099, "y": 548.5714285715078}, {"name": "絕美牙醫診所", "addr": "新北市板橋區文化路一段138號", "cat": "牙醫", "seg": "一段", "lat": 25.019, "lon": 121.465, "house": 138, "est": false, "x": 898.7500000001099, "y": 548.5714285715078}, {"name": "新生堂中醫診所(板橋)", "addr": "新北市板橋區文化路一段188巷17號", "cat": "中醫", "seg": "一段", "lat": 25.019, "lon": 121.467, "house": 188, "est": false, "x": 981.2499999998901, "y": 548.5714285715078}, {"name": "板橋大愛眼科診所", "addr": "新北市板橋區文化路一段294號1樓、2樓", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.01867857142857, "lon": 121.465, "house": 294, "est": true, "x": 898.7500000001099, "y": 561.1224489796732}, {"name": "勇年牙醫診所", "addr": "新北市板橋區文化路一段277號1樓", "cat": "牙醫", "seg": "一段", "lat": 25.018071428571428, "lon": 121.465, "house": 277, "est": true, "x": 898.7500000001099, "y": 584.8299319728283}, {"name": "張英睿皮膚專科診所", "addr": "新北市板橋區文化路一段118號", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.018, "lon": 121.465, "house": 118, "est": false, "x": 898.7500000001099, "y": 587.619047619041}, {"name": "楊孟達身心精神科診所", "addr": "新北市板橋區文化路一段275號", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.018, "lon": 121.465, "house": 275, "est": false, "x": 898.7500000001099, "y": 587.619047619041}, {"name": "佳腎內科診所(透析洗腎)", "addr": "新北市板橋區文化路一段120號1F", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.018, "lon": 121.465, "house": 120, "est": false, "x": 898.7500000001099, "y": 587.619047619041}, {"name": "絕美板橋牙醫診所", "addr": "新北市板橋區文化路一段108、110號", "cat": "牙醫", "seg": "一段", "lat": 25.018, "lon": 121.465, "house": 108, "est": false, "x": 898.7500000001099, "y": 587.619047619041}, {"name": "倫敦美學牙醫(英倫體系)", "addr": "新北市板橋區文化路一段255號", "cat": "牙醫", "seg": "一段", "lat": 25.018, "lon": 121.464, "house": 255, "est": false, "x": 857.4999999999268, "y": 587.619047619041}, {"name": "生生優動板橋診所", "addr": "新北市板橋區文化路一段142號(1樓)", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.017285714285713, "lon": 121.46328571428572, "house": 142, "est": true, "x": 828.0357142858452, "y": 615.5102040817233}, {"name": "誠信牙醫診所", "addr": "新北市板橋區文化路一段125號", "cat": "牙醫", "seg": "一段", "lat": 25.017117647058825, "lon": 121.46411764705883, "house": 125, "est": true, "x": 862.3529411766258, "y": 622.0728291316192}, {"name": "博恩泌尿專科診所", "addr": "新北市板橋區文化路一段203號", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.017, "lon": 121.463, "house": 203, "est": false, "x": 816.2499999997435, "y": 626.6666666667129}, {"name": "DR.SKY（名冠診所）", "addr": "新北市板橋區文化路一段145號3F-5", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.016, "lon": 121.462, "house": 145, "est": false, "x": 775.0000000001465, "y": 665.7142857143848}, {"name": "板橋美麗爾美學眼科診所", "addr": "新北市板橋區文化路一段145號2F", "cat": "無健保特約", "seg": "一段", "lat": 25.016, "lon": 121.462, "house": 145, "est": false, "x": 775.0000000001465, "y": 665.7142857143848}, {"name": "尚水美博-新北板橋醫美", "addr": "新北市板橋區文化路一段145號3F之1", "cat": "無健保特約", "seg": "一段", "lat": 25.016, "lon": 121.462, "house": 145, "est": false, "x": 775.0000000001465, "y": 665.7142857143848}, {"name": "向日葵美學牙醫診所", "addr": "新北市板橋區文化路一段181號", "cat": "牙醫", "seg": "一段", "lat": 25.016, "lon": 121.463, "house": 181, "est": false, "x": 816.2499999997435, "y": 665.7142857143848}, {"name": "明遠中醫診所(板橋)", "addr": "新北市板橋區文化路一段159號", "cat": "中醫", "seg": "一段", "lat": 25.016, "lon": 121.463, "house": 159, "est": false, "x": 816.2499999997435, "y": 665.7142857143848}, {"name": "新生堂中醫診所(站前)", "addr": "新北市板橋區文化路一段175、177號", "cat": "中醫", "seg": "一段", "lat": 25.016, "lon": 121.463, "house": 175, "est": false, "x": 816.2499999997435, "y": 665.7142857143848}, {"name": "板橋諾貝爾眼科診所", "addr": "新北市板橋區文化路一段145號(1樓)", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.016, "lon": 121.462, "house": 145, "est": true, "x": 775.0000000001465, "y": 665.7142857143848}, {"name": "燦明大學眼科診所", "addr": "新北市板橋區文化路一段180號2樓、182號1、2樓", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.016, "lon": 121.463, "house": 180, "est": true, "x": 816.2499999997435, "y": 665.7142857143848}, {"name": "台達牙醫診所", "addr": "新北市板橋區文化路一段134號", "cat": "牙醫", "seg": "一段", "lat": 25.015529411764707, "lon": 121.4625294117647, "house": 134, "est": true, "x": 796.8382352941198, "y": 684.0896358543433}, {"name": "久明醫美診所-新北板橋", "addr": "新北市板橋區文化路一段137號3F", "cat": "無健保特約", "seg": "一段", "lat": 25.015, "lon": 121.462, "house": 137, "est": false, "x": 775.0000000001465, "y": 704.761904761918}, {"name": "板橋高美泌尿科診所", "addr": "新北市板橋區文化路一段137號(1樓)", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.015, "lon": 121.462, "house": 137, "est": true, "x": 775.0000000001465, "y": 704.761904761918}, {"name": "耀美牙醫診所(新板店)", "addr": "新北市板橋區文化路一段85號", "cat": "牙醫", "seg": "一段", "lat": 25.014, "lon": 121.461, "house": 85, "est": false, "x": 733.7499999999634, "y": 743.8095238095899}, {"name": "悅美牙醫診所", "addr": "新北市板橋區文化路一段27號", "cat": "無健保特約", "seg": "一段", "lat": 25.013, "lon": 121.46, "house": 27, "est": false, "x": 692.4999999997801, "y": 782.8571428571231}, {"name": "老德燕中醫診所", "addr": "新北市板橋區文化路一段30號", "cat": "中醫", "seg": "一段", "lat": 25.011, "lon": 121.459, "house": 30, "est": false, "x": 651.2500000001831, "y": 860.9523809524668}, {"name": "瑞明眼科診所", "addr": "新北市板橋區文化路一段13號1樓、2樓", "cat": "西醫(含洗腎)", "seg": "一段", "lat": 25.010900000000003, "lon": 121.45859999999999, "house": 13, "est": true, "x": 634.749999999641, "y": 864.8571428570814}, {"name": "薪馨牙醫診所", "addr": "新北市板橋區文化路一段7號", "cat": "牙醫", "seg": "一段", "lat": 25.01, "lon": 121.458, "house": 7, "est": false, "x": 610.0, "y": 900.0}, {"name": "大林牙醫診所", "addr": "新北市板橋區文化路一段3號2樓", "cat": "牙醫", "seg": "一段", "lat": 25.01, "lon": 121.458, "house": 3, "est": true, "x": 610.0, "y": 900.0}];
+gsap.registerPlugin(ScrollTrigger);
 
-  const ns = 'http://www.w3.org/2000/svg';
-  const pins = document.getElementById('story-pins');
-  const roads = document.getElementById('story-roads');
-  const nEl = document.getElementById('story-n');
-  const national = document.getElementById('story-national');
-  const search = document.getElementById('story-search');
-  const closing = document.getElementById('story-closing');
-  const clinicCount = document.getElementById('story-clinicCount');
-  const shade = story.querySelector('.search-shade');
-  const searchCopy = story.querySelector('.search-copy');
-  const endKicker = story.querySelector('.closing-kicker');
-  const endTitle = story.querySelector('.closing h4');
-  const endSub = story.querySelector('.closing p');
-  const scenes = [...story.querySelectorAll('.scene')];
-  const cards = [...story.querySelectorAll('.card')];
-  const fragments = [...story.querySelectorAll('.fragment')];
+/* 真實 OSM 文化路 SVG：保留 v05 道路及診所投影，簡化細路 */
+const svg=document.querySelector("#cultureSvg");
+const geoPins=gsap.utils.toArray(".geo-pin");
+const sortedPins=[...geoPins].sort((a,b)=>{
+ const ya=+(a.getAttribute("transform").match(/translate\([^ ]+ ([0-9.]+)/)?.[1]||0);
+ const yb=+(b.getAttribute("transform").match(/translate\([^ ]+ ([0-9.]+)/)?.[1]||0);
+ return ya-yb;
+});
 
-  function addPath(d, cls) {
-    const e = document.createElementNS(ns, 'path');
-    e.setAttribute('d', d);
-    e.setAttribute('class', cls);
-    roads.appendChild(e);
-  }
+/* Scene 04 uses the previously approved phone-scroll concept, with denser floating cards. */
+const pinSvg='<svg viewBox="0 0 52 48"><path d="M3 20 26 3 49 20V44H3Z" fill="#fff" stroke="#17191d" stroke-width="3.2" stroke-linejoin="round"/><path d="M26 15v17M17.5 23.5h17" stroke="#f45500" stroke-width="6"/></svg>';
+const handoff=document.querySelector('#handoffPins');
+const pts=[[15,19],[25,31],[40,19],[57,26],[72,14],[84,30],[16,47],[34,54],[49,45],[69,52],[86,64],[20,76],[40,78],[57,70],[76,84],[33,13],[90,14],[10,65],[62,10],[52,90]];
+pts.forEach(([x,y])=>{let e=document.createElement('div');e.className='pin';e.style.left=x+'%';e.style.top=y+'%';e.innerHTML=pinSvg;handoff.appendChild(e)});
+const demoResults=document.querySelector('#demoResults');
+const fakeNames=['文化路診所 A','板橋診所 B','文化路診所 C','板橋診所 D','文化路診所 E','板橋診所 F','文化路診所 G'];
+fakeNames.forEach((name,i)=>{const el=document.createElement('div');el.className='demo-result';el.innerHTML=`<strong>${name}</strong><div class="stars">★★★★★ <span style="color:#17191d;font-size:12px">${(4.6+(i%4)*.1).toFixed(1)}</span></div><small>距離 ${350+i*150} 公尺 · 評價與評論</small><span class="book">立即預約</span>`;demoResults.appendChild(el)});
+const burstHolder=document.querySelector('#burstCards');
+const burstDefs=[['看距離','附近就有好多間診所'],['比星等','★★★★★　4.9'],['讀評論','「預約方便、服務親切」'],['線上預約','立即預約'],['搜尋結果','附近的診所越來越多'],['熱門推薦','★★★★★　4.8'],['看診時間','今天可以預約'],['比較選擇','距離、評價、評論'],['病患留言','「環境整潔、交通方便」'],['快速掛號','選擇時段'],['診所資訊','評價 4.7 · 評論'],['線上諮詢','查看更多資訊'],['搜尋附近','更多診所結果'],['評價比較','★★★★★　4.9']];
+const bursts=[];
+burstDefs.forEach((d,i)=>{let el=document.createElement('div');el.className='burst';el.innerHTML=`<strong>${d[0]}</strong><p>${d[1]}</p>`;const spots=[[3,12],[56,7],[5,33],[60,28],[2,55],[55,50],[10,75],[62,73],[22,8],[43,84],[71,14],[3,86],[48,39],[67,61]];el.style.left=spots[i][0]+'%';el.style.top=spots[i][1]+'%';el.style.transform=`translateY(95px) rotate(${i%2?6:-6}deg)`;burstHolder.appendChild(el);bursts.push(el)});
+const copyHeadline=document.querySelector('#searchHeadline'),copyDetail=document.querySelector('#searchDetail');
+const sceneCopy=[['找診所，<br>先搜尋。','附近的診所一間接著一間出現。'],['找診所，<br>愈來愈像找餐廳。','看距離、比星等、讀評論，最後按下預約。']];
+function setSceneCopy(i){copyHeadline.innerHTML=sceneCopy[i][0];copyDetail.textContent=sceneCopy[i][1]}
+gsap.set(["#s1","#s2","#mapWorld","#searchScene","#endingScene","#approvedTaiwanScene"],{opacity:0});
+gsap.set("#s1",{opacity:1,visibility:"visible"});
 
-  [90, 145, 205, 265, 325, 385, 445, 505, 565, 625, 685, 745, 805, 865].forEach((y, i) => {
-    addPath(`M520 ${y - 25 * Math.sin(i)} C720 ${y + 18}, 1040 ${y - 18}, 1370 ${y + 12}`, 'road');
+const count={v:19861};
+const growthPins=[...document.querySelectorAll("#approvedTaiwanScene .locked-pin")];
+const growthCount=document.querySelector("#growthCounter");
+const growthPlus=document.querySelector("#growthPlus");
+function renderGrowth(v){
+  const p=Math.max(0,Math.min(1,(v-19861)/(23000-19861)));
+  growthCount.textContent=Math.round(v).toLocaleString("en-US");
+  growthPlus.textContent=p>=.999?"+":"";
+  growthPins.forEach((el,i)=>{
+    const start=.025+(i/growthPins.length)*.86;
+    const t=Math.max(0,Math.min(1,(p-start)/.09));
+    // opacity:0 alone can leave SVG image compositor artifacts in Chrome.
+    // Fully remove unrevealed icons from painting, including during scrub reverse.
+    el.style.visibility = t <= 0.001 ? "hidden" : "visible";
+    el.style.opacity=String(t);
+    el.style.transform=`translate(-50%,-50%) scale(${.82+.18*t})`;
   });
-  for (let x = 620; x < 1370; x += 115) {
-    addPath(`M${x} 40 C${x - 35} 300, ${x + 30} 620, ${x - 10} 930`, 'road');
-  }
+}
+renderGrowth(19861);
 
-  const ordered = [...P].sort((a, b) => a.y - b.y);
-  const main = 'M' + ordered.map((p) => `${p.x},${p.y}`).join(' L');
-  addPath(main, 'main');
-  addPath(main, 'inner');
+const tl=gsap.timeline({
+ defaults:{ease:"none"},
+ scrollTrigger:{
+   trigger:"#section-story",
+   start:"top top",
+   end:"+=4200",
+   pin:true,
+   pinSpacing:true,
+   scrub:0.25,
+   anticipatePin:1,
+   invalidateOnRefresh:true,
+   onUpdate:self=>gsap.set("#progress",{width:(self.progress*100)+"%"})
+ }
+});
 
-  const pinNodes = ordered.map((p, i) => {
-    const g = document.createElementNS(ns, 'g');
-    g.id = 'story-pin' + i;
-    g.setAttribute('class', 'pin');
-    g.setAttribute('transform', `translate(${p.x} ${p.y}) scale(0)`);
+/* 01 文化路：鏡頭行進 → 定點停住 → 90 個 PIN 累積；絕不拉遠。 */
+const originalViewBox=svg.getAttribute("viewBox").split(/[ ,]+/).map(Number);
+const [vx,vy,vw,vh]=originalViewBox;
+const camera={x:vx+vw*.58,y:vy+vh*.22,w:vw*.43,h:vh*.43};
+function updateCamera(){svg.setAttribute("viewBox",`${camera.x-camera.w/2} ${camera.y-camera.h/2} ${camera.w} ${camera.h}`)}
+updateCamera();
+gsap.set(sortedPins,{opacity:0});
+tl.to("#mapWorld",{opacity:1,duration:.12})
+  .to(camera,{x:910.11,y:323.27,w:405.41,h:261.56,duration:.65,onUpdate:updateCamera},"<")
+  .to(sortedPins.slice(0,22),{opacity:1,stagger:.014,duration:.08},"<+=.12")
+  .to("#s1",{opacity:0,y:-10,duration:.13}).set("#s1",{visibility:"hidden"})
+  .set("#s2",{visibility:"visible"}).fromTo("#s2",{opacity:0,y:10},{opacity:1,y:0,duration:.15},"<")
+  /* 鏡頭停止在文化路主視覺位置，剩餘 PIN 不再跟著畫面移出。 */
+  .to(camera,{x:880.11,y:373.27,w:476.96,h:307.71,duration:.19,onUpdate:updateCamera},"<")
+  .to(sortedPins.slice(22),{opacity:1,stagger:.018,duration:.08})
+  .to({}, {duration:.42})
+  /* 02 黑色轉場：35 公尺與 50 步集中於此，不再有橘色第三張文案。 */
+  .to("#bridgeBlack",{opacity:1,duration:.18})
+  .to({}, {duration:.48})
+  .to("#mapWorld",{opacity:0,duration:.18})
+  .to("#s2",{opacity:0,duration:.16},"<")
+  /* 03 唯一的台灣圖層：鎖定麥克筆地圖與 Clinic2，同一坐標系。 */
+  .call(()=>renderGrowth(count.v))
+  .to("#approvedTaiwanScene",{opacity:1,duration:.26})
+  .to("#bridgeBlack",{opacity:0,duration:.24},"<")
+  .to(count,{v:23000,duration:.56,onUpdate:()=>renderGrowth(count.v)})
+  .to({}, {duration:.36})
+  /* 04 單一診所圖示語言接往手機搜尋，沒有舊版線條台灣地圖。 */
+  .to("#approvedTaiwanScene",{opacity:0,duration:.30})
+  .to("#searchScene",{opacity:1,duration:.30},"<")
+  .fromTo("#handoffPins",{opacity:0,scale:1.15},{opacity:1,scale:1,duration:.24},"<")
+  .to("#handoffPins",{opacity:0,scale:.58,x:90,y:20,duration:.38})
+  .fromTo("#demoPhone",{opacity:0,scale:.78},{opacity:1,scale:1,duration:.42},"-=.30")
+  .call(()=>setSceneCopy(0))
+  .to("#demoResults",{y:-310,duration:.65})
+  .call(()=>setSceneCopy(1))
+  .to("#demoResults",{y:-480,duration:.58})
+  .to(bursts,{opacity:1,y:0,rotation:(i)=>((i%5)-2)*3,stagger:.045,duration:.26},"-=.33")
+  .to(bursts,{x:(i)=>((i%4)-1.5)*13,y:(i)=>((i%3)-1)*11,stagger:.022,duration:.30})
+  .to({}, {duration:.28})
 
-    const path = document.createElementNS(ns, 'path');
-    path.setAttribute('d', 'M0 10 C-9 -2 -17 -10 -17 -21 A17 17 0 1 1 17 -21 C17 -10 9 -2 0 10Z');
-    path.setAttribute('fill', '#fff5df');
-    path.setAttribute('stroke', '#17191d');
-    path.setAttribute('stroke-width', '3');
+  /* Ending: transition line then mandatory editorial question. */
+  .set("#endingScene",{visibility:"visible"})
+  .to("#endingScene",{opacity:1,duration:.20})
+  .fromTo("#endingPre",{opacity:0,y:18},{opacity:1,y:0,duration:.33})
+  .to({}, {duration:.34})
+  .to("#endingPre",{opacity:0,y:-20,duration:.22})
+  .fromTo(".ending-lead",{opacity:0,y:22},{opacity:1,y:0,duration:.28})
+  .fromTo(".ending-question",{opacity:0,scale:.4,filter:"blur(6px)"},{opacity:1,scale:1,filter:"blur(0px)",duration:.52,ease:"power3.out"},"-=.03")
+  .to({}, {duration:.75});
 
-    const circle = document.createElementNS(ns, 'circle');
-    circle.setAttribute('cx', '0');
-    circle.setAttribute('cy', '-21');
-    circle.setAttribute('r', '5.5');
-    circle.setAttribute('fill', '#F45500');
-    circle.setAttribute('stroke', '#17191d');
-    circle.setAttribute('stroke-width', '2');
-
-    g.appendChild(path);
-    g.appendChild(circle);
-    pins.appendChild(g);
-    return g;
-  });
-
-  const clamp = (v) => Math.max(0, Math.min(1, v));
-  const ease = (t) => 1 - Math.pow(1 - clamp(t), 3);
-  const cardLayout = [
-    [58, 8, -4], [48, 24, 3], [62, 40, -2], [42, 56, 4], [66, 67, -5], [35, 73, 2],
-    [72, 18, 5], [27, 35, -3], [73, 52, 2], [18, 61, -5], [54, 76, 4], [76, 73, -2],
-    [8, 20, 4], [12, 43, -3], [22, 78, 5], [48, 6, 2], [78, 33, -4], [4, 67, 3]
-  ];
-  const fragLayout = [
-    [7, 16, -8], [67, 12, 5], [54, 86, -4], [78, 60, 8], [4, 82, -6], [33, 14, 4],
-    [72, 30, -3], [10, 52, 7], [59, 48, -5], [30, 88, 3], [82, 82, -7], [40, 66, 5]
-  ];
-
-  function resetOverlays() {
-    national.classList.remove('on');
-    search.classList.remove('on');
-    closing.classList.remove('on');
-    cards.forEach((c) => { c.style.opacity = 0; });
-    fragments.forEach((f) => { f.style.opacity = 0; });
-    shade.style.opacity = 0;
-    searchCopy.style.opacity = 1;
-    searchCopy.style.transform = 'none';
-    endKicker.style.opacity = 0;
-    endTitle.style.opacity = 0;
-    endSub.style.opacity = 0;
-  }
-
-  function render() {
-    const max = story.offsetHeight - innerHeight;
-    const p = Math.max(0, Math.min(1, -story.getBoundingClientRect().top / Math.max(1, max)));
-    resetOverlays();
-
-    if (p < .55) {
-      const local = p / .55;
-      const si = Math.min(4, Math.floor(local * 5));
-      scenes.forEach((s, i) => s.classList.toggle('on', i === si));
-      const k = local < .08 ? 0 : Math.round(Math.min(1, (local - .08) / .60) * 90);
-      nEl.textContent = k;
-      ordered.forEach((d, i) => {
-        const on = i < k;
-        pinNodes[i].style.opacity = on ? 1 : 0;
-        pinNodes[i].setAttribute('transform', `translate(${d.x} ${d.y}) scale(${on ? 1 : 0})`);
-      });
-      return;
-    }
-
-    scenes.forEach((s) => s.classList.remove('on'));
-    nEl.textContent = '90';
-    ordered.forEach((d, i) => {
-      pinNodes[i].style.opacity = 1;
-      pinNodes[i].setAttribute('transform', `translate(${d.x} ${d.y}) scale(1)`);
-    });
-
-    if (p < .75) {
-      national.classList.add('on');
-      const q = (p - .55) / .20;
-      clinicCount.textContent = Math.round(18877 + (23800 - 18877) * q).toLocaleString() + (q > .97 ? '+' : '');
-      return;
-    }
-
-    if (p < .94) {
-      search.classList.add('on');
-      const sp = clamp((p - .75) / .19);
-      const mobile = window.innerWidth <= 760;
-
-      cards.forEach((c, i) => {
-        const start = i < 4 ? i * .09 : .30 + (i - 4) * .035;
-        const t = ease((sp - start) / .16);
-        const [x, y, r] = cardLayout[i];
-        const mx = mobile ? (i % 2 ? 10 : 4) + (i % 3) * 3 : x;
-        const my = mobile ? 34 + i * 3.15 : y;
-        c.style.left = mx + 'vw';
-        c.style.top = my + (mobile ? 'svh' : 'vh');
-        c.style.opacity = t;
-        c.style.transform = `translate3d(0,${(1 - t) * 90}px,0) rotate(${(mobile ? r * .55 : r) * t}deg) scale(${.90 + t * .10})`;
-        c.style.zIndex = 10 + i;
-      });
-
-      fragments.forEach((f, i) => {
-        const t = ease((sp - (.50 + i * .025)) / .14);
-        const [x, y, r] = fragLayout[i];
-        f.style.left = x + 'vw';
-        f.style.top = y + 'vh';
-        f.style.opacity = t * .92;
-        f.style.transform = `translateY(${(1 - t) * 50}px) rotate(${r * t}deg) scale(${.8 + t * .25})`;
-      });
-
-      searchCopy.style.opacity = 1 - clamp((sp - .62) / .22) * .78;
-      searchCopy.style.transform = `scale(${1 - clamp((sp - .62) / .22) * .05})`;
-      shade.style.opacity = clamp((sp - .86) / .14) * .78;
-      return;
-    }
-
-    closing.classList.add('on');
-    const ep = clamp((p - .94) / .06);
-    const k = ease(ep / .32);
-    const t = ease((ep - .16) / .52);
-    const s = ease((ep - .58) / .30);
-    endKicker.style.opacity = k;
-    endKicker.style.transform = `translateY(${(1 - k) * 24}px)`;
-    endTitle.style.opacity = t;
-    endTitle.style.transform = `translateY(${(1 - t) * 100}px) scale(${.88 + t * .12})`;
-    endTitle.style.filter = `blur(${(1 - t) * 10}px)`;
-    endSub.style.opacity = s;
-    endSub.style.transform = `translateY(${(1 - s) * 30}px)`;
-  }
-
-  addEventListener('scroll', render, { passive: true });
-  addEventListener('resize', render);
-  requestAnimationFrame(render);
+  window.addEventListener('load', () => ScrollTrigger.refresh());
 })();

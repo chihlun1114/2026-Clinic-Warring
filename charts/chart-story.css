@@ -7,14 +7,19 @@ body {
 }
 
 #section-story {
+  --orange: #F45500;
+  --black: #17191D;
+  --cream: #F4F1EA;
   --story-header: 64px;
   align-self: stretch;
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
-  height: 1200vh;
+  height: 100svh;
   margin: 0 0 200px;
   padding: 0;
+  position: relative;
+  overflow: hidden;
   color: #17191d;
   background: #f45500;
   font-family: Arial, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
@@ -23,7 +28,6 @@ body {
 @media (width <= 768px) {
   #section-story {
     --story-header: 52px;
-    margin-top: 0;
     margin-bottom: 160px;
   }
 }
@@ -34,519 +38,215 @@ body {
   box-sizing: border-box;
 }
 
-#section-story .stage {
-  position: sticky;
-  top: 0;
-  overflow: hidden;
-  width: 100%;
-  max-width: 100%;
-  height: 100vh;
-  min-height: 100svh;
-  background: #f45500;
+#section-story{--orange:#F45500;--black:#17191D;--cream:#F4F1EA}
+#section-story, #section-story *{box-sizing:border-box}
+#section-story{height:100svh;position:relative;overflow:hidden;background:var(--orange)}
+#section-story .visual{position:absolute;inset:0}
+#section-story /* 左側固定閱讀安全區：整段 Opening 不換位置 */
+.copy-zone{
+  position:absolute;z-index:20;left:5.5vw;top:50%;
+  transform:translateY(-50%);width:min(440px,32vw);min-height:310px;
 }
-
-#section-story .map {
-  position: absolute;
-  inset: 0;
-  overflow: visible;
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
+#section-story .scene-copy{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0}
+#section-story .kicker{font-size:13px;font-weight:900;letter-spacing:.12em;margin-bottom:18px}
+#section-story .scene-copy h2{margin:0;font-size:clamp(34px,3.6vw,58px);line-height:1.05;letter-spacing:-.045em;font-weight:950}
+#section-story .scene-copy p{margin:22px 0 0;font-size:clamp(17px,1.35vw,21px);line-height:1.65;font-weight:750}
+#section-story .number{font-size:clamp(82px,9vw,145px);line-height:.78;letter-spacing:-.075em;font-weight:950;margin:12px 0 4px}
+#section-story .number small{font-size:.22em;letter-spacing:0;margin-left:8px}
+#section-story .eq{font-size:clamp(25px,2.4vw,38px);font-weight:950;line-height:1.2;margin-top:20px}
+#section-story /* 右側視覺場，和左側文字分工 */
+.map-world{position:absolute;left:38%;right:-4%;top:-4%;bottom:-4%;opacity:0}
+#section-story .road{position:absolute;background:var(--black);transform-origin:left center;border-radius:20px;opacity:.18}
+#section-story .r1{left:2%;top:22%;width:95%;height:4px;transform:rotate(25deg)}
+#section-story .r2{left:0;top:45%;width:92%;height:3px;transform:rotate(-8deg)}
+#section-story .r3{left:14%;top:70%;width:80%;height:3px;transform:rotate(16deg)}
+#section-story .r4{left:22%;top:5%;width:3px;height:94%;transform:rotate(17deg)}
+#section-story .r5{left:52%;top:0;width:3px;height:96%;transform:rotate(-11deg)}
+#section-story .culture{position:absolute;left:8%;top:85%;width:110%;height:8px;background:var(--black);transform:rotate(-54deg);transform-origin:left center;border-radius:10px}
+#section-story .pin{position:absolute;width:17px;height:17px;background:var(--orange);border:4px solid var(--black);border-radius:50%;opacity:0;transform:scale(.25)}
+#section-story .pin:after{content:"";position:absolute;left:4px;top:10px;width:4px;height:17px;background:var(--black);transform:rotate(25deg);transform-origin:top}
+#section-story /* 全台成長：左側保留文字＋數字，右側只做診所密度增加 */
+.clinic-growth{position:absolute;left:43%;right:4%;top:8%;bottom:8%;opacity:0;overflow:hidden}
+#section-story .growth-icon{position:absolute;width:58px;height:54px;opacity:0;transform:scale(.45);transform-origin:center}
+#section-story .growth-icon .house{position:absolute;left:4px;bottom:0;width:50px;height:38px;background:var(--black);border-radius:2px}
+#section-story .growth-icon .roof{position:absolute;left:10px;top:1px;width:38px;height:38px;background:var(--black);transform:rotate(45deg);border-radius:2px}
+#section-story .growth-icon .plus{position:absolute;z-index:2;left:17px;top:11px;color:var(--orange);font-size:34px;line-height:1;font-weight:950}
+#section-story /* 左側安全區後方用同色遮罩，避免右側線條穿進文字 */
+.safe-mask{
+ position:absolute;z-index:10;left:0;top:0;bottom:0;width:40%;
+ background:linear-gradient(90deg,var(--orange) 0 78%,rgba(244,85,0,.96) 86%,rgba(244,85,0,0) 100%);
+ pointer-events:none
 }
-
-#section-story .road {
-  fill: none;
-  stroke: #17191d;
-  stroke-width: 3;
-  opacity: .38;
+#section-story .progress{position:absolute;z-index:50;left:0;bottom:0;height:3px;width:0;background:var(--black)}
+@media(max-width:760px){
+ .copy-zone{left:7vw;top:9svh;transform:none;width:86vw;min-height:250px}
+ .scene-copy{justify-content:flex-start}
+ .scene-copy h2{font-size:clamp(30px,8.8vw,42px)}
+ .number{font-size:clamp(76px,25vw,112px)}
+ .map-world{left:-22%;right:-45%;top:35%;bottom:-8%}
+ .safe-mask{width:100%;height:38%;bottom:auto;background:linear-gradient(180deg,var(--orange) 0 75%,rgba(244,85,0,0) 100%)}
+ .clinic-growth{left:7%;right:7%;top:40%;bottom:5%}
+ .growth-icon{width:44px;height:42px}
+ .growth-icon .house{width:38px;height:29px}
+ .growth-icon .roof{left:8px;width:29px;height:29px}
+ .growth-icon .plus{left:13px;top:9px;font-size:25px}
 }
-
-#section-story .main {
-  fill: none;
-  stroke: #17191d;
-  stroke-width: 15;
-  stroke-linecap: round;
+#section-story /* V13.2 visual replacement only — pinned viewport and left column unchanged */
+.map-world{left:40%;right:-5%;top:-5%;bottom:-5%;overflow:hidden}
+#section-story #cultureSvg{width:100%;height:100%;display:block;filter:contrast(1.07)}
+#section-story .geo-pin{opacity:0;transform-box:fill-box;transform-origin:center}
+#section-story .clinic-growth{left:45%;right:2%;top:3%;bottom:3%;overflow:hidden}
+#section-story #taiwanMap{display:block;height:100%;width:100%;overflow:visible}
+#section-story .map-caption{position:absolute;bottom:1%;right:3%;font-size:10px;font-weight:800;letter-spacing:.04em;opacity:.7}
+#section-story .taiwan-mark{opacity:0}
+#section-story #searchScene .search-card{will-change:transform,opacity}
+#section-story #endingScene{position:absolute;inset:0;z-index:45;display:flex;align-items:center;justify-content:center;text-align:center;background:#17191D;color:#F45500;opacity:0;pointer-events:none}
+#section-story #endingScene h2{font-size:clamp(58px,10vw,156px);line-height:.9;letter-spacing:-.06em;margin:0}
+#section-story #endingScene p{font-size:clamp(18px,2vw,28px);color:#F4F1EA;font-weight:900}
+@media(max-width:760px){
+ .map-world{left:-35%;right:-45%;top:32%;bottom:-4%}
+ .clinic-growth{left:3%;right:3%;top:40%;bottom:1%}
+ #taiwanMap{height:100%;width:100%}
+ .map-caption{font-size:9px;bottom:0}
+ #searchScene .search-copy-fixed{left:7vw!important;top:7svh!important;transform:none!important;width:86vw!important}
+ #searchCards{left:3%!important;right:3%!important;top:40%!important;bottom:2%!important}
+ #searchScene .search-card{width:min(76vw,340px)!important}
 }
-
-#section-story .inner {
-  fill: none;
-  stroke: #f45500;
-  stroke-width: 4;
+#section-story /* V13.4 Ending: readable final hold; 3D approach limited to the text itself */
+#endingScene{perspective:1000px;overflow:hidden;visibility:hidden;padding:clamp(22px,5vw,72px)}
+#section-story #endingScene .ending-content{width:min(1200px,100%);margin:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(22px,4vh,45px)}
+#section-story #endingScene .ending-lead{margin:0;color:#F4F1EA;font-size:clamp(16px,1.8vw,26px);font-weight:800;line-height:1.45;letter-spacing:.045em;opacity:0}
+#section-story #endingScene .ending-question{margin:0;color:#F45500;font-size:clamp(44px,6.6vw,110px);font-weight:950;line-height:1.12;letter-spacing:-.055em;transform-origin:center;opacity:0;will-change:transform,opacity;max-width:100%;overflow-wrap:normal}
+#section-story #endingScene .ending-question span{display:inline-block;white-space:nowrap}
+@media(max-width:760px){
+ #endingScene .ending-content{gap:25px}
+ #endingScene .ending-lead{font-size:clamp(15px,4vw,20px);letter-spacing:0}
+ #endingScene .ending-question{font-size:clamp(40px,10.5vw,65px);line-height:1.22}
+ #endingScene .ending-question span{display:block}
 }
-
-#section-story .pin {
-  opacity: 0;
-  transition: opacity .16s;
+@media(prefers-reduced-motion:reduce){#endingScene .ending-question{filter:none!important}}
+#section-story /* Full-story prototype additions; culture map and its PIN positions remain unedited. */
+#bridgeBlack{position:absolute;inset:0;background:#17191d;z-index:26;opacity:0;pointer-events:none;display:flex;align-items:center;justify-content:center;text-align:center;color:#f4f1ea}
+#section-story #bridgeBlack .big50{font-size:clamp(95px,18vw,270px);line-height:.95;color:#f45500;font-weight:950;letter-spacing:-.09em}
+#section-story #bridgeBlack p{font-weight:850;font-size:clamp(17px,2vw,30px);margin:22px}
+#section-story #searchScene{display:grid;grid-template-columns:42% 58%;overflow:hidden}
+#section-story #searchScene .search-copy-fixed{position:relative!important;left:auto!important;top:auto!important;transform:none!important;width:auto!important;align-self:center;padding:5.5vw;z-index:4}
+#section-story #searchScene .search-copy-fixed h2{font-size:clamp(32px,3.3vw,60px)!important}
+#section-story #searchScene .search-copy-fixed p{font-size:clamp(16px,1.35vw,23px);line-height:1.55;font-weight:700}
+#section-story #searchVisual{position:relative;overflow:hidden;isolation:isolate}
+#section-story #handoffPins{position:absolute;inset:0;z-index:1;pointer-events:none}
+#section-story #handoffPins .pin{position:absolute;width:42px;height:40px;transform:translate(-50%,-50%)}
+#section-story #handoffPins svg{width:100%;height:100%}
+#section-story #demoPhone{position:absolute;z-index:3;left:49%;top:50%;width:min(300px,38vw);height:min(615px,78vh);transform:translate(-50%,-50%) scale(.78);border:9px solid #17191d;border-radius:42px;background:#f4f1ea;box-shadow:16px 20px 0 rgba(23,25,29,.2);opacity:0;overflow:hidden}
+#section-story #demoPhone .notch{height:26px;width:98px;margin:0 auto;background:#17191d;border-radius:0 0 16px 16px}
+#section-story #demoPhone .screen{padding:14px;height:calc(100% - 26px);overflow:hidden}
+#section-story #demoPhone .app-title{font-size:22px;font-weight:950;margin-bottom:12px}
+#section-story #demoPhone .search-field{border:2px solid #17191d;background:white;border-radius:10px;padding:12px;font-weight:850;font-size:15px}
+#section-story #demoResults{margin-top:14px;will-change:transform}
+#section-story .demo-result{background:white;border:2px solid #17191d;border-radius:10px;padding:14px;margin-bottom:11px;box-shadow:4px 4px 0 #17191d22}
+#section-story .demo-result strong{font-size:16px}
+#section-story .demo-result .stars{color:#f45500;font-size:20px;letter-spacing:1px;margin:7px 0;font-weight:950}
+#section-story .demo-result small{font-size:12px;font-weight:750}
+#section-story .demo-result .book{display:table;background:#f45500;font-size:12px;font-weight:900;padding:6px 11px;border-radius:4px;margin-top:9px}
+#section-story #burstCards{position:absolute;inset:0;z-index:5;pointer-events:none}
+#section-story #burstCards .burst{position:absolute;width:clamp(155px,21vw,295px);padding:14px 15px;background:#f4f1ea;border:2.5px solid #17191d;border-radius:11px;box-shadow:8px 9px 0 #17191d33;opacity:0;will-change:transform,opacity}
+#section-story #burstCards .burst strong{font-size:clamp(13px,1.3vw,20px)}
+#section-story #burstCards .burst p{font-size:clamp(11px,1vw,15px);margin:7px 0 0;font-weight:750}
+#section-story #burstCards .burst .stars{font-size:18px;color:#f45500;font-weight:950}
+#section-story #endingPre{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;text-align:center;opacity:0;pointer-events:none;color:#f4f1ea;font-size:clamp(28px,4vw,70px);font-weight:950;line-height:1.45;padding:5vw}
+#section-story #endingScene .ending-content{z-index:2;position:relative}
+@media(max-width:720px){#searchScene{grid-template-columns:1fr;grid-template-rows:35% 65%}#searchScene .search-copy-fixed{padding:22px 25px 0;align-self:end}#searchScene .search-copy-fixed h2{font-size:clamp(29px,8vw,45px)!important}#searchScene .search-copy-fixed p{font-size:14px;margin-top:9px}#demoPhone{width:202px;height:min(390px,55vh);border-width:7px;border-radius:29px;left:50%;top:51%}#demoPhone .notch{height:17px;width:72px}#demoPhone .screen{padding:9px}#demoPhone .app-title{font-size:15px}#demoPhone .search-field{font-size:11px;padding:8px}.demo-result{padding:8px;margin-bottom:8px}.demo-result strong{font-size:12px}.demo-result .stars{font-size:13px}.demo-result small{font-size:9px}.demo-result .book{font-size:9px;padding:4px 7px}#burstCards .burst{width:145px;padding:9px}#burstCards .burst strong{font-size:12px}#burstCards .burst p{font-size:10px}#handoffPins .pin{width:30px;height:28px}}
+#section-story /* 第二幕視覺還原：使用使用者確認的原圖，鎖定構圖與筆觸；僅桌機視覺驗收。 */
+#approvedTaiwanScene{position:absolute;inset:0;z-index:23;opacity:0;pointer-events:none;overflow:hidden;background:#f45500}
+#section-story #approvedTaiwanScene img{display:block;width:100%;height:100%;object-fit:fill}
+@media(max-width:760px){#approvedTaiwanScene{display:none!important}}
+#section-story /* 第二幕鎖定：一組數字、乾淨起始地圖、Clinic2 不跟著地圖旋轉 */
+#approvedTaiwanScene{position:absolute;inset:0;z-index:23;opacity:0;pointer-events:none;overflow:hidden;background:#f45500}
+#section-story #approvedTaiwanScene .growth-copy{position:absolute;left:4.4%;top:10%;width:34%;z-index:2;color:#17191d;font-weight:900}
+#section-story #approvedTaiwanScene .growth-years{display:flex;justify-content:space-between;border-bottom:2px solid #17191d;padding-bottom:10px;font-size:clamp(16px,1.5vw,24px)}
+#section-story #approvedTaiwanScene .growth-value{font-size:clamp(70px,8.5vw,145px);letter-spacing:-.075em;line-height:1.2;margin-top:22px;white-space:nowrap;font-variant-numeric:tabular-nums}
+#section-story #approvedTaiwanScene .growth-label{font-size:clamp(16px,1.5vw,25px)}
+#section-story #approvedTaiwanScene .growth-desc{font-size:clamp(19px,2vw,32px);line-height:1.5;margin-top:6vh}
+@media(max-width:760px){
+ #approvedTaiwanScene{display:block!important}
+ #approvedTaiwanScene .growth-copy{left:6%;top:4%;width:88%}
+ #approvedTaiwanScene .growth-value{font-size:clamp(62px,14vw,105px)}
+ #approvedTaiwanScene .growth-desc{font-size:clamp(16px,4vw,23px);margin-top:12px}
+ 
+ 
 }
+#section-story /* V04 scene isolation / locked visual */
+#approvedTaiwanScene{z-index:29}
+#section-story #bridgeBlack{z-index:30}
+#section-story #bridgeBlack .bridge-distance{font-weight:850;font-size:clamp(23px,3vw,45px);color:#f4f1ea}
+#section-story #bridgeBlack .bridge-distance strong{color:#f45500;font-size:1.5em}
+@media(max-width:760px){}
+#section-story /* V05 修正：鎖定文字層、地圖與圖示共用同一個座標容器。 */
+.copy-zone{isolation:isolate}
+#section-story .scene-copy{visibility:hidden;opacity:0;pointer-events:none}
+#section-story #s1{visibility:visible;opacity:1}
+#section-story .scene-copy h2,
+#section-story .scene-copy p,
+#section-story .scene-copy .kicker,
+#section-story .scene-copy .number,
+#section-story #approvedTaiwanScene .growth-copy,
+#section-story #approvedTaiwanScene .growth-copy *,
+#section-story #searchScene .search-copy-fixed,
+#section-story #searchScene .search-copy-fixed *{font-weight:900!important}
+#section-story /* 文化路地圖畫面：不更動左側欄寬，僅以 viewBox 定點放大右側道路。 */
 
-#section-story .brand,
-#section-story .counter {
-  position: absolute;
-  z-index: 20;
-  top: calc(var(--story-header) + 12px);
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: .12em;
+
+
+
+@media(max-width:760px){}
+#section-story /* V07: Prevent Chrome's zero-opacity SVG image ghosting before the counter starts. */
+#approvedTaiwanScene .locked-pin{visibility:hidden;opacity:0;backface-visibility:hidden}
+#section-story /* V06: LOCKED master is the only coordinate system. No rotation or object-fit offsets. */
+#approvedTaiwanScene .locked-art{position:absolute;inset:0;width:100%;height:100%;transform:none!important;pointer-events:none}
+#section-story #approvedTaiwanScene .locked-base{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block}
+#section-story #approvedTaiwanScene .locked-pin-layer{position:absolute;inset:0;width:100%;height:100%;transform:none!important}
+#section-story #approvedTaiwanScene .locked-pin{position:absolute;width:2.35%;height:auto;aspect-ratio:106/100;opacity:0;transform:translate(-50%,-50%) scale(.82);transform-origin:center;will-change:opacity,transform;filter:drop-shadow(1px 1px 0 #17191d)}
+#section-story /* V08: clean original marker source,
+#section-story never inpaint ICONs */
+#approvedTaiwanScene .locked-pin{visibility:hidden;opacity:0}
+#section-story /* V06: unified typography and true vertical centering of all left-hand editorial text. */
+.copy-zone{top:50%!important;transform:translateY(-50%)!important;min-height:0!important;height:min(74vh,680px);display:block}
+#section-story .scene-copy{inset:0;justify-content:center!important;align-items:flex-start}
+#section-story .scene-copy h2{font-size:clamp(34px,3.5vw,56px)!important;font-weight:900!important;line-height:1.13!important}
+#section-story .scene-copy p{font-size:clamp(17px,1.35vw,21px)!important;font-weight:900!important;line-height:1.55!important}
+#section-story .scene-copy .kicker{font-size:13px!important;font-weight:900!important}
+#section-story .scene-copy .number{font-size:clamp(82px,9vw,145px)!important;font-weight:900!important}
+#section-story #approvedTaiwanScene .growth-copy{top:50%!important;transform:translateY(-50%)!important;left:5.5%!important;width:32%!important;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+#section-story #approvedTaiwanScene .growth-years{width:100%}
+#section-story #approvedTaiwanScene .growth-value{font-weight:900!important;font-size:clamp(82px,8.6vw,138px)!important;line-height:1!important}
+#section-story #approvedTaiwanScene .growth-desc{font-size:clamp(17px,1.35vw,21px)!important;font-weight:900!important;line-height:1.55!important;margin-top:26px!important}
+#section-story #approvedTaiwanScene .growth-label{font-size:clamp(17px,1.35vw,21px)!important;font-weight:900!important}
+#section-story #searchScene .search-copy-fixed{display:flex!important;flex-direction:column;justify-content:center!important;align-self:stretch!important;padding:5.5vw!important}
+#section-story #searchScene .search-copy-fixed h2{font-size:clamp(34px,3.5vw,56px)!important;font-weight:900!important;line-height:1.13!important}
+#section-story #searchScene .search-copy-fixed p{font-size:clamp(17px,1.35vw,21px)!important;font-weight:900!important;line-height:1.55!important}
+@media(max-width:760px){
+.copy-zone{top:7svh!important;transform:none!important;height:33svh!important;left:7vw!important;width:86vw!important}
+#approvedTaiwanScene .growth-copy{top:5%!important;transform:none!important;left:7%!important;width:86%!important}
+#approvedTaiwanScene .locked-art{top:35%;height:65%;left:-20%;width:145%}
+#approvedTaiwanScene .growth-value{font-size:clamp(65px,16vw,105px)!important}
+#approvedTaiwanScene .growth-desc{font-size:16px!important;margin-top:8px!important}
+#searchScene .search-copy-fixed{padding:22px 25px!important;justify-content:center!important}
 }
-
-#section-story .brand {
-  left: 5vw;
-}
-
-#section-story .counter {
-  right: 5vw;
-}
-
-#section-story .copy {
-  position: absolute;
-  z-index: 20;
-  top: calc(var(--story-header) + 12vh);
-  left: 5vw;
-  width: min(430px, 40vw);
-}
-
-#section-story .scene {
-  position: absolute;
-  inset: auto 0;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(18px);
-  transition: .25s;
-}
-
-#section-story .scene.on {
-  opacity: 1;
-  transform: none;
-}
-
-#section-story .copy h1,
-#section-story .copy h2 {
-  margin: 0 0 20px;
-  color: #17191d;
-  font-size: clamp(38px, 4.8vw, 70px);
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: -.04em;
-  text-align: left;
-}
-
-#section-story .copy p {
-  max-width: 430px;
-  margin: 0;
-  color: #17191d;
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.75;
-  letter-spacing: 0;
-  text-align: left;
-}
-
-#section-story .metric {
-  font-size: clamp(96px, 13vw, 190px);
-  font-weight: 900;
-  line-height: .8;
-}
-
-#section-story .metric small {
-  font-size: .2em;
-}
-
-#section-story .hint {
-  position: absolute;
-  z-index: 20;
-  bottom: 4vh;
-  left: 5vw;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: .12em;
-}
-
-#section-story .national {
-  position: absolute;
-  z-index: 30;
-  inset: 0;
-  display: none;
-  align-items: center;
-  padding-left: 5vw;
-  background: linear-gradient(90deg, #f45500 0 32%, rgba(244, 85, 0, .8) 45%, rgba(244, 85, 0, 0) 72%);
-}
-
-#section-story .national.on {
-  display: flex;
-}
-
-#section-story .national-inner {
-  width: min(610px, 43vw);
-}
-
-#section-story .years {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #17191d;
-  font-size: 12px;
-  font-weight: 900;
-}
-
-#section-story .countup {
-  margin-top: 28px;
-  font-size: clamp(92px, 12vw, 180px);
-  font-weight: 900;
-  line-height: .85;
-  letter-spacing: -.06em;
-}
-
-#section-story .delta {
-  margin-top: 24px;
-  font-size: clamp(24px, 3vw, 42px);
-  font-weight: 900;
-  line-height: 1.25;
-}
-
-#section-story .search {
-  position: absolute;
-  z-index: 40;
-  inset: 0;
-  display: none;
-  overflow: hidden;
-  background: #f4f1eb;
-}
-
-#section-story .search.on {
-  display: block;
-}
-
-#section-story .search-copy {
-  position: absolute;
-  z-index: 5;
-  top: 9vh;
-  left: 5vw;
-  width: min(450px, 36vw);
-}
-
-#section-story .eyebrow {
-  margin-bottom: 16px;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: .12em;
-}
-
-#section-story .search h3 {
-  margin: 0 0 18px;
-  color: #17191d;
-  font-size: clamp(38px, 4.5vw, 66px);
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: -.04em;
-}
-
-#section-story .search-copy p {
-  max-width: none;
-  color: #17191d;
-  font-size: 17px;
-  line-height: 1.75;
-  transition: opacity .25s, transform .25s;
-}
-
-#section-story .cards {
-  position: absolute;
-  z-index: 3;
-  inset: 0;
-  pointer-events: none;
-}
-
-#section-story .card {
-  position: absolute;
-  width: min(480px, 38vw);
-  padding: 18px 20px;
-  border: 1px solid #d9d5ce;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 18px 48px rgba(0, 0, 0, .16);
-  opacity: 0;
-  transform: translate3d(0, 90px, 0) scale(.94);
-  will-change: transform, opacity;
-  transition: none;
-}
-
-#section-story .cname {
-  font-size: 19px;
-  font-weight: 900;
-}
-
-#section-story .rating {
-  margin-top: 7px;
-  font-size: 13px;
-  font-weight: 800;
-}
-
-#section-story .stars {
-  letter-spacing: 1px;
-}
-
-#section-story .meta {
-  margin-top: 7px;
-  color: #555;
-  font-size: 12px;
-}
-
-#section-story .chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin-top: 12px;
-}
-
-#section-story .chip {
-  padding: 5px 9px;
-  border: 1px solid #d5d1ca;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 800;
-}
-
-#section-story .search-fragments {
-  position: absolute;
-  z-index: 4;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-#section-story .fragment {
-  position: absolute;
-  font-weight: 900;
-  white-space: nowrap;
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
-#section-story .fragment.big {
-  font-size: clamp(24px, 3.5vw, 54px);
-}
-
-#section-story .fragment.small {
-  font-size: clamp(12px, 1.3vw, 20px);
-}
-
-#section-story .search-shade {
-  position: absolute;
-  z-index: 6;
-  inset: 0;
-  pointer-events: none;
-  background: #17191d;
-  opacity: 0;
-}
-
-#section-story .closing {
-  position: absolute;
-  z-index: 50;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding: 7vw;
-  color: #fff;
-  background: #17191d;
-  text-align: center;
-}
-
-#section-story .closing.on {
-  display: flex;
-}
-
-#section-story .closing-inner {
-  position: relative;
-}
-
-#section-story .closing-kicker {
-  margin-bottom: 28px;
-  font-size: clamp(14px, 1.4vw, 20px);
-  font-weight: 800;
-  letter-spacing: .08em;
-  opacity: 0;
-  transform: translateY(24px);
-}
-
-#section-story .closing h4 {
-  margin: 0;
-  color: #f45500;
-  font-size: clamp(68px, 12vw, 180px);
-  font-weight: 900;
-  line-height: .86;
-  letter-spacing: -.06em;
-  opacity: 0;
-  filter: blur(10px);
-  transform: translateY(100px) scale(.88);
-  will-change: transform, opacity, filter;
-}
-
-#section-story .closing p {
-  margin: 30px auto 0;
-  color: #fff;
-  font-size: clamp(18px, 2vw, 28px);
-  font-weight: 800;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-@media (width <= 760px) {
-  #section-story {
-    height: 1250svh;
-  }
-
-  #section-story .stage {
-    height: 100svh;
-    min-height: 100svh;
-  }
-
-  #section-story .map {
-    top: 0;
-    right: auto;
-    bottom: 0;
-    left: -42vw;
-    width: 155vw;
-    max-width: none;
-    height: 100%;
-  }
-
-  #section-story .brand {
-    top: calc(var(--story-header) + 8px);
-    left: 6vw;
-    max-width: 65vw;
-    font-size: 9px;
-    line-height: 1.4;
-  }
-
-  #section-story .counter {
-    top: calc(var(--story-header) + 8px);
-    right: 6vw;
-    font-size: 10px;
-  }
-
-  #section-story .copy {
-    top: auto;
-    bottom: 9svh;
-    left: 6vw;
-    width: 88vw;
-    min-height: 30svh;
-  }
-
-  #section-story .copy::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: -12svh;
-    right: -8vw;
-    bottom: -9svh;
-    left: -8vw;
-    background: linear-gradient(180deg, rgba(244, 85, 0, 0), rgba(244, 85, 0, .94) 40%, #f45500 75%);
-  }
-
-  #section-story .copy h1,
-  #section-story .copy h2 {
-    font-size: clamp(34px, 10vw, 44px);
-  }
-
-  #section-story .copy p {
-    max-width: none;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  #section-story .metric {
-    font-size: clamp(84px, 27vw, 126px);
-  }
-
-  #section-story .hint {
-    bottom: 3svh;
-    left: 6vw;
-    font-size: 9px;
-  }
-
-  #section-story .national {
-    align-items: flex-end;
-    padding: 0 6vw 9svh;
-    background: linear-gradient(180deg, rgba(244, 85, 0, 0) 20%, rgba(244, 85, 0, .92) 56%, #f45500 78%);
-  }
-
-  #section-story .national-inner {
-    width: 88vw;
-  }
-
-  #section-story .countup {
-    font-size: clamp(80px, 24vw, 118px);
-  }
-
-  #section-story .delta {
-    font-size: 22px;
-  }
-
-  #section-story .search-copy {
-    top: 6svh;
-    left: 6vw;
-    width: 88vw;
-  }
-
-  #section-story .search h3 {
-    font-size: clamp(34px, 9.5vw, 42px);
-  }
-
-  #section-story .search-copy p {
-    max-width: 82vw;
-    font-size: 14px;
-    line-height: 1.55;
-  }
-
-  #section-story .card {
-    width: 82vw;
-    max-width: 340px;
-    padding: 13px 14px;
-    border-radius: 13px;
-  }
-
-  #section-story .cname {
-    font-size: 15px;
-  }
-
-  #section-story .rating,
-  #section-story .meta {
-    font-size: 10px;
-  }
-
-  #section-story .chips {
-    margin-top: 8px;
-  }
-
-  #section-story .chip {
-    padding: 4px 7px;
-    font-size: 9px;
-  }
-
-  #section-story .fragment.big {
-    font-size: clamp(22px, 8vw, 38px);
-  }
-
-  #section-story .fragment.small {
-    font-size: 12px;
-  }
-
-  #section-story .closing {
-    padding: 8vw;
-  }
-
-  #section-story .closing-kicker {
-    margin-bottom: 22px;
-    font-size: 13px;
-    line-height: 1.6;
-  }
-
-  #section-story .closing h4 {
-    font-size: clamp(58px, 18vw, 92px);
-  }
-
-  #section-story .closing p {
-    font-size: 17px;
-  }
-}
+#section-story /* V11 correction: the background has no pre-rendered labels or clinic pins. */
+#approvedTaiwanScene .locked-base{filter:none!important;opacity:1!important;transform:none!important;}
+#section-story #approvedTaiwanScene .growth-copy{z-index:8!important;isolation:isolate;}
+#section-story #approvedTaiwanScene .locked-pin-layer{z-index:5!important;}
+#section-story #approvedTaiwanScene .locked-pin{visibility:hidden;opacity:0;}
+#section-story /* 第二幕：使用上一版較小 ICON 視覺，鎖定整體地圖與 icon 同一個百分比座標系 */
+#approvedTaiwanScene{background:#f45500!important}
+#section-story #approvedTaiwanScene .locked-art{position:absolute!important;inset:0!important;left:0!important;top:0!important;width:100%!important;height:100%!important;transform:none!important;overflow:hidden!important}
+#section-story #approvedTaiwanScene .locked-base{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:fill!important;transform:none!important}
+#section-story #approvedTaiwanScene .locked-pin-layer{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;transform:none!important}
+#section-story #approvedTaiwanScene .locked-pin{position:absolute!important;width:1.85%!important;height:auto!important;aspect-ratio:106/100!important;transform:translate(-50%,-50%) scale(.82);transform-origin:center;opacity:0;visibility:hidden;filter:drop-shadow(1px 1px 0 #17191d);z-index:2}
+#section-story #approvedTaiwanScene .growth-copy{position:absolute!important;left:4.7%!important;top:23%!important;width:33%!important;transform:none!important;z-index:8!important;font-weight:900!important}
+#section-story #approvedTaiwanScene .growth-years{font-size:clamp(15px,1.5vw,24px)!important}
+#section-story #approvedTaiwanScene .growth-value{font-size:clamp(70px,7.8vw,148px)!important;line-height:1!important;letter-spacing:-.065em!important;white-space:nowrap}
+#section-story #approvedTaiwanScene .growth-label{font-size:clamp(17px,1.55vw,26px)!important}
+#section-story #approvedTaiwanScene .growth-desc{font-size:clamp(16px,1.5vw,25px)!important;line-height:1.45!important}
+#section-story #approvedTaiwanScene .visual-disclaimer{position:absolute;bottom:1.4%;left:4.7%;font-size:10px;color:#17191d;z-index:10}
+@media(max-width:760px){#approvedTaiwanScene{display:block!important}#approvedTaiwanScene .locked-art{top:37%!important;height:60%!important;left:-24%!important;width:160%!important}#approvedTaiwanScene .growth-copy{top:5%!important;left:5%!important;width:88%!important}#approvedTaiwanScene .growth-value{font-size:clamp(55px,14vw,110px)!important}#approvedTaiwanScene .growth-desc{font-size:15px!important}#approvedTaiwanScene .visual-disclaimer{font-size:8px;bottom:0.5%}}
