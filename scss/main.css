@@ -3493,7 +3493,7 @@ section.section-bottom .name {
   place-items: center;
   width: min(200px, 58%);
   aspect-ratio: 398 / 127;
-  margin: 0 auto 28px;
+  margin: 0 auto 40px;
 }
 
 #section-related .related-label img {
