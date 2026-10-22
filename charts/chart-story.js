@@ -25,9 +25,6 @@ const burstHolder=document.querySelector('#burstCards');
 const burstDefs=[['看距離','附近就有好多間診所'],['比星等','★★★★★　4.9'],['讀評論','「預約方便、服務親切」'],['線上預約','立即預約'],['搜尋結果','附近的診所越來越多'],['熱門推薦','★★★★★　4.8'],['看診時間','今天可以預約'],['比較選擇','距離、評價、評論'],['病患留言','「環境整潔、交通方便」'],['快速掛號','選擇時段'],['診所資訊','評價 4.7 · 評論'],['線上諮詢','查看更多資訊'],['搜尋附近','更多診所結果'],['評價比較','★★★★★　4.9']];
 const bursts=[];
 burstDefs.forEach((d,i)=>{let el=document.createElement('div');el.className='burst';el.innerHTML=`<strong>${d[0]}</strong><p>${d[1]}</p>`;const spots=[[3,12],[56,7],[5,33],[60,28],[2,55],[55,50],[10,75],[62,73],[22,8],[43,84],[71,14],[3,86],[48,39],[67,61]];el.style.left=spots[i][0]+'%';el.style.top=spots[i][1]+'%';el.style.transform=`translateY(95px) rotate(${i%2?6:-6}deg)`;burstHolder.appendChild(el);bursts.push(el)});
-const copyHeadline=document.querySelector('#searchHeadline'),copyDetail=document.querySelector('#searchDetail');
-const sceneCopy=[['找診所，<br>先搜尋。','附近的診所一間接著一間出現。'],['找診所，<br>愈來愈像找餐廳。','看距離、比星等、讀評論，最後按下預約。']];
-function setSceneCopy(i){copyHeadline.innerHTML=sceneCopy[i][0];copyDetail.textContent=sceneCopy[i][1]}
 gsap.set(["#s1","#s2","#mapWorld","#searchScene","#endingScene","#approvedTaiwanScene"],{opacity:0});
 gsap.set("#approvedTaiwanScene",{visibility:"hidden"});
 gsap.set("#s1",{opacity:1,visibility:"visible"});
@@ -102,9 +99,7 @@ tl.to("#mapWorld",{opacity:1,duration:.12})
   .fromTo("#handoffPins",{opacity:0,scale:1.15},{opacity:1,scale:1,duration:.24},"<")
   .to("#handoffPins",{opacity:0,scale:.58,x:90,y:20,duration:.38})
   .fromTo("#demoPhone",{opacity:0,scale:.78},{opacity:1,scale:1,duration:.42},"-=.30")
-  .call(()=>setSceneCopy(0))
   .to("#demoResults",{y:-310,duration:.65})
-  .call(()=>setSceneCopy(1))
   .to("#demoResults",{y:-480,duration:.58})
   .to(bursts,{opacity:1,y:0,rotation:(i)=>((i%5)-2)*3,stagger:.045,duration:.26},"-=.33")
   .to(bursts,{x:(i)=>((i%4)-1.5)*13,y:(i)=>((i%3)-1)*11,stagger:.022,duration:.30})

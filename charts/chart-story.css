@@ -451,3 +451,39 @@ body {
     height: auto;
   }
 }
+
+#section-story #bridgeBlack .big50 {
+  font-size: clamp(84px, 14vw, 210px);
+  letter-spacing: -.06em;
+}
+
+#section-story #bridgeBlack p {
+  max-width: 18em;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.55;
+}
+
+#section-story #approvedTaiwanScene .growth-value {
+  margin-top: 0 !important;
+}
+
+#section-story #searchScene .search-copy-fixed h2 {
+  font-size: clamp(40px, 4.4vw, 72px) !important;
+}
+
+@media (max-width: 760px) {
+  #section-story #bridgeBlack .big50 {
+    font-size: clamp(72px, 22vw, 120px);
+  }
+
+  #section-story #bridgeBlack p {
+    max-width: 90vw;
+    font-size: 15px;
+    margin: 16px 22px 0;
+  }
+
+  #section-story #searchScene .search-copy-fixed h2 {
+    font-size: clamp(30px, 8.2vw, 42px) !important;
+  }
+}
