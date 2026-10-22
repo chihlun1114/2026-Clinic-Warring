@@ -29,6 +29,7 @@ const copyHeadline=document.querySelector('#searchHeadline'),copyDetail=document
 const sceneCopy=[['找診所，<br>先搜尋。','附近的診所一間接著一間出現。'],['找診所，<br>愈來愈像找餐廳。','看距離、比星等、讀評論，最後按下預約。']];
 function setSceneCopy(i){copyHeadline.innerHTML=sceneCopy[i][0];copyDetail.textContent=sceneCopy[i][1]}
 gsap.set(["#s1","#s2","#mapWorld","#searchScene","#endingScene","#approvedTaiwanScene"],{opacity:0});
+gsap.set("#approvedTaiwanScene",{visibility:"hidden"});
 gsap.set("#s1",{opacity:1,visibility:"visible"});
 
 const count={v:19861};
@@ -46,6 +47,7 @@ function renderGrowth(v){
     // Fully remove unrevealed icons from painting, including during scrub reverse.
     el.style.visibility = t <= 0.001 ? "hidden" : "visible";
     el.style.opacity=String(t);
+    el.style.filter = t <= 0.001 ? "none" : "drop-shadow(1px 1px 0 #17191d)";
     el.style.transform=`translate(-50%,-50%) scale(${.82+.18*t})`;
   });
 }
@@ -89,12 +91,13 @@ tl.to("#mapWorld",{opacity:1,duration:.12})
   .to("#s2",{opacity:0,duration:.16},"<")
   /* 03 唯一的台灣圖層：鎖定麥克筆地圖與 Clinic2，同一坐標系。 */
   .call(()=>renderGrowth(count.v))
-  .to("#approvedTaiwanScene",{opacity:1,duration:.26})
+  .fromTo("#approvedTaiwanScene",{opacity:0,visibility:"hidden"},{opacity:1,visibility:"visible",duration:.26})
   .to("#bridgeBlack",{opacity:0,duration:.24},"<")
   .to(count,{v:23000,duration:.56,onUpdate:()=>renderGrowth(count.v)})
   .to({}, {duration:.36})
   /* 04 單一診所圖示語言接往手機搜尋，沒有舊版線條台灣地圖。 */
   .to("#approvedTaiwanScene",{opacity:0,duration:.30})
+  .set("#approvedTaiwanScene",{visibility:"hidden"})
   .to("#searchScene",{opacity:1,duration:.30},"<")
   .fromTo("#handoffPins",{opacity:0,scale:1.15},{opacity:1,scale:1,duration:.24},"<")
   .to("#handoffPins",{opacity:0,scale:.58,x:90,y:20,duration:.38})

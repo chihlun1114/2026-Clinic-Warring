@@ -382,3 +382,72 @@ body {
     padding: 8px 10px;
   }
 }
+
+/* Scene 2: overhead Taiwan map, keep drawing aspect so it is not stretched into a side view. */
+#section-story #approvedTaiwanScene .locked-art {
+  inset: 0 !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-end;
+  transform: none !important;
+  overflow: hidden !important;
+}
+
+#section-story #approvedTaiwanScene .locked-stage {
+  position: relative;
+  width: min(74%, calc(100svh * 1024 / 809));
+  height: auto;
+  aspect-ratio: 1024 / 809;
+  max-height: 100%;
+  flex: 0 0 auto;
+}
+
+#section-story #approvedTaiwanScene .locked-base {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: fill !important;
+  transform: none !important;
+}
+
+#section-story #approvedTaiwanScene .locked-pin-layer {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform: none !important;
+}
+
+#section-story #approvedTaiwanScene .locked-pin {
+  width: 3.05% !important;
+  will-change: auto !important;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  filter: none;
+}
+
+@media (max-width: 760px) {
+  #section-story #approvedTaiwanScene .locked-art {
+    height: 54% !important;
+    width: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    align-items: flex-end;
+    justify-content: center;
+    padding-top: var(--story-header);
+  }
+
+  #section-story #approvedTaiwanScene .locked-stage {
+    width: min(100%, calc(54svh * 1024 / 809));
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+  }
+}
