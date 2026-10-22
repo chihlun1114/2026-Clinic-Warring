@@ -2368,7 +2368,7 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   width: 100%;
   max-width: 590px;
   margin-bottom: 40px;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 200%;
 
 }
@@ -2381,7 +2381,7 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   section:not(#section-banner, .section-bottom, #section-related, #section-story) p {
     max-width: none;
     margin-bottom: 24px;
-    font-size: 16px;
+    font-size: 18px;
   }
 
 }
@@ -3569,7 +3569,7 @@ section.section-bottom .name {
 #section-related .related-dek {
   margin: 11px 0 0;
   color: #2d2c28;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.85;
   letter-spacing: .02em;
@@ -3644,7 +3644,7 @@ section.section-bottom .name {
 
   #section-related .related-dek {
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.8;
   }
 }
