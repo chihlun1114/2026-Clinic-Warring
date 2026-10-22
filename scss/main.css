@@ -3518,7 +3518,7 @@ section.section-bottom .name {
 #section-related .related-kicker {
   margin: 0 0 8px;
   color: var(--related-accent);
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: .02em;
@@ -3596,16 +3596,16 @@ section.section-bottom .name {
   }
 
   #section-related .related-kicker {
-    font-size: 11px;
+    font-size: 15px;
   }
 
   #section-related .related-title {
-    font-size: 18px;
+    font-size: 22px;
   }
 
   #section-related .related-dek {
     margin-top: 8px;
-    font-size: 11px;
+    font-size: 14px;
     line-height: 1.8;
   }
 }
