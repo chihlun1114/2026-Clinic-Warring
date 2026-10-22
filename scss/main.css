@@ -3487,6 +3487,36 @@ section.section-bottom .name {
   padding: 19px 24px 0;
 }
 
+#section-related .related-label {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(200px, 58%);
+  aspect-ratio: 398 / 127;
+  margin: 0 auto 28px;
+}
+
+#section-related .related-label img {
+  grid-area: 1 / 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#section-related .related-label span {
+  grid-area: 1 / 1;
+  position: relative;
+  color: var(--related-accent);
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: .28em;
+  padding-left: .28em;
+  white-space: nowrap;
+}
+
 #section-related .related-list {
   display: flex;
   flex-direction: column;
@@ -3581,10 +3611,19 @@ section.section-bottom .name {
     gap: 38px;
   }
 
+  #section-related .related-label {
+    width: min(172px, 64%);
+    margin: 0 auto 22px;
+  }
+
+  #section-related .related-label span {
+    font-size: 20px;
+  }
+
   #section-related .related-item,
   #section-related .related-item:nth-child(even) {
     grid-template-columns: 1fr;
-    grid-template-areas: "copy" "visual";
+    grid-template-areas: "visual" "copy";
     gap: 16px;
   }
 
