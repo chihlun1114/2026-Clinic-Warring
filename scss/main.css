@@ -2921,12 +2921,10 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
 }
 
 #section-banner .banner-title .banner-sub {
-  font-size: calc(var(--hero-title) * 9 / 16);
+  font-size: 35px;
   line-height: 1.35;
   letter-spacing: 0;
-  text-align: justify;
-  text-align-last: justify;
-  text-justify: inter-character;
+  text-align: center;
 }
 
 @media only screen and (width <= 768px) {
