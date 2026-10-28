@@ -8,9 +8,11 @@ gsap.registerPlugin(ScrollTrigger);
 const svg=document.querySelector("#cultureSvg");
 const geoPins=gsap.utils.toArray(".geo-pin");
 const sortedPins=[...geoPins].sort((a,b)=>{
- const ya=+(a.getAttribute("transform").match(/translate\([^ ]+ ([0-9.]+)/)?.[1]||0);
- const yb=+(b.getAttribute("transform").match(/translate\([^ ]+ ([0-9.]+)/)?.[1]||0);
- return ya-yb;
+ const ma=(a.getAttribute("transform")||"").match(/translate\(([-\d.]+)[ ,]+([-\d.]+)\)/);
+ const mb=(b.getAttribute("transform")||"").match(/translate\(([-\d.]+)[ ,]+([-\d.]+)\)/);
+ const xa=ma?+ma[1]:0, ya=ma?+ma[2]:0;
+ const xb=mb?+mb[1]:0, yb=mb?+mb[2]:0;
+ return (ya-yb)||(xb-xa);
 });
 
 /* Scene 04 uses the previously approved phone-scroll concept, with denser floating cards. */
@@ -27,7 +29,7 @@ const bursts=[];
 burstDefs.forEach((d,i)=>{let el=document.createElement('div');el.className='burst';el.innerHTML=`<strong>${d[0]}</strong><p>${d[1]}</p>`;const spots=[[3,12],[56,7],[5,33],[60,28],[2,55],[55,50],[10,75],[62,73],[22,8],[43,84],[71,14],[3,86],[48,39],[67,61]];el.style.left=spots[i][0]+'%';el.style.top=spots[i][1]+'%';el.style.transform=`translateY(95px) rotate(${i%2?6:-6}deg)`;burstHolder.appendChild(el);bursts.push(el)});
 gsap.set(["#s1","#s2","#mapWorld","#searchScene","#endingScene","#approvedTaiwanScene"],{opacity:0});
 gsap.set("#approvedTaiwanScene",{visibility:"hidden"});
-gsap.set("#s1",{opacity:1,visibility:"visible"});
+gsap.set("#s1",{opacity:0,visibility:"hidden"});
 
 const count={v:19861};
 const growthPins=[...document.querySelectorAll("#approvedTaiwanScene .locked-pin")];
@@ -50,6 +52,46 @@ function renderGrowth(v){
 }
 renderGrowth(19861);
 
+/* 01 文化路：v06 跟路。鏡頭中心貼在文化路座標上，由華江橋（東北）往西南，不把路帶出畫面。 */
+const ROAD=[
+  [1042,180],
+  [1008,188],
+  [997,197],
+  [972,241],
+  [949,266],
+  [926,291],
+  [903,329],
+  [880,380],
+  [846,426],
+  [813,473],
+  [788,506]
+];
+const lerp=(a,b,p)=>a+(b-a)*p;
+function roadAt(t){
+  const n=ROAD.length-1;
+  const u=Math.max(0,Math.min(1,t))*n;
+  const i=Math.min(n-1,Math.floor(u));
+  const p=u-i;
+  return {x:lerp(ROAD[i][0],ROAD[i+1][0],p),y:lerp(ROAD[i][1],ROAD[i+1][1],p)};
+}
+const drive={t:0};
+function applyDrive(){
+  if(!svg) return;
+  const mobile=window.matchMedia("(max-width: 760px)").matches;
+  const r=roadAt(drive.t);
+  const w=lerp(mobile?260:300, mobile?390:430, drive.t);
+  const h=mobile?w*1.32:w;
+  /* 鏡頭略偏東北，讓文化路前方佔畫面左下、華江橋在右上，避免路被帶出畫面。 */
+  const x=r.x+14;
+  const y=r.y-18;
+  svg.setAttribute("viewBox",`${x-w/2} ${y-h/2} ${w} ${h}`);
+  const reveal=Math.max(0,(drive.t-0.08)/0.92);
+  const n=Math.min(sortedPins.length,Math.floor(Math.pow(reveal,.85)*sortedPins.length));
+  sortedPins.forEach((el,i)=>{el.style.opacity=i<n?"1":"0";});
+}
+gsap.set(sortedPins,{opacity:0});
+applyDrive();
+
 const tl=gsap.timeline({
  defaults:{ease:"none"},
  scrollTrigger:{
@@ -61,28 +103,22 @@ const tl=gsap.timeline({
    scrub:0.25,
    anticipatePin:1,
    invalidateOnRefresh:true,
-   onUpdate:self=>gsap.set("#progress",{width:(self.progress*100)+"%"})
+   onUpdate:self=>gsap.set("#progress",{width:(self.progress*100)+"%"}),
+   onRefresh:()=>applyDrive()
  }
 });
 
-/* 01 文化路：鏡頭行進 → 定點停住 → 90 個 PIN 累積；絕不拉遠。 */
-const originalViewBox=svg.getAttribute("viewBox").split(/[ ,]+/).map(Number);
-const [vx,vy,vw,vh]=originalViewBox;
-const camera={x:vx+vw*.58,y:vy+vh*.22,w:vw*.43,h:vh*.43};
-function updateCamera(){svg.setAttribute("viewBox",`${camera.x-camera.w/2} ${camera.y-camera.h/2} ${camera.w} ${camera.h}`)}
-updateCamera();
-gsap.set(sortedPins,{opacity:0});
-tl.to("#mapWorld",{opacity:1,duration:.12})
-  .to(camera,{x:910.11,y:323.27,w:405.41,h:261.56,duration:.65,onUpdate:updateCamera},"<")
-  .to(sortedPins.slice(0,22),{opacity:1,stagger:.014,duration:.08},"<+=.12")
-  .to("#s1",{opacity:0,y:-10,duration:.13}).set("#s1",{visibility:"hidden"})
-  .set("#s2",{visibility:"visible"}).fromTo("#s2",{opacity:0,y:10},{opacity:1,y:0,duration:.15},"<")
-  /* 鏡頭停止在文化路主視覺位置，剩餘 PIN 不再跟著畫面移出。 */
-  .to(camera,{x:880.11,y:373.27,w:476.96,h:307.71,duration:.19,onUpdate:updateCamera},"<")
-  .to(sortedPins.slice(22),{opacity:1,stagger:.018,duration:.08})
-  .to({}, {duration:.42})
-  /* 02 黑色轉場：35 公尺與 50 步集中於此，不再有橘色第三張文案。 */
-  .to("#bridgeBlack",{opacity:1,duration:.18})
+tl.to("#mapWorld",{opacity:1,duration:.16})
+  .to({}, {duration:.36})
+  .set("#s1",{visibility:"visible"})
+  .fromTo("#s1",{opacity:0,y:12},{opacity:1,y:0,duration:.2})
+  .to(drive,{t:.4,duration:1.2,onUpdate:applyDrive,ease:"none"})
+  .to("#s1",{opacity:0,y:-8,duration:.12}).set("#s1",{visibility:"hidden"})
+  .set("#s2",{visibility:"visible"}).fromTo("#s2",{opacity:0,y:8},{opacity:1,y:0,duration:.12},"<")
+  .to(drive,{t:1,duration:1.5,onUpdate:applyDrive,ease:"none"},"<")
+  .to({}, {duration:.32})
+  /* 分鏡 3：50 步黑卡；地圖停在最密路段後被蓋住。 */
+  .to("#bridgeBlack",{opacity:1,duration:.16})
   .to({}, {duration:.48})
   .to("#mapWorld",{opacity:0,duration:.18})
   .to("#s2",{opacity:0,duration:.16},"<")

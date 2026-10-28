@@ -453,15 +453,38 @@ body {
 }
 
 #section-story #bridgeBlack .big50 {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
   font-size: clamp(84px, 14vw, 210px);
   letter-spacing: -.06em;
+  color: #f45500;
+}
+
+#section-story #bridgeBlack .big50 span {
+  font-size: .28em;
+  letter-spacing: 0;
+  margin-left: .12em;
+  font-weight: 900;
+  color: #f45500;
 }
 
 #section-story #bridgeBlack p {
-  max-width: 18em;
+  max-width: 16em;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.55;
+  text-align: center;
+}
+
+#section-story .scene-copy .number small {
+  font-size: .38em;
+  vertical-align: super;
+  letter-spacing: 0;
+  margin-left: .04em;
+  font-weight: 900;
 }
 
 #section-story #approvedTaiwanScene .growth-value {
@@ -485,5 +508,109 @@ body {
 
   #section-story #searchScene .search-copy-fixed h2 {
     font-size: clamp(30px, 8.2vw, 42px) !important;
+  }
+}
+
+/* Scene 1: desktop left 1/3 copy / right 2/3 map; mobile top 2/3 map / bottom 1/3 copy, no gap. */
+#section-story .copy-zone {
+  left: 5vw !important;
+  width: min(460px, 28vw) !important;
+  max-width: 32%;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  height: min(74vh, 680px) !important;
+  z-index: 22;
+  text-align: left;
+}
+
+#section-story .scene-copy,
+#section-story .scene-copy h2,
+#section-story .scene-copy p {
+  text-align: left;
+}
+
+#section-story .scene-copy h2 {
+  font-size: clamp(26px, 2.2vw, 38px) !important;
+  line-height: 1.22 !important;
+}
+
+#section-story .map-world {
+  left: 33.333% !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  overflow: hidden;
+}
+
+#section-story .safe-mask {
+  width: 36%;
+  height: auto;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, var(--orange) 0 72%, rgba(244, 85, 0, .94) 86%, rgba(244, 85, 0, 0) 100%);
+}
+
+/* Scene 1 開頭先只看華江橋地圖，文字等滾動後再進。 */
+#section-story #s1 {
+  visibility: hidden;
+  opacity: 0;
+}
+
+@media (max-width: 760px) {
+  #section-story .map-world {
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+  }
+
+  #section-story .copy-zone {
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: none;
+    height: auto !important;
+    min-height: 0 !important;
+    transform: none !important;
+    display: grid;
+    padding: 16px 7vw calc(18px + env(safe-area-inset-bottom, 0px));
+    background: var(--orange);
+    text-align: center;
+    z-index: 22;
+  }
+
+  #section-story .scene-copy {
+    position: relative !important;
+    inset: auto !important;
+    grid-area: 1 / 1;
+    height: auto !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    padding: 0 !important;
+    text-align: center;
+  }
+
+  #section-story .scene-copy h2 {
+    font-size: clamp(24px, 6.6vw, 34px) !important;
+    line-height: 1.25 !important;
+    text-align: center !important;
+  }
+
+  #section-story .scene-copy p {
+    font-size: 15px !important;
+    margin-top: 10px !important;
+    line-height: 1.5 !important;
+    text-align: center !important;
+  }
+
+  #section-story .scene-copy .number {
+    font-size: clamp(64px, 18vw, 92px) !important;
+    margin: 0 0 6px !important;
+  }
+
+  #section-story .safe-mask {
+    display: none;
   }
 }
