@@ -458,7 +458,7 @@ body {
   justify-content: center;
   flex-wrap: nowrap;
   white-space: nowrap;
-  font-size: clamp(84px, 14vw, 210px);
+  font-size: clamp(84px, 17.36vw, 250px);
   letter-spacing: -.06em;
   color: #f45500;
 }
@@ -477,6 +477,7 @@ body {
   margin-right: auto;
   line-height: 1.55;
   text-align: center;
+  font-size: clamp(17px, 2.05vw, 29px);
 }
 
 #section-story .scene-copy .number small {
@@ -497,12 +498,12 @@ body {
 
 @media (max-width: 760px) {
   #section-story #bridgeBlack .big50 {
-    font-size: clamp(72px, 22vw, 120px);
+    font-size: clamp(72px, 25.6vw, 120px);
   }
 
   #section-story #bridgeBlack p {
     max-width: 90vw;
-    font-size: 15px;
+    font-size: 18px;
     margin: 16px 22px 0;
   }
 
@@ -530,8 +531,16 @@ body {
 }
 
 #section-story .scene-copy h2 {
-  font-size: clamp(26px, 2.2vw, 38px) !important;
+  font-size: clamp(26px, 2.78vw, 40px) !important;
   line-height: 1.22 !important;
+}
+
+#section-story .scene-copy p {
+  font-size: clamp(17px, 2.02vw, 29px) !important;
+}
+
+#section-story .scene-copy .number {
+  font-size: clamp(82px, 11.81vw, 170px) !important;
 }
 
 #section-story .map-world {
@@ -593,21 +602,25 @@ body {
   }
 
   #section-story .scene-copy h2 {
-    font-size: clamp(24px, 6.6vw, 34px) !important;
+    font-size: 28px !important;
     line-height: 1.25 !important;
     text-align: center !important;
   }
 
   #section-story .scene-copy p {
-    font-size: 15px !important;
+    font-size: 18px !important;
     margin-top: 10px !important;
     line-height: 1.5 !important;
     text-align: center !important;
   }
 
   #section-story .scene-copy .number {
-    font-size: clamp(64px, 18vw, 92px) !important;
+    font-size: clamp(64px, 20.5vw, 92px) !important;
     margin: 0 0 6px !important;
+  }
+
+  #section-story .s1-br-desk {
+    display: none;
   }
 
   #section-story .safe-mask {
