@@ -31,26 +31,32 @@ gsap.set(["#s1","#s2","#mapWorld","#searchScene","#endingScene","#approvedTaiwan
 gsap.set("#approvedTaiwanScene",{visibility:"hidden"});
 gsap.set("#s1",{opacity:0,visibility:"hidden"});
 
-const count={v:19861};
-const growthPins=[...document.querySelectorAll("#approvedTaiwanScene .locked-pin")];
+const GROWTH_START=19000;
+const GROWTH_END=23000;
+const count={v:GROWTH_START};
+const growthPinSets=[
+  [...document.querySelectorAll("#approvedTaiwanScene .is-desk .locked-pin")],
+  [...document.querySelectorAll("#approvedTaiwanScene .is-mob .locked-pin")]
+];
 const growthCount=document.querySelector("#growthCounter");
 const growthPlus=document.querySelector("#growthPlus");
 function renderGrowth(v){
-  const p=Math.max(0,Math.min(1,(v-19861)/(23000-19861)));
+  const p=Math.max(0,Math.min(1,(v-GROWTH_START)/(GROWTH_END-GROWTH_START)));
   growthCount.textContent=Math.round(v).toLocaleString("en-US");
   growthPlus.textContent=p>=.999?"+":"";
-  growthPins.forEach((el,i)=>{
-    const start=.025+(i/growthPins.length)*.86;
-    const t=Math.max(0,Math.min(1,(p-start)/.09));
-    // opacity:0 alone can leave SVG image compositor artifacts in Chrome.
-    // Fully remove unrevealed icons from painting, including during scrub reverse.
-    el.style.visibility = t <= 0.001 ? "hidden" : "visible";
-    el.style.opacity=String(t);
-    el.style.filter = t <= 0.001 ? "none" : "drop-shadow(1px 1px 0 #17191d)";
-    el.style.transform=`translate(-50%,-50%) scale(${.82+.18*t})`;
+  growthPinSets.forEach(pins=>{
+    const n=Math.max(1,pins.length);
+    pins.forEach((el,i)=>{
+      const start=.025+(i/n)*.86;
+      const t=Math.max(0,Math.min(1,(p-start)/.09));
+      el.style.visibility = t <= 0.001 ? "hidden" : "visible";
+      el.style.opacity=String(t);
+      el.style.filter = t <= 0.001 ? "none" : "drop-shadow(1px 1px 0 #17191d)";
+      el.style.transform=`translate(-50%,-50%) scale(${.82+.18*t})`;
+    });
   });
 }
-renderGrowth(19861);
+renderGrowth(GROWTH_START);
 
 /* 01 文化路：v06 跟路。鏡頭中心貼在文化路座標上，由華江橋（東北）往西南，不把路帶出畫面。 */
 const ROAD=[
@@ -126,7 +132,7 @@ tl.to("#mapWorld",{opacity:1,duration:.16})
   .call(()=>renderGrowth(count.v))
   .fromTo("#approvedTaiwanScene",{opacity:0,visibility:"hidden"},{opacity:1,visibility:"visible",duration:.26})
   .to("#bridgeBlack",{opacity:0,duration:.24},"<")
-  .to(count,{v:23000,duration:.56,onUpdate:()=>renderGrowth(count.v)})
+  .to(count,{v:GROWTH_END,duration:.72,onUpdate:()=>renderGrowth(count.v)})
   .to({}, {duration:.36})
   /* 04 單一診所圖示語言接往手機搜尋，沒有舊版線條台灣地圖。 */
   .to("#approvedTaiwanScene",{opacity:0,duration:.30})
@@ -141,12 +147,9 @@ tl.to("#mapWorld",{opacity:1,duration:.16})
   .to(bursts,{x:(i)=>((i%4)-1.5)*13,y:(i)=>((i%3)-1)*11,stagger:.022,duration:.30})
   .to({}, {duration:.28})
 
-  /* Ending: transition line then mandatory editorial question. */
+  /* Ending: editorial question. */
   .set("#endingScene",{visibility:"visible"})
   .to("#endingScene",{opacity:1,duration:.20})
-  .fromTo("#endingPre",{opacity:0,y:18},{opacity:1,y:0,duration:.33})
-  .to({}, {duration:.34})
-  .to("#endingPre",{opacity:0,y:-20,duration:.22})
   .fromTo(".ending-lead",{opacity:0,y:22},{opacity:1,y:0,duration:.28})
   .fromTo(".ending-question",{opacity:0,scale:.4,filter:"blur(6px)"},{opacity:1,scale:1,filter:"blur(0px)",duration:.52,ease:"power3.out"},"-=.03")
   .to({}, {duration:.75});
