@@ -2284,8 +2284,8 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   margin: 0 auto 40px;
   color: #404040;
   font-family: "Noto Sans TC", PingFang TC, Microsoft JhengHei, sans-serif;
-  font-size: 36px;
-  font-weight: 700;
+  font-size: 44px;
+  font-weight: 900;
   line-height: 130%;
   position: relative;
 }
@@ -2312,7 +2312,7 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
 @media only screen and (width <= 768px) {
   section:not(#section-banner, .section-bottom, #section-related, #section-story) .h2-section {
     margin-bottom: 24px;
-    font-size: 28px;
+    font-size: 36px;
   }
 
   section:not(#section-banner, .section-bottom, #section-related, #section-story) .h2-section span {
@@ -3550,7 +3550,7 @@ section.section-bottom .name {
   margin: 0;
   color: #2d2c28;
   font-family: "Noto Serif TC", "Noto Serif CJK TC", "Source Han Serif TC", PMingLiU, serif;
-  font-size: clamp(15px, 1.92vw, 24px);
+  font-size: clamp(16px, 2.24vw, 28px);
   font-weight: 700;
   line-height: 1.35;
   letter-spacing: 0;
@@ -3630,7 +3630,7 @@ section.section-bottom .name {
   }
 
   #section-related .related-title {
-    font-size: 20px;
+    font-size: 24px;
   }
 
   #section-related .related-dek {
