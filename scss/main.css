@@ -2368,7 +2368,7 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   width: 100%;
   max-width: 590px;
   margin-bottom: 40px;
-  font-size: 21px;
+  font-size: 25px;
   line-height: 200%;
 
 }
@@ -2381,7 +2381,7 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   section:not(#section-banner, .section-bottom, #section-related, #section-story) p {
     max-width: none;
     margin-bottom: 24px;
-    font-size: 18px;
+    font-size: 22px;
   }
 
 }
