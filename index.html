@@ -25,6 +25,7 @@
 	<link rel="stylesheet" href="charts/chart-3.css">
 	<link rel="stylesheet" href="charts/chart-6.css">
 	<link rel="stylesheet" href="charts/chart-story.css?v=s2num8">
+	<link rel="stylesheet" href="charts/zoom-quote.css?v=v4">
 	<!-- Google Tag Manager -->
 	<script>(function (w, d, s, l, i) {
 		w[l] = w[l] || []; w[l].push({
@@ -803,7 +804,18 @@
             <div class="wrapper flex flex-col items-center">
                 <p>事實上，基層醫療體系不只表面上的版圖擴張，真正的劇變暗藏在收入來源的轉向。</p>
                 <p>10年間，個人醫療照護支出膨脹了65%，但金流已經改道。健保醫療的餅雖變大，要吃得飽卻愈來愈難，因為有更高比例的醫療花費，是流向不吃健保的長照機構、民俗醫療、月子中心等「其他專業機構」。</p>
-                <p>值得注意的是，完全脫離健保約束的診所更是快速增加。全台已有1,915家診所完全自費、不收健保，大約每12間診所就有1間是全自費。自費診所高度集中在消費力強的都會，光台北市就有818家，健保特約率全台最低，只有79.2%，等於大約每5間診所就有1間全自費。</p>
+                <div id="zoom-photo" class="zoom-photo">
+                    <p class="zoom-copy">值得注意的是，完全脫離健保約束的診所更是快速增加。全台已有1,915家診所完全自費、不收健保，大約每12間診所就有1間是全自費。自費診所高度集中在消費力強的都會，光台北市就有818家，健保特約率全台最低，只有79.2%，等於大約每5間診所就有1間全自費。</p>
+                    <div class="zoom-slot">
+                        <figure class="zoom-frame">
+                            <img src="images/ihope-clinic.jpg" alt="2024年7月醫願診所於台北市信義區開幕記者會" width="2000" height="1333">
+                            <div class="zoom-overlay">
+                                <span class="zoom-rule" aria-hidden="true"></span>
+                                <figcaption class="zoom-cap">第三波複合式自費診所市場崛起，扣緊防癌、抗衰老核心，吸走大量醫學中心醫護。圖為今年（2024）7月醫願診所於台北市信義區正式開幕，由醫學中心資深主任級醫師組成團隊，該診所也提供醫美、精準健檢與血液透析等服務。</figcaption>
+                            </div>
+                        </figure>
+                    </div>
+                </div>
                 <div id="chart-4" class="chart-block w-full maxw-794">
                   <p class="eyebrow">診所戰國時代｜醫療支出變化</p>
                   <h3 class="chart-title">醫療支出全面增加，「其他專業機構」10年成長1.3倍</h3>
@@ -1090,6 +1102,7 @@
 <script src="charts/chart-3.js"></script>
 <script src="charts/chart-6.js"></script>
 <script src="charts/chart-story.js?v=s2big"></script>
+<script src="charts/zoom-quote.js?v=v5"></script>
 </body>
 
 </html>
