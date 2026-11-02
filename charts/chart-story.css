@@ -458,14 +458,14 @@ body {
   flex-wrap: nowrap;
   white-space: nowrap;
   font-size: clamp(84px, 17.36vw, 250px);
-  letter-spacing: -.06em;
+  letter-spacing: 0;
   color: #f45500;
 }
 
 #section-story #bridgeBlack .big50 span {
-  font-size: .28em;
+  font-size: clamp(17px, 1.88vw, 27px);
   letter-spacing: 0;
-  margin-left: .12em;
+  margin-left: .08em;
   font-weight: 900;
   color: #f45500;
 }
@@ -480,10 +480,13 @@ body {
 }
 
 #section-story .scene-copy .number small {
-  font-size: .38em;
-  vertical-align: super;
+  position: absolute;
+  top: .02em;
+  right: 0;
+  font-size: .28em;
+  line-height: 1;
   letter-spacing: 0;
-  margin-left: .04em;
+  margin: 0;
   font-weight: 900;
 }
 
@@ -498,6 +501,10 @@ body {
 @media (max-width: 760px) {
   #section-story #bridgeBlack .big50 {
     font-size: clamp(72px, 25.6vw, 120px);
+  }
+
+  #section-story #bridgeBlack .big50 span {
+    font-size: 20px;
   }
 
   #section-story #bridgeBlack p {
@@ -538,9 +545,17 @@ body {
   font-size: clamp(17px, 2.02vw, 29px) !important;
 }
 
+#section-story .s1-copy-mob {
+  display: none;
+}
+
 #section-story .scene-copy .number {
+  position: relative;
+  display: inline-block;
   font-size: clamp(82px, 11.81vw, 170px) !important;
   font-family: "Montserrat Alternates", Arial, sans-serif;
+  letter-spacing: 0;
+  padding-right: .1em;
 }
 
 #section-story .scene-copy .number small,
@@ -621,12 +636,20 @@ body {
   }
 
   #section-story .scene-copy .number {
-    font-size: clamp(64px, 20.5vw, 92px) !important;
+    font-size: clamp(70px, 20.5vw, 92px) !important;
     margin: 0 0 6px !important;
   }
 
   #section-story .s1-br-desk {
     display: none;
+  }
+
+  #section-story .s1-copy-desk {
+    display: none;
+  }
+
+  #section-story .s1-copy-mob {
+    display: inline;
   }
 
   #section-story .safe-mask {
@@ -709,15 +732,34 @@ body {
 }
 
 #section-story #approvedTaiwanScene .growth-value,
-#section-story #approvedTaiwanScene .growth-value #growthCounter,
-#section-story #approvedTaiwanScene .growth-value #growthPlus {
+#section-story #approvedTaiwanScene .growth-value #growthCounter {
   font-family: "Montserrat Alternates", Arial, sans-serif;
   font-weight: 900 !important;
-  font-size: clamp(52px, 6.2vw, 118px) !important;
-  letter-spacing: -.065em;
+  font-size: clamp(55px, 6.2vw, 118px) !important;
+  letter-spacing: 0 !important;
   line-height: 1 !important;
   white-space: nowrap;
   margin: 0 !important;
+}
+
+#section-story #approvedTaiwanScene .growth-value {
+  position: relative;
+  display: inline-block !important;
+  width: auto !important;
+  padding-right: .1em;
+}
+
+#section-story #approvedTaiwanScene .growth-value #growthPlus {
+  position: absolute;
+  top: .02em;
+  right: 0;
+  font-family: "Montserrat Alternates", Arial, sans-serif;
+  font-weight: 900 !important;
+  font-size: .28em !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
 }
 
 #section-story #approvedTaiwanScene .growth-desc {
@@ -799,10 +841,8 @@ body {
   }
 
   #section-story #approvedTaiwanScene .growth-value,
-  #section-story #approvedTaiwanScene .growth-value #growthCounter,
-  #section-story #approvedTaiwanScene .growth-value #growthPlus {
+  #section-story #approvedTaiwanScene .growth-value #growthCounter {
     font-size: clamp(52px, 15vw, 84px) !important;
-    width: 100%;
     text-align: center;
     margin: 0 0 6px !important;
   }

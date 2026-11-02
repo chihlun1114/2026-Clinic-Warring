@@ -2867,7 +2867,6 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
 }
 
 #section-banner .banner-title {
-  --hero-title: clamp(52px, 8.2vw, 104px);
   width: 100%;
   max-width: 1200px;
   color: #fff;
@@ -2883,23 +2882,16 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
 }
 
 #section-banner .banner-title h1 {
-  margin: 8px 0 10px;
-  color: #f45500;
-  font-size: var(--hero-title);
-  font-weight: 900;
-  line-height: 1.12;
-  letter-spacing: .02em;
-  text-shadow: 0 2px 28px rgba(0, 0, 0, .45);
-  word-break: keep-all;
-  white-space: nowrap;
+  margin: -6px 0 2px;
+  font-size: 0;
+  line-height: 0;
 }
 
-#section-banner .banner-title-desktop {
-  display: inline;
-}
-
-#section-banner .banner-title-mobile {
-  display: none;
+#section-banner .banner-title-img {
+  display: block;
+  width: min(82vw, 1180px);
+  max-width: 100%;
+  height: auto;
 }
 
 #section-banner .banner-title .banner-kicker,
@@ -2907,44 +2899,37 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   width: 100%;
   max-width: none;
   margin: 0;
-  color: #fff;
   font-weight: 700;
-  text-shadow: 0 1px 16px rgba(0, 0, 0, .55);
   word-break: keep-all;
 }
 
 #section-banner .banner-title .banner-kicker {
+  color: #fff;
   font-size: clamp(18px, 2.2vw, 28px);
   line-height: 1.5;
   letter-spacing: .06em;
   text-align: center;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, .55);
 }
 
 #section-banner .banner-title .banner-sub {
-  font-size: 35px;
+  color: #f45500;
+  font-size: clamp(15px, 1.25vw, 18px);
   line-height: 1.35;
   letter-spacing: 0;
-  text-align: center;
+  text-align: justify;
+  text-align-last: justify;
+  text-justify: inter-character;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, .55);
 }
 
 @media only screen and (width <= 768px) {
-  #section-banner .banner-title {
-    --hero-title: clamp(44px, 12.5vw, 56px);
-  }
-
   #section-banner .banner-title h1 {
-    margin: 8px 0 12px;
-    white-space: normal;
-    line-height: 1.12;
-    letter-spacing: .01em;
+    margin: -4px 0 4px;
   }
 
-  #section-banner .banner-title-desktop {
-    display: none;
-  }
-
-  #section-banner .banner-title-mobile {
-    display: block;
+  #section-banner .banner-title-img {
+    width: 92vw;
   }
 
   #section-banner .banner-title .banner-kicker {
@@ -2953,7 +2938,7 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   }
 
   #section-banner .banner-title .banner-sub {
-    font-size: calc(var(--hero-title) * 6 / 16);
+    font-size: clamp(12px, 3.2vw, 14px);
   }
 }
 
@@ -3527,7 +3512,7 @@ section.section-bottom .name {
   display: grid;
   grid-template-columns: minmax(192px, .96fr) minmax(0, 1.04fr);
   grid-template-areas: "visual copy";
-  gap: 29px 48px;
+  gap: 29px 45px;
   align-items: center;
   color: inherit;
   text-decoration: none;
@@ -3546,7 +3531,7 @@ section.section-bottom .name {
 #section-related .related-kicker {
   margin: 0 0 8px;
   color: var(--related-accent);
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: .02em;
@@ -3557,7 +3542,7 @@ section.section-bottom .name {
   margin: 0;
   color: #2d2c28;
   font-family: "Noto Serif TC", "Noto Serif CJK TC", "Source Han Serif TC", PMingLiU, serif;
-  font-size: clamp(18px, 1.92vw, 26px);
+  font-size: clamp(15px, 1.92vw, 24px);
   font-weight: 700;
   line-height: 1.35;
   letter-spacing: 0;
@@ -3567,7 +3552,7 @@ section.section-bottom .name {
 #section-related .related-dek {
   margin: 11px 0 0;
   color: #2d2c28;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.85;
   letter-spacing: .02em;
@@ -3633,16 +3618,16 @@ section.section-bottom .name {
   }
 
   #section-related .related-kicker {
-    font-size: 15px;
+    font-size: 17px;
   }
 
   #section-related .related-title {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   #section-related .related-dek {
     margin-top: 8px;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.8;
   }
 }
