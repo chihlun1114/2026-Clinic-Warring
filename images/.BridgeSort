@@ -1,12 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <dirinfo>
 <files>
-	<item key='arsenal.webp20261022124839' />
-	<item key='gen-y.webp20261022124927' />
-	<item key='hero-desktop.jpg20261022054933' />
-	<item key='hero-desktop.webp20261006040635' />
-	<item key='hero-mobile.jpg20261022054915' />
-	<item key='hero-mobile.webp20261006041329' />
+	<item key='hero-desktop.webp20261102145332' />
+	<item key='hero-mobile.webp20261102145819' />
 	<item key='map.png20261007150630' />
 	<item key='pin.svg20261007150630' />
 	<item key='related-01-arsenal.jpg20261006045555' />
@@ -15,5 +11,18 @@
 	<item key='related-04-imbalance.jpg20261006045555' />
 	<item key='story-clinic-pin.svg20261022070819' />
 	<item key='story-taiwan-base.png20261022070819' />
+	<item key='p05.webp20261103073716' />
+	<item key='article-01.webp20261102111541' />
+	<item key='article-02.webp20261102111526' />
+	<item key='article-03.webp20261102111604' />
+	<item key='article-04.webp20261102111504' />
+	<item key='brushstrokes-article.svg20261102193047' />
+	<item key='brushstrokes01.svg20261102144258' />
+	<item key='brushstrokes02.svg20261102144512' />
+	<item key='p02.webp20261102181212' />
+	<item key='story-taiwan-desk.png20261030175129' />
+	<item key='story-taiwan-mobile.png20261030175220' />
+	<item key='title.png20261102145458' />
+	<item key='p01.webp20261103073407' />
 </files>
 </dirinfo>
