@@ -69,11 +69,21 @@
   max-width: none;
   margin: 0;
   color: #252a2d;
-  font-size: clamp(22px, 3.36vw, 30px);
+  font-size: 24px;
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: 0;
+  line-height: 160%;
+  letter-spacing: 1px;
   text-align: left;
+}
+
+@media only screen and (width <= 768px) {
+  #chart-1 h3.chart-title,
+  #chart-4 h3.chart-title,
+  #chart-5 h3.chart-title,
+  #chart-3 h3.chart-title,
+  #chart-6 h3.chart-title {
+    font-size: 22px;
+  }
 }
 
 #chart-1 p.dek,
@@ -84,10 +94,10 @@
   width: 100%;
   max-width: none;
   margin: 19px 0 0;
-  color: #4f575c;
-  font-size: 13px;
+  color: #2d2c28;
+  font-size: 20px;
   font-weight: 400;
-  line-height: 1.9;
+  line-height: 140%;
   letter-spacing: normal;
   text-align: left;
   word-break: keep-all;
@@ -316,8 +326,8 @@
 #chart-3 p.dek,
 #chart-6 p.dek {
     margin-top: 14px;
-    font-size: 12px;
-    line-height: 1.8;
+    font-size: 18px;
+    line-height: 140%;
   }
 
   #chart-1 .chart-panel,
