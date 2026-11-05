@@ -2367,7 +2367,7 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   letter-spacing: .6px;
   width: 100%;
   max-width: 590px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   font-size: 20px;
   line-height: 200%;
 
@@ -3512,10 +3512,11 @@ section#section-5 {
     align-items: flex-start;
     gap: 16px;
     width: 100%;
-    margin-top: 8px;
+    margin-top: 0;
     pointer-events: auto;
     position: sticky;
-    top: 96px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .deep-rail-label {
@@ -3777,8 +3778,94 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
     font-size: 20px;
   }
 
-  .related-inline .related-dek {
+  .related-inline .related-dek,
+  section:not(#section-banner, .section-bottom, #section-related, #section-story) .related-inline p.related-dek {
     font-size: 14px;
+    text-align: justify;
+    text-justify: inter-ideograph;
+    text-align-last: left;
+  }
+}
+
+.map-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  max-width: 590px;
+  margin: 64px auto 0;
+  padding: 16px 4px 16px 20px;
+  overflow: visible;
+  background: #fff;
+  border-left: 6px solid #f45500;
+  box-sizing: border-box;
+  color: inherit;
+  text-decoration: none;
+}
+
+.map-entry-copy {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.map-entry-kicker {
+  display: block;
+  margin: 0 0 6px;
+  color: #f45500;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: .02em;
+}
+
+.map-entry-title {
+  display: block;
+  color: #2d2c28;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.map-entry-visual {
+  flex: 0 0 200px;
+  width: 200px;
+  margin: -40px 0;
+}
+
+.map-entry-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.map-entry:hover .map-entry-title {
+  color: #f45500;
+}
+
+@media only screen and (width <= 768px) {
+  .map-entry {
+    gap: 8px;
+    margin-top: 40px;
+    padding: 16px 6px 16px 16px;
+  }
+
+  .map-entry-kicker {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .map-entry-title {
+    font-size: 18px;
+  }
+
+  .map-entry-visual {
+    flex-basis: 132px;
+    width: 132px;
+    margin: -28px 0;
   }
 }
 
