@@ -12,7 +12,7 @@
   --teal: #15998c;
   --green: #6f9a1f;
   width: 100%;
-  max-width: 794px;
+  max-width: 590px;
   margin-left: auto;
   margin-right: auto;
   align-self: center;
@@ -134,7 +134,7 @@
 #chart-4 .chart-wrap {
   position: relative;
   width: 100%;
-  max-width: 794px;
+  max-width: 590px;
   height: 450px;
   overflow: visible;
   font-family: "Noto Sans TC", sans-serif;
@@ -148,9 +148,9 @@
 
 #chart-1 .data-row {
   display: grid;
-  grid-template-columns: 130px minmax(0, 1fr);
+  grid-template-columns: 108px minmax(0, 1fr);
   align-items: center;
-  column-gap: 26px;
+  column-gap: 16px;
   min-height: 62px;
   cursor: pointer;
 }
@@ -166,6 +166,7 @@
 #chart-1 .measure-zone {
   position: relative;
   height: 46px;
+  box-sizing: border-box;
 }
 
 #chart-1 .brush-svg {
@@ -195,10 +196,10 @@
 
 #chart-1 .row-value {
   position: absolute;
-  left: calc(var(--bar) + 10px);
+  left: calc(var(--bar) + 8px);
   top: 50%;
   transform: translateY(-50%) translateX(-6px);
-  font-size: 34px;
+  font-size: 28px;
   line-height: 1;
   font-weight: 900;
   letter-spacing: -.05em;
@@ -355,14 +356,16 @@
 
   #chart-1 .measure-zone {
     height: 38px;
+    padding-right: 80px;
   }
 
   #chart-1 .brush-svg {
     height: 30px;
+    max-width: calc(100% - 80px);
   }
 
   #chart-1 .row-value {
-    left: calc(var(--bar) + 7px);
+    left: calc(min(var(--bar), 100% - 80px) + 7px);
     font-size: 24px;
   }
 
@@ -386,8 +389,16 @@
     column-gap: 14px;
   }
 
+  #chart-1 .measure-zone {
+    padding-right: 72px;
+  }
+
+  #chart-1 .brush-svg {
+    max-width: calc(100% - 72px);
+  }
+
   #chart-1 .row-value {
-    left: calc(var(--bar) + 6px);
+    left: calc(min(var(--bar), 100% - 72px) + 6px);
     font-size: 21px;
   }
 }

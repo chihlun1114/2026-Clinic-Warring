@@ -2284,8 +2284,8 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   margin: 0 auto 40px;
   color: #404040;
   font-family: "Noto Sans TC", PingFang TC, Microsoft JhengHei, sans-serif;
-  font-size: 44px;
-  font-weight: 900;
+  font-size: 36px;
+  font-weight: 700;
   line-height: 130%;
   position: relative;
 }
@@ -2481,7 +2481,10 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
 }
 
 section:not(#section-banner, .section-bottom, #section-related, #section-story) .chart-block {
+  width: 100%;
+  max-width: 590px;
   margin-top: 64px;
+  margin-bottom: 0;
 }
 
 @media only screen and (width <= 768px) {
@@ -2516,6 +2519,7 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   font-size: 14px;
   font-weight: 300;
   line-height: 160%;
+  letter-spacing: 0;
 }
 
 @media only screen and (width <= 768px) {
@@ -2763,7 +2767,7 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
     aspect-ratio: auto;
     height: 100svh;
     min-height: 620px;
-    padding: 52px 20px 0;
+    padding: 52px 10px 0;
   }
 }
 
@@ -2809,7 +2813,7 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
 @media only screen and (width <= 768px) {
   #section-banner .banner-block .container {
     margin-bottom: 0;
-    padding-top: 0;
+    padding: 0;
   }
 }
 
@@ -2930,12 +2934,18 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
 }
 
 @media only screen and (width <= 768px) {
+  #section-banner .banner-copy {
+    width: 100%;
+  }
+
   #section-banner .banner-title h1 {
     margin: 10px 0 0;
+    width: 100%;
   }
 
   #section-banner .banner-title-img {
-    width: 92vw;
+    width: 100%;
+    max-width: none;
   }
 
   #section-banner .banner-title .banner-kicker {
@@ -2944,9 +2954,9 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   }
 
   #section-banner .banner-title .banner-sub {
-    font-size: 14px;
+    font-size: 18px;
     margin-top: 1px;
-    padding-inline: 10px;
+    padding-inline: 12px;
   }
 }
 
@@ -3470,173 +3480,334 @@ section.section-bottom .name {
 	}
 }
 
-#section-related {
-  --related-accent: #f45500;
+section#section-5 {
+  margin-bottom: 200px;
+}
+
+.article-with-rail {
+  position: relative;
   width: 100%;
-  max-width: 864px;
-  margin: 0 auto 64px;
-  padding: 19px 24px 0;
+}
+
+.deep-rail {
+  display: none;
+}
+
+@media only screen and (width > 1280px) {
+  .deep-rail {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: max(4px, calc((100% - 1248px) / 8 + 2px));
+    bottom: 0;
+    z-index: 6;
+    width: 184px;
+    pointer-events: none;
+  }
+
+  .deep-rail-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+    margin-top: 8px;
+    pointer-events: auto;
+    position: sticky;
+    top: 96px;
+  }
+
+  .deep-rail-label {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 64%;
+    margin: 0 0 4px;
+    aspect-ratio: 398 / 127;
+  }
+
+  .deep-rail-label img {
+    grid-area: 1 / 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .deep-rail-label span {
+    grid-area: 1 / 1;
+    position: relative;
+    z-index: 1;
+    color: #f45500;
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: .28em;
+    padding-left: .28em;
+    white-space: nowrap;
+  }
+
+  .deep-rail-inner a {
+    width: 100%;
+    color: #616161;
+    font-family: "Noto Serif TC", "Noto Serif CJK TC", "Source Han Serif TC", PMingLiU, serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 160%;
+    text-align: left;
+    text-decoration: underline 1px;
+    text-underline-offset: 3px;
+    transition: color .3s, font-weight .3s;
+  }
+
+  .deep-rail-inner a:hover {
+    color: #f7741c;
+    font-weight: 400;
+  }
+}
+
+#section-related {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1248px;
+  margin: 0 auto 80px;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 #section-related .related-label {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: min(200px, 58%);
-  aspect-ratio: 398 / 127;
-  margin: 0 auto 40px;
-}
-
-#section-related .related-label img {
-  grid-area: 1 / 1;
-  display: block;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-#section-related .related-label span {
-  grid-area: 1 / 1;
-  position: relative;
-  color: var(--related-accent);
+  flex: 0 0 140px;
+  width: 140px;
+  margin: 0 12px 0 0;
+  padding-top: 4px;
+  color: #808080;
   font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
-  font-size: 24px;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: .28em;
-  padding-left: .28em;
-  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: .4px;
 }
 
 #section-related .related-list {
   display: flex;
-  flex-direction: column;
-  gap: 58px;
-  overflow: visible;
-  padding: 0 13px;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 16px;
 }
 
 #section-related .related-item {
-  display: grid;
-  grid-template-columns: minmax(192px, .96fr) minmax(0, 1.04fr);
-  grid-template-areas: "visual copy";
-  gap: 29px 45px;
-  align-items: center;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-width: 0;
   color: inherit;
   text-decoration: none;
-}
-
-#section-related .related-item:nth-child(even) {
-  grid-template-columns: minmax(0, 1.04fr) minmax(192px, .96fr);
-  grid-template-areas: "copy visual";
-}
-
-#section-related .related-copy {
-  grid-area: copy;
-  min-width: 0;
-}
-
-#section-related .related-kicker {
-  margin: 0 0 8px;
-  color: var(--related-accent);
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: .02em;
-  text-align: left;
-}
-
-#section-related .related-title {
-  margin: 0;
-  color: #2d2c28;
-  font-family: "Noto Serif TC", "Noto Serif CJK TC", "Source Han Serif TC", PMingLiU, serif;
-  font-size: clamp(16px, 2.24vw, 28px);
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: 0;
-  text-align: left;
-}
-
-#section-related .related-dek {
-  margin: 11px 0 0;
-  color: #2d2c28;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.85;
-  letter-spacing: .02em;
-  text-align: left;
-  text-justify: auto;
+  border-bottom: 1px solid #e4e0d8;
+  padding-bottom: 28px;
 }
 
 #section-related .related-visual {
-  grid-area: visual;
   position: relative;
   width: 100%;
-  max-width: 420px;
-  justify-self: stretch;
-}
-
-#section-related .related-item:nth-child(odd) .related-visual {
-  justify-self: start;
-}
-
-#section-related .related-item:nth-child(even) .related-visual {
-  justify-self: end;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #e4e0d8;
 }
 
 #section-related .related-visual img {
   display: block;
   width: 100%;
-  height: auto;
-  object-fit: contain;
-  background: transparent;
+  height: 100%;
+  object-fit: cover;
+}
+
+#section-related .related-title {
+  margin: 10px 4px 0 0;
+  color: #404040;
+  font-family: "Noto Serif TC", "Noto Serif CJK TC", "Source Han Serif TC", PMingLiU, serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: .4px;
+  text-align: left;
+}
+
+#section-related .related-item:hover .related-title {
+  color: #f45500;
 }
 
 @media only screen and (width <= 768px) {
-  #section-related {
-    margin-bottom: 38px;
-    padding: 6px 20px 0;
+  section#section-5 {
+    margin-bottom: 160px;
   }
 
-  #section-related .related-list {
-    gap: 38px;
+  #section-related {
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 48px;
+    padding: 0 20px;
   }
 
   #section-related .related-label {
-    width: min(172px, 64%);
-    margin: 0 auto 22px;
+    flex: none;
+    width: auto;
+    margin: 0;
+    padding-top: 0;
   }
 
-  #section-related .related-label span {
-    font-size: 20px;
+  #section-related .related-list {
+    flex-direction: column;
+    gap: 28px;
   }
 
-  #section-related .related-item,
-  #section-related .related-item:nth-child(even) {
-    grid-template-columns: 1fr;
-    grid-template-areas: "visual" "copy";
-    gap: 16px;
-  }
-
-  #section-related .related-visual,
-  #section-related .related-item:nth-child(odd) .related-visual,
-  #section-related .related-item:nth-child(even) .related-visual {
-    max-width: none;
-    justify-self: stretch;
-  }
-
-  #section-related .related-kicker {
-    font-size: 17px;
+  #section-related .related-item {
+    padding-bottom: 20px;
   }
 
   #section-related .related-title {
-    font-size: 24px;
+    font-size: 18px;
+  }
+}
+
+.related-inline-slot {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0 24px;
+}
+
+.related-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 590px;
+  margin: 64px auto 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+}
+
+.related-inline--flip .related-visual {
+  order: 0;
+}
+
+.related-inline .related-visual {
+  width: 100%;
+  min-width: 0;
+}
+
+.related-inline .related-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.related-inline .related-copy {
+  width: 100%;
+  max-width: 590px;
+  min-width: 0;
+  text-align: center;
+}
+
+.related-inline .related-kicker,
+.related-inline .related-dek,
+section:not(#section-banner, .section-bottom, #section-related, #section-story) .related-inline p {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  letter-spacing: .02em;
+  text-align: center;
+}
+
+.related-inline .related-kicker,
+section:not(#section-banner, .section-bottom, #section-related, #section-story) .related-inline p.related-kicker {
+  color: #f45500;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.related-inline .related-title,
+section:not(#section-banner, .section-bottom, #section-related, #section-story) .related-inline h3 {
+  margin: 6px 0 0;
+  color: #2d2c28;
+  font-family: "Noto Serif TC", "Noto Serif CJK TC", "Source Han Serif TC", PMingLiU, serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-align: center;
+  text-decoration: underline 1px;
+  text-underline-offset: 4px;
+}
+
+.related-inline .related-dek,
+section:not(#section-banner, .section-bottom, #section-related, #section-story) .related-inline p.related-dek {
+  margin-top: 10px;
+  color: #2d2c28;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+@media only screen and (width <= 768px) {
+  .related-inline-slot {
+    padding: 0 20px;
   }
 
-  #section-related .related-dek {
-    margin-top: 8px;
-    font-size: 17px;
-    line-height: 1.8;
+  .related-inline,
+  .related-inline--flip {
+    gap: 16px;
+    margin-top: 40px;
+    padding: 0;
+  }
+
+  .related-inline--flip .related-visual {
+    order: 0;
+  }
+
+  .related-inline .related-title,
+  section:not(#section-banner, .section-bottom, #section-related, #section-story) .related-inline h3 {
+    font-size: 20px;
+  }
+
+  .related-inline .related-dek {
+    font-size: 14px;
+  }
+}
+
+/* Charts sit in a flex column, so adjacent margins do not collapse.
+   Zero the body p under a chart, and give the p after a chart the same
+   64 / 40 rhythm as .chart-block { margin-top } and .related-inline. */ */
+#section-1 .wrapper > p:has(+ .chart-block),
+#section-2 .wrapper > p:has(+ .chart-block),
+#section-3 .wrapper > p:has(+ .chart-block),
+#section-4 .wrapper > p:has(+ .chart-block),
+#section-5 .wrapper > p:has(+ .chart-block) {
+  margin-bottom: 0;
+}
+
+#section-1 .chart-block + p,
+#section-2 .chart-block + p,
+#section-3 .chart-block + p,
+#section-4 .chart-block + p,
+#section-5 .chart-block + p {
+  margin-top: 64px;
+}
+
+@media only screen and (width <= 768px) {
+  #section-1 .chart-block + p,
+  #section-2 .chart-block + p,
+  #section-3 .chart-block + p,
+  #section-4 .chart-block + p,
+  #section-5 .chart-block + p {
+    margin-top: 40px;
   }
 }
 

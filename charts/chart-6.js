@@ -78,6 +78,9 @@
     if (d.city === '苗栗縣') ty = yy - 20;
     if (d.city === '桃園市') ty = yy + 24;
     if (d.city === '連江縣') ty = yy - 18;
+    if (d.city === '金門縣') ty = yy + 22;
+    if (d.city === '臺南市') ty = yy + 22;
+    if (d.city === '高雄市') ty = yy - 20;
     if (d.city === '臺北市') ty = yy - 18;
 
     g.appendChild(el('text', {
