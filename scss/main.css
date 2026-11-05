@@ -3773,14 +3773,26 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
     order: 0;
   }
 
+  .related-inline .related-visual {
+    width: calc(100% + 48px);
+    max-width: none;
+    margin-left: -24px;
+    margin-right: -24px;
+  }
+
+  .related-inline .related-kicker,
+  section:not(#section-banner, .section-bottom, #section-related, #section-story) .related-inline p.related-kicker {
+    font-size: 18px;
+  }
+
   .related-inline .related-title,
   section:not(#section-banner, .section-bottom, #section-related, #section-story) .related-inline h3 {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .related-inline .related-dek,
   section:not(#section-banner, .section-bottom, #section-related, #section-story) .related-inline p.related-dek {
-    font-size: 14px;
+    font-size: 16px;
     text-align: justify;
     text-justify: inter-ideograph;
     text-align-last: left;
