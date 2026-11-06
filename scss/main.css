@@ -2381,7 +2381,8 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   section:not(#section-banner, .section-bottom, #section-related, #section-story) p {
     max-width: none;
     margin-bottom: 24px;
-    font-size: 22px;
+    font-size: 20px;
+    line-height: 200%;
   }
 
 }
