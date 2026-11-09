@@ -1,5 +1,5 @@
 #chart-3 {
-  --orange: #e2762b;
+  --orange: #f55000;
   --blue: #3d7fb8;
   --red: #d6453c;
 }
@@ -42,6 +42,7 @@
 
 #chart-3 .axis {
   fill: #7f8589;
+  font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
   font-size: 14px;
 }
 
@@ -62,6 +63,7 @@
 }
 
 #chart-3 .change {
+  font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
   font-size: 15px;
   font-weight: 700;
 }
@@ -124,6 +126,7 @@
 }
 
 #chart-3 .mobile-detail .value {
+  font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
   font-size: 16px;
   font-weight: 700;
 }

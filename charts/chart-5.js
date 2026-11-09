@@ -12,9 +12,9 @@
     { name: '其他16縣市', value: 195 }
   ];
 
-  const TAIPEI_COLOR = '#f45500';
-  const GRAY_DARK = [74, 72, 68];
-  const GRAY_LIGHT = [198, 194, 186];
+  const TAIPEI_COLOR = '#f55000';
+  const GRAY_DARK = [93, 93, 96];
+  const GRAY_LIGHT = [200, 200, 203];
   const others = data.filter(d => d.name !== '台北市');
   const minOther = Math.min.apply(null, others.map(d => d.value));
   const maxOther = Math.max.apply(null, others.map(d => d.value));
@@ -28,7 +28,7 @@
     const g = Math.round(GRAY_LIGHT[1] + (GRAY_DARK[1] - GRAY_LIGHT[1]) * t);
     const b = Math.round(GRAY_LIGHT[2] + (GRAY_DARK[2] - GRAY_LIGHT[2]) * t);
     const lum = 0.299 * r + 0.587 * g + 0.114 * b;
-    return { fill: 'rgb(' + r + ',' + g + ',' + b + ')', onLight: lum > 130 };
+    return { fill: 'rgb(' + r + ',' + g + ',' + b + ')', onLight: lum > 125 };
   }
 
   const total = data.reduce((s, d) => s + d.value, 0);
@@ -36,11 +36,11 @@
   const tooltip = document.getElementById('chart5-tooltip');
   const wrap = root.querySelector('.donut-wrap');
   const NS = 'http://www.w3.org/2000/svg';
-  const PIE_SRC = 'images/Pie%20chart.svg';
+  const PIE_SRC = 'images/Pie-chart.png?v=1';
 
   const cx = 260, cy = 260;
-  const rOuter = 268, rInner = 70;
-  const GAP = 0.55;
+  const rOuter = 252, rInner = 84;
+  const GAP = 0;
 
   function polar(r, a) {
     const rad = (a - 90) * Math.PI / 180;
@@ -96,8 +96,21 @@
   defs.appendChild(mask);
   svg.appendChild(defs);
 
+  const pieGroup = el('g', { class: 'pie-paint' });
   const slices = el('g', { class: 'slices' });
-  svg.appendChild(slices);
+  pieGroup.appendChild(slices);
+  const texture = el('image', {
+    class: 'pie-texture',
+    href: PIE_SRC,
+    x: '0',
+    y: '0',
+    width: '520',
+    height: '520',
+    preserveAspectRatio: 'xMidYMid meet',
+    'pointer-events': 'none'
+  });
+  pieGroup.appendChild(texture);
+  svg.appendChild(pieGroup);
   const labels = el('g', { class: 'labels' });
   svg.appendChild(labels);
 
@@ -121,7 +134,7 @@
     slices.appendChild(path);
 
     const mid = (start + end) / 2;
-    const [lx, ly] = polar(188, mid);
+    const [lx, ly] = polar(168, mid);
     const shortName = d.name.replace('其他16縣市', '其他').replace('市', '');
     const isSmall = d.value < 130;
 
@@ -137,7 +150,7 @@
       });
       const t1 = el('tspan', { x: String(lx) });
       t1.textContent = shortName;
-      const t2 = el('tspan', { x: String(lx), dy: isSmall ? '20' : '24' });
+      const t2 = el('tspan', { x: String(lx), dy: isSmall ? '24' : '30' });
       t2.textContent = d.value.toLocaleString('zh-TW');
       text.append(t1, t2);
       labels.appendChild(text);
@@ -166,7 +179,7 @@
   }
 
   function toAlphaMask(img) {
-    const size = 1450;
+    const size = img.naturalWidth || 1254;
     const canvas = document.createElement('canvas');
     canvas.width = size;
     canvas.height = size;
@@ -175,9 +188,9 @@
     const pixels = ctx.getImageData(0, 0, size, size);
     const d = pixels.data;
     for (let i = 0; i < d.length; i += 4) {
+      const a = d[i + 3];
       const lum = (d[i] + d[i + 1] + d[i + 2]) / 3;
-      const isRing = d[i + 3] > 96 && lum < 140;
-      const v = isRing ? 255 : 0;
+      const v = a < 8 ? 0 : Math.round((255 - lum) * (a / 255));
       d[i] = d[i + 1] = d[i + 2] = v;
       d[i + 3] = 255;
     }

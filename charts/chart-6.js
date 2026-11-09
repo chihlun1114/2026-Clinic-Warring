@@ -67,7 +67,7 @@
     const xx = x(d.value);
     const yy = yMap[d.city];
     const isTop = topNames.has(d.city);
-    const color = isTop ? '#f45500' : '#7ea9a3';
+    const color = isTop ? '#f55000' : '#7ea9a3';
 
     const g = el('g', { class: 'dot' });
     g.appendChild(el('circle', {

@@ -1,5 +1,5 @@
 #chart-6 {
-  --top: #f45500;
+  --top: #f55000;
   --bottom: #7ea9a3;
   --avg: #9aa0a4;
 }
@@ -51,6 +51,7 @@
 
 #chart-6 .axis {
   fill: #7f8589;
+  font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
   font-size: 15px;
 }
 
@@ -67,6 +68,7 @@
 
 #chart-6 .avg-label {
   fill: #6b7176;
+  font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
   font-size: 15px;
   font-weight: 700;
 }
@@ -80,6 +82,7 @@
 }
 
 #chart-6 .label {
+  font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
   font-size: 16px;
   font-weight: 700;
 }

@@ -1,12 +1,12 @@
 #chart-5 {
-  --donut-accent: #f45500;
+  --donut-accent: #f55000;
 }
 
 #chart-5 .chart-kicker {
   width: 100%;
   max-width: none;
   margin: 0 0 8px;
-  color: #f45500;
+  color: #f55000;
   font-size: 16px;
   font-weight: 700;
   line-height: 1.2;
@@ -53,6 +53,13 @@
   width: 100%;
   height: 100%;
   overflow: visible;
+  isolation: isolate;
+}
+
+#chart-5 .pie-texture {
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  opacity: .32;
 }
 
 #chart-5 .center-total {
@@ -65,20 +72,30 @@
 
 #chart-5 .center-total .num {
   display: block;
-  color: #17191d;
-  font-size: 42px;
+  color: #f55000;
+  font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
+  font-size: 44px;
   line-height: 1;
   font-weight: 900;
   letter-spacing: -.04em;
 }
 
+#chart-5 .center-total .num-unit {
+  margin-left: .12em;
+  color: #171a1c;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
 #chart-5 .center-total .unit {
   display: block;
   margin-top: 6px;
-  color: #2d2c28;
-  font-size: 15px;
+  color: #171a1c;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 #chart-5 .insights {
@@ -110,7 +127,8 @@
 #chart-5 .insight .big {
   display: block;
   margin-top: 6px;
-  color: #f45500;
+  color: #f55000;
+  font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
   font-size: 28px;
   line-height: 1;
   font-weight: 900;
@@ -155,18 +173,19 @@
 
 #chart-5 .slice-label {
   fill: #fff;
-  font-size: 20px;
+  font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
+  font-size: 24px;
   font-weight: 800;
   text-anchor: middle;
   pointer-events: none;
 }
 
 #chart-5 .slice-label.small {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 #chart-5 .slice-label.on-light {
-  fill: #17191d;
+  fill: #171a1c;
 }
 
 @media only screen and (width <= 768px) {
@@ -195,15 +214,23 @@
   }
 
   #chart-5 .center-total .num {
-    font-size: 34px;
+    font-size: 36px;
+  }
+
+  #chart-5 .center-total .num-unit {
+    font-size: 14px;
+  }
+
+  #chart-5 .center-total .unit {
+    font-size: 16px;
   }
 
   #chart-5 .slice-label {
-    font-size: 18px;
+    font-size: 21px;
   }
 
   #chart-5 .slice-label.small {
-    font-size: 15px;
+    font-size: 17px;
   }
 }
 
@@ -216,16 +243,24 @@
     font-size: 32px;
   }
 
+  #chart-5 .center-total .num-unit {
+    font-size: 13px;
+  }
+
+  #chart-5 .center-total .unit {
+    font-size: 15px;
+  }
+
   #chart-5 .insight .big {
     font-size: 22px;
   }
 
   #chart-5 .slice-label {
-    font-size: 17px;
+    font-size: 19px;
   }
 
   #chart-5 .slice-label.small {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 

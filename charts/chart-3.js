@@ -40,7 +40,7 @@
   }
 
   function colorFor(d) {
-    return d.group === 'fast' ? '#e2762b' : (d.group === 'down' ? '#d6453c' : '#3d7fb8');
+    return d.group === 'fast' ? '#f55000' : (d.group === 'down' ? '#d6453c' : '#3d7fb8');
   }
 
   function isMobile() {
