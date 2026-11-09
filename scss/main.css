@@ -2764,11 +2764,11 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   }
 
   #section-banner .banner-block {
-    align-items: center;
+    align-items: flex-end;
     aspect-ratio: auto;
     height: 100svh;
     min-height: 620px;
-    padding: 52px 10px 0;
+    padding: 52px 10px 12vh;
   }
 }
 
@@ -3551,6 +3551,47 @@ section#section-5 {
     white-space: nowrap;
   }
 
+  .deep-rail-nav {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .deep-rail-dots {
+    position: absolute;
+    left: -32px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    pointer-events: none;
+  }
+
+  .deep-rail-dot {
+    width: 8px;
+    height: 8px;
+    box-sizing: border-box;
+    border: 1px solid #d0cdc6;
+    border-radius: 50%;
+    background: #fff;
+    transition: background .3s, border-color .3s;
+  }
+
+  .deep-rail-dot.is-active {
+    background: #f45500;
+    border-color: #f45500;
+  }
+
+  .deep-rail-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
   .deep-rail-inner a {
     width: 100%;
     color: #616161;
@@ -3559,14 +3600,28 @@ section#section-5 {
     font-weight: 300;
     line-height: 160%;
     text-align: left;
+    text-decoration: none;
+    transition: color .3s;
+  }
+
+  .deep-rail-text {
     text-decoration: underline 1px;
     text-underline-offset: 3px;
-    transition: color .3s, font-weight .3s;
   }
 
   .deep-rail-inner a:hover {
     color: #f7741c;
     font-weight: 400;
+  }
+
+  .deep-rail-inner a.is-active {
+    color: #2d2c28;
+    font-weight: 700;
+  }
+
+  .deep-rail-inner a.is-active:hover {
+    color: #f7741c;
+    font-weight: 700;
   }
 }
 
