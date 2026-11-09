@@ -163,42 +163,90 @@
 
 #chart-4 .measure-zone {
   position: relative;
-  height: 46px;
+  height: 48px;
   box-sizing: border-box;
   padding-right: 120px;
 }
 
-#chart-4 .brush-svg {
+#chart-4 .coin-track {
   position: absolute;
   left: 0;
   top: 50%;
-  width: var(--bar);
+  transform: translateY(-50%);
+  width: var(--stack, 0px);
   max-width: calc(100% - 120px);
-  height: 38px;
-  color: var(--row-color);
-  fill: currentColor;
-  transform: translateY(-50%) scaleX(0);
-  transform-origin: left center;
-  overflow: visible;
+  height: 42px;
 }
 
-#chart-4 .is-visible .brush-svg {
-  animation: chart4-brushGrow .82s cubic-bezier(.22, .75, .22, 1) forwards;
+#chart-4 .coin-stack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
 }
 
-#chart-4 .row-1 .brush-svg { animation-delay: .12s; }
-#chart-4 .row-2 .brush-svg { animation-delay: .32s; }
-#chart-4 .row-3 .brush-svg { animation-delay: .52s; }
-#chart-4 .row-4 .brush-svg { animation-delay: .72s; }
-#chart-4 .row-5 .brush-svg { animation-delay: .92s; }
+#chart-4 .is-visible .coin-stack {
+  animation: chart4-stackIn .2s ease forwards;
+}
 
-@keyframes chart4-brushGrow {
-  to { transform: translateY(-50%) scaleX(1); }
+#chart-4 .coin-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+#chart-4 .coin-layer-gray {
+  width: 100%;
+}
+
+#chart-4 .coin-layer-orange {
+  width: 0;
+  z-index: 1;
+}
+
+#chart-4 .is-visible .coin-layer-orange {
+  animation: chart4-coinFill .82s cubic-bezier(.22, .75, .22, 1) forwards;
+}
+
+#chart-4 .row-1 .coin-layer-orange { animation-delay: .12s; }
+#chart-4 .row-2 .coin-layer-orange { animation-delay: .32s; }
+#chart-4 .row-3 .coin-layer-orange { animation-delay: .52s; }
+#chart-4 .row-4 .coin-layer-orange { animation-delay: .72s; }
+#chart-4 .row-5 .coin-layer-orange { animation-delay: .92s; }
+
+@keyframes chart4-stackIn {
+  to { opacity: 1; }
+}
+
+@keyframes chart4-coinFill {
+  to { width: var(--fill); }
+}
+
+#chart-4 .coin-row {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: max-content;
+}
+
+#chart-4 .coin-row img {
+  display: block;
+  height: 42px;
+  width: 42px;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-left: -12px;
+}
+
+#chart-4 .coin-row img:first-child {
+  margin-left: 0;
 }
 
 #chart-4 .row-value {
   position: absolute;
-  left: calc(min(var(--bar), 100% - 120px) + 8px);
+  left: calc(var(--stack, 0px) + 8px);
   top: 50%;
   transform: translateY(-50%) translateX(-6px);
   font-size: 28px;
@@ -301,8 +349,8 @@
   }
 
   #chart-4 .data-row {
-    grid-template-columns: 108px minmax(0, 1fr);
-    column-gap: 12px;
+    grid-template-columns: 100px minmax(0, 1fr);
+    column-gap: 10px;
     min-height: 52px;
   }
 
@@ -311,18 +359,24 @@
   }
 
   #chart-4 .measure-zone {
-    height: 38px;
-    padding-right: 96px;
+    height: 40px;
+    padding-right: 80px;
   }
 
-  #chart-4 .brush-svg {
-    height: 30px;
-    max-width: calc(100% - 96px);
+  #chart-4 .coin-track {
+    height: 36px;
+    max-width: calc(100% - 80px);
+  }
+
+  #chart-4 .coin-row img {
+    height: 36px;
+    width: 36px;
+    margin-left: -12px;
   }
 
   #chart-4 .row-value {
-    left: calc(min(var(--bar), 100% - 96px) + 6px);
-    font-size: 20px;
+    left: calc(var(--stack, 0px) + 6px);
+    font-size: 18px;
   }
 
   #chart-4 .chart4-detail {
@@ -341,20 +395,20 @@
 
 @media (max-width: 430px) {
   #chart-4 .data-row {
-    grid-template-columns: 100px minmax(0, 1fr);
-    column-gap: 10px;
+    grid-template-columns: 96px minmax(0, 1fr);
+    column-gap: 8px;
   }
 
   #chart-4 .measure-zone {
-    padding-right: 88px;
+    padding-right: 76px;
   }
 
-  #chart-4 .brush-svg {
-    max-width: calc(100% - 88px);
+  #chart-4 .coin-track {
+    max-width: calc(100% - 76px);
   }
 
   #chart-4 .row-value {
-    left: calc(min(var(--bar), 100% - 88px) + 6px);
+    left: calc(var(--stack, 0px) + 4px);
     font-size: 18px;
   }
 }
@@ -362,8 +416,12 @@
 @media (prefers-reduced-motion: reduce) {
   #chart-4 .anim-line { stroke-dashoffset: 0; }
   #chart-4 .chart-annotation { opacity: 1; transform: none; }
-  #chart-4 .brush-svg {
-    transform: translateY(-50%) scaleX(1) !important;
+  #chart-4 .coin-stack {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  #chart-4 .coin-layer-orange {
+    width: var(--fill) !important;
     animation: none !important;
   }
   #chart-4 .row-value {

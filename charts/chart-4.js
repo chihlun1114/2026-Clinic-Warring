@@ -10,6 +10,64 @@
     { key: 'west', name: '西醫診所', growth: 32.0, start: 1206, end: 1592, delta: 386 }
   ];
 
+  const COIN_ORANGE = 'images/coin.png?v=5';
+  const COIN_GRAY = 'images/coin2.png?v=5';
+  const BASE_COINS = 6;
+  const MAX_GROWTH = data[0].growth;
+  const tracks = [...root.querySelectorAll('.coin-track')];
+
+  function makeCoinRow(src) {
+    const row = document.createElement('div');
+    row.className = 'coin-row';
+    for (let i = 0; i < BASE_COINS; i++) {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      row.appendChild(img);
+    }
+    return row;
+  }
+
+  tracks.forEach(track => {
+    const stack = document.createElement('div');
+    stack.className = 'coin-stack';
+
+    const gray = document.createElement('div');
+    gray.className = 'coin-layer coin-layer-gray';
+    gray.appendChild(makeCoinRow(COIN_GRAY));
+
+    const orange = document.createElement('div');
+    orange.className = 'coin-layer coin-layer-orange';
+    orange.appendChild(makeCoinRow(COIN_ORANGE));
+
+    stack.appendChild(gray);
+    stack.appendChild(orange);
+    track.appendChild(stack);
+  });
+
+  function setBarWidths() {
+    const baseRow = tracks[0] && tracks[0].querySelector('.coin-layer-gray .coin-row');
+    if (!baseRow) return;
+    const fullW = baseRow.scrollWidth;
+    if (!fullW) return;
+    data.forEach((item, i) => {
+      const fill = (item.growth / MAX_GROWTH) * fullW;
+      tracks[i].style.setProperty('--stack', fullW + 'px');
+      tracks[i].style.setProperty('--fill', fill + 'px');
+      tracks[i].parentElement.style.setProperty('--stack', fullW + 'px');
+      tracks[i].parentElement.style.setProperty('--fill', fill + 'px');
+    });
+  }
+
+  function whenCoinsReady(cb) {
+    const imgs = [...root.querySelectorAll('.coin-track img')];
+    Promise.all(imgs.map(img => (img.decode ? img.decode() : Promise.resolve()).catch(() => {})))
+      .then(cb);
+  }
+
+  whenCoinsReady(setBarWidths);
+  window.addEventListener('resize', setBarWidths);
+
   const panel = document.getElementById('chart4-panel');
   const detail = document.getElementById('chart4-detail');
   const mobileDetail = document.getElementById('chart4-mobile-detail');
