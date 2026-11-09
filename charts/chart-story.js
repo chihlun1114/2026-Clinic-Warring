@@ -27,7 +27,8 @@ const burstHolder=document.querySelector('#burstCards');
 const burstDefs=[['看距離','附近就有好多間診所'],['比星等','★★★★★　4.9'],['讀評論','「預約方便、服務親切」'],['線上預約','立即預約'],['搜尋結果','附近的診所越來越多'],['熱門推薦','★★★★★　4.8'],['看診時間','今天可以預約'],['比較選擇','距離、評價、評論'],['病患留言','「環境整潔、交通方便」'],['快速掛號','選擇時段'],['診所資訊','評價 4.7 · 評論'],['線上諮詢','查看更多資訊'],['搜尋附近','更多診所結果'],['評價比較','★★★★★　4.9']];
 const bursts=[];
 burstDefs.forEach((d,i)=>{let el=document.createElement('div');el.className='burst';el.innerHTML=`<strong>${d[0]}</strong><p>${d[1]}</p>`;const spots=[[3,12],[56,7],[5,33],[60,28],[2,55],[55,50],[10,75],[62,73],[22,8],[43,84],[71,14],[3,86],[48,39],[67,61]];el.style.left=spots[i][0]+'%';el.style.top=spots[i][1]+'%';el.style.transform=`translateY(95px) rotate(${i%2?6:-6}deg)`;burstHolder.appendChild(el);bursts.push(el)});
-gsap.set(["#s1","#s2","#mapWorld","#searchScene","#endingScene","#approvedTaiwanScene"],{opacity:0});
+gsap.set(["#s1","#s2","#searchScene","#endingScene","#approvedTaiwanScene"],{opacity:0});
+gsap.set("#mapWorld",{opacity:1});
 gsap.set("#approvedTaiwanScene",{visibility:"hidden"});
 gsap.set("#s1",{opacity:0,visibility:"hidden"});
 
@@ -91,7 +92,7 @@ function applyDrive(){
   const x=r.x+14;
   const y=r.y-18;
   svg.setAttribute("viewBox",`${x-w/2} ${y-h/2} ${w} ${h}`);
-  const reveal=Math.max(0,(drive.t-0.08)/0.92);
+  const reveal=Math.max(0.16,(drive.t-0.08)/0.92);
   const n=Math.min(sortedPins.length,Math.floor(Math.pow(reveal,.85)*sortedPins.length));
   sortedPins.forEach((el,i)=>{el.style.opacity=i<n?"1":"0";});
 }
@@ -114,8 +115,7 @@ const tl=gsap.timeline({
  }
 });
 
-tl.to("#mapWorld",{opacity:1,duration:.16})
-  .to({}, {duration:.36})
+tl.to({}, {duration:.52})
   .set("#s1",{visibility:"visible"})
   .fromTo("#s1",{opacity:0,y:12},{opacity:1,y:0,duration:.2})
   .to(drive,{t:.4,duration:1.2,onUpdate:applyDrive,ease:"none"})

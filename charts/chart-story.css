@@ -55,7 +55,7 @@ body {
 #section-story .number small{font-size:.22em;letter-spacing:0;margin-left:8px}
 #section-story .eq{font-size:clamp(25px,2.4vw,38px);font-weight:950;line-height:1.2;margin-top:20px}
 #section-story /* 右側視覺場，和左側文字分工 */
-.map-world{position:absolute;left:38%;right:-4%;top:-4%;bottom:-4%;opacity:0}
+.map-world{position:absolute;left:38%;right:-4%;top:-4%;bottom:-4%;opacity:1}
 #section-story .road{position:absolute;background:var(--black);transform-origin:left center;border-radius:20px;opacity:.18}
 #section-story .r1{left:2%;top:22%;width:95%;height:4px;transform:rotate(25deg)}
 #section-story .r2{left:0;top:45%;width:92%;height:3px;transform:rotate(-8deg)}
@@ -481,9 +481,10 @@ body {
 
 #section-story .scene-copy .number small {
   position: absolute;
-  top: .02em;
-  right: 0;
-  font-size: .28em;
+  top: -.12em;
+  right: -.04em;
+  left: auto;
+  font-size: .42em;
   line-height: 1;
   letter-spacing: 0;
   margin: 0;
@@ -555,7 +556,8 @@ body {
   font-size: clamp(82px, 11.81vw, 170px) !important;
   font-family: "Montserrat Alternates", Arial, sans-serif;
   letter-spacing: 0;
-  padding-right: .1em;
+  padding-right: .18em;
+  overflow: visible;
 }
 
 #section-story .scene-copy .number small,
@@ -570,6 +572,7 @@ body {
   top: 0 !important;
   bottom: 0 !important;
   overflow: hidden;
+  opacity: 1;
 }
 
 #section-story .safe-mask {
@@ -593,6 +596,7 @@ body {
     right: 0 !important;
     top: 0 !important;
     bottom: 0 !important;
+    opacity: 1;
   }
 
   #section-story .copy-zone {
@@ -636,8 +640,11 @@ body {
   }
 
   #section-story .scene-copy .number {
+    display: inline-block !important;
+    width: auto;
     font-size: clamp(70px, 20.5vw, 92px) !important;
     margin: 0 0 6px !important;
+    padding-right: .18em;
   }
 
   #section-story .s1-br-desk {
@@ -746,16 +753,17 @@ body {
   position: relative;
   display: inline-block !important;
   width: auto !important;
-  padding-right: .1em;
+  padding-right: .42em;
+  overflow: visible;
 }
 
 #section-story #approvedTaiwanScene .growth-value #growthPlus {
   position: absolute;
-  top: .02em;
-  right: 0;
+  top: -.28em;
+  right: -.22em;
   font-family: "Montserrat Alternates", Arial, sans-serif;
   font-weight: 900 !important;
-  font-size: .28em !important;
+  font-size: .84em !important;
   line-height: 1 !important;
   letter-spacing: 0 !important;
   margin: 0 !important;
