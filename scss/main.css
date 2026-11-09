@@ -3505,6 +3505,8 @@ section#section-5 {
     z-index: 6;
     width: 184px;
     pointer-events: none;
+    padding-top: 120px;
+    box-sizing: border-box;
   }
 
   .deep-rail-inner {
@@ -3610,8 +3612,8 @@ section#section-5 {
   }
 
   .deep-rail-inner a:hover {
-    color: #f7741c;
-    font-weight: 400;
+    color: #2d2c28;
+    font-weight: 700;
   }
 
   .deep-rail-inner a.is-active {
@@ -3620,7 +3622,7 @@ section#section-5 {
   }
 
   .deep-rail-inner a.is-active:hover {
-    color: #f7741c;
+    color: #2d2c28;
     font-weight: 700;
   }
 }

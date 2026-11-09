@@ -18,13 +18,13 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700;800;900&display=swap">
-	<link rel="stylesheet" href="scss/main.css?v=hero-m-down">
-	<link rel="stylesheet" href="charts/chart-1.css?v=w590b">
-	<link rel="stylesheet" href="charts/chart-4.css">
+	<link rel="stylesheet" href="scss/main.css?v=rail-gap3">
+	<link rel="stylesheet" href="charts/chart-1.css?v=fmt8">
+	<link rel="stylesheet" href="charts/chart-4.css?v=brush2">
 	<link rel="stylesheet" href="charts/chart-5.css">
 	<link rel="stylesheet" href="charts/chart-3.css">
 	<link rel="stylesheet" href="charts/chart-6.css?v=w590">
-	<link rel="stylesheet" href="charts/chart-story.css?v=plusgap6">
+	<link rel="stylesheet" href="charts/chart-story.css?v=endzoom1">
 	<!-- Google Tag Manager -->
 	<script>(function (w, d, s, l, i) {
 		w[l] = w[l] || []; w[l].push({
@@ -776,6 +776,7 @@
     </symbol>
   </defs>
 </svg>
+                  <p class="chart-kicker">全國診所家數變化</p>
                   <h3 class="chart-title">20年間，全台多了近5千家診所</h3>
                   <div id="chart1-panel" class="chart-panel">
                     <div class="chart1-bars">
@@ -835,47 +836,66 @@
                 <p>事實上，基層醫療體系不只表面上的版圖擴張，真正的劇變暗藏在收入來源的轉向。</p>
                 <p>10年間，個人醫療照護支出膨脹了65%，但金流已經改道。健保醫療的餅雖變大，要吃得飽卻愈來愈難，因為有更高比例的醫療花費，是流向不吃健保的長照機構、民俗醫療、月子中心等「其他專業機構」。</p>
                 <div id="chart-4" class="chart-block w-full maxw-590">
-                  <p class="eyebrow">診所戰國時代｜醫療支出變化</p>
+                  <p class="chart-kicker">個人醫療照護服務支出</p>
                   <h3 class="chart-title">醫療支出全面增加，「其他專業機構」10年成長1.3倍</h3>
-                  <p class="dek">近10年，個人醫療照護服務支出持續攀升。醫院仍是最大支出項目，<br>但成長最快的不是醫院，而是包含長照機構、月子中心、民俗醫療機構等在內的「其他專業機構」。</p>
-                  <div class="chart-panel">
-                    <p class="rank-title">各類支出都增加，但成長速度差很大</p>
-                    <p class="rank-note">以下比較 2014 → 2024 的支出成長幅度；橫條長度代表成長率。</p>
-                    <div class="growth-list" aria-label="各類醫療支出成長幅度">
-                      <div class="growth-row other" style="--c:var(--other)">
-                        <div class="cat">其他專業機構</div>
-                        <div class="bar-track"><div class="bar-fill" style="--w:100%;--delay:.05s"></div></div>
-                        <div class="percent">+129.9%</div>
-                        <div class="value-pair"><strong>1,082</strong> 億 → <strong>2,487</strong> 億</div>
+                  <div id="chart4-panel" class="chart-panel">
+                    <div class="chart4-bars">
+                      <div class="data-row row-1" data-key="other">
+                        <div class="row-label">其他專業機構</div>
+                        <div class="measure-zone" style="--bar:68.82%; --row-color:#f45500;">
+                          <svg class="brush-svg" viewBox="0 0 1424.26 139.4" preserveAspectRatio="none" aria-hidden="true">
+                            <use href="#brush01"></use>
+                          </svg>
+                          <div class="row-value" style="color:#f45500">+129.9%</div>
+                        </div>
                       </div>
-                      <div class="growth-row" style="--c:var(--dental)">
-                        <div class="cat">牙醫診所</div>
-                        <div class="bar-track"><div class="bar-fill" style="--w:53.2%;--delay:.12s"></div></div>
-                        <div class="percent">+69.4%</div>
-                        <div class="value-pair"><strong>1,003</strong> 億 → <strong>1,699</strong> 億</div>
+                      <div class="data-row row-2" data-key="dental">
+                        <div class="row-label">牙醫診所</div>
+                        <div class="measure-zone" style="--bar:36.77%; --row-color:#5d5d60;">
+                          <svg class="brush-svg" viewBox="0 0 1424.26 139.4" preserveAspectRatio="none" aria-hidden="true">
+                            <use href="#brush01"></use>
+                          </svg>
+                          <div class="row-value" style="color:#4a4e52">+69.4%</div>
+                        </div>
                       </div>
-                      <div class="growth-row" style="--c:var(--hospital)">
-                        <div class="cat">醫院</div>
-                        <div class="bar-track"><div class="bar-fill" style="--w:44.5%;--delay:.19s"></div></div>
-                        <div class="percent">+58.0%</div>
-                        <div class="value-pair"><strong>4,541</strong> 億 → <strong>7,174</strong> 億</div>
+                      <div class="data-row row-3" data-key="hospital">
+                        <div class="row-label">醫院</div>
+                        <div class="measure-zone" style="--bar:30.73%; --row-color:#6a6a6d;">
+                          <svg class="brush-svg" viewBox="0 0 1424.26 139.4" preserveAspectRatio="none" aria-hidden="true">
+                            <use href="#brush01"></use>
+                          </svg>
+                          <div class="row-value" style="color:#4a4e52">+58.0%</div>
+                        </div>
                       </div>
-                      <div class="growth-row" style="--c:var(--chinese)">
-                        <div class="cat">中醫診所</div>
-                        <div class="bar-track"><div class="bar-fill" style="--w:27.8%;--delay:.26s"></div></div>
-                        <div class="percent">+36.2%</div>
-                        <div class="value-pair"><strong>232</strong> 億 → <strong>316</strong> 億</div>
+                      <div class="data-row row-4" data-key="chinese">
+                        <div class="row-label">中醫診所</div>
+                        <div class="measure-zone" style="--bar:19.18%; --row-color:#77777a;">
+                          <svg class="brush-svg" viewBox="0 0 1424.26 139.4" preserveAspectRatio="none" aria-hidden="true">
+                            <use href="#brush01"></use>
+                          </svg>
+                          <div class="row-value" style="color:#4a4e52">+36.2%</div>
+                        </div>
                       </div>
-                      <div class="growth-row" style="--c:var(--west)">
-                        <div class="cat">西醫診所</div>
-                        <div class="bar-track"><div class="bar-fill" style="--w:24.6%;--delay:.33s"></div></div>
-                        <div class="percent">+32.0%</div>
-                        <div class="value-pair"><strong>1,206</strong> 億 → <strong>1,592</strong> 億</div>
+                      <div class="data-row row-5" data-key="west">
+                        <div class="row-label">西醫診所</div>
+                        <div class="measure-zone" style="--bar:16.95%; --row-color:#848487;">
+                          <svg class="brush-svg" viewBox="0 0 1424.26 139.4" preserveAspectRatio="none" aria-hidden="true">
+                            <use href="#brush01"></use>
+                          </svg>
+                          <div class="row-value" style="color:#4a4e52">+32.0%</div>
+                        </div>
                       </div>
+                    </div>
+                    <div id="chart4-mobile-detail" class="chart4-mobile-detail">
+                      <strong>其他專業機構</strong>
+                      <span>2014：1,082 億</span>
+                      <span>2024：2,487 億</span>
+                      <span>增加：1,405 億</span>
                     </div>
                     <p class="other-note">＊「其他專業機構」包含長照機構、月子中心、民俗醫療機構，以及精神專科機構、健保境外給付等。</p>
                   </div>
                   <p class="info">資料來源：衛生福利部《113年國民醫療保健支出（NHE）》，2026年2月發布。</p>
+                  <div id="chart4-detail" class="chart4-detail"></div>
                 </div>
                 <p>值得注意的是，完全脫離健保約束的診所更是快速增加。全台已有1,915家診所完全自費、不收健保，大約每12間診所就有1間是全自費。自費診所高度集中在消費力強的都會，光台北市就有818家，健保特約率全台最低，只有79.2%，等於大約每5間診所就有1間全自費。</p>
                 <div id="chart-5" class="chart-block w-full maxw-590">
@@ -1113,11 +1133,11 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="charts/chart-1.js?v=brush3"></script>
-<script src="charts/chart-4.js?v=noline"></script>
+<script src="charts/chart-4.js?v=brush1"></script>
 <script src="charts/chart-5.js"></script>
 <script src="charts/chart-3.js"></script>
 <script src="charts/chart-6.js?v=w590"></script>
-<script src="charts/chart-story.js?v=mobmap1"></script>
+<script src="charts/chart-story.js?v=endzoom1"></script>
 <script>
   (function () {
     const links = Array.from(document.querySelectorAll('.deep-rail-inner a[data-article]'));

@@ -118,11 +118,12 @@ body {
 #section-story #endingScene .ending-lead{margin:0;color:#F4F1EA;font-size:clamp(16px,1.8vw,26px);font-weight:800;line-height:1.45;letter-spacing:.045em;opacity:0}
 #section-story #endingScene .ending-question{margin:0;color:#F45500;font-size:clamp(44px,6.6vw,110px);font-weight:950;line-height:1.12;letter-spacing:-.055em;transform-origin:center;opacity:0;will-change:transform,opacity;max-width:100%;overflow-wrap:normal}
 #section-story #endingScene .ending-question span{display:inline-block;white-space:nowrap}
+#section-story #endingScene .ending-content{transform-style:preserve-3d}
 @media(max-width:760px){
- #endingScene .ending-content{gap:25px}
- #endingScene .ending-lead{font-size:clamp(15px,4vw,20px);letter-spacing:0}
- #endingScene .ending-question{font-size:clamp(40px,10.5vw,65px);line-height:1.22}
- #endingScene .ending-question span{display:block}
+ #section-story #endingScene .ending-content{gap:22px}
+ #section-story #endingScene .ending-lead{font-size:clamp(20px,5.4vw,26px);letter-spacing:.02em;line-height:1.4}
+ #section-story #endingScene .ending-question{font-size:clamp(52px,14.2vw,86px);line-height:1.14;letter-spacing:-.05em}
+ #section-story #endingScene .ending-question span{display:block}
 }
 @media(prefers-reduced-motion:reduce){#endingScene .ending-question{filter:none!important}}
 #section-story /* Full-story prototype additions; culture map and its PIN positions remain unedited. */

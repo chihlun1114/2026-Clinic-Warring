@@ -147,12 +147,13 @@ tl.to({}, {duration:.52})
   .to(bursts,{x:(i)=>((i%4)-1.5)*13,y:(i)=>((i%3)-1)*11,stagger:.022,duration:.30})
   .to({}, {duration:.28})
 
-  /* Ending: editorial question. */
+  /* Ending: black slam → white lead → orange title zooms in from depth. */
   .set("#endingScene",{visibility:"visible"})
-  .to("#endingScene",{opacity:1,duration:.20})
-  .fromTo(".ending-lead",{opacity:0,y:22},{opacity:1,y:0,duration:.28})
-  .fromTo(".ending-question",{opacity:0,scale:.4,filter:"blur(6px)"},{opacity:1,scale:1,filter:"blur(0px)",duration:.52,ease:"power3.out"},"-=.03")
-  .to({}, {duration:.75});
+  .to("#endingScene",{opacity:1,duration:.16})
+  .fromTo(".ending-lead",{opacity:0,y:16},{opacity:1,y:0,duration:.24})
+  .fromTo(".ending-question",{opacity:0,scale:.22,z:-420,filter:"blur(14px)"},{opacity:1,scale:1.04,z:0,filter:"blur(0px)",duration:.68,ease:"power3.out"},"-=.02")
+  .to(".ending-question",{scale:1,duration:.16,ease:"power1.inOut"})
+  .to({}, {duration:.70});
 
   window.addEventListener('load', () => ScrollTrigger.refresh());
 })();
