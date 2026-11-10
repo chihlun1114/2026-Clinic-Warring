@@ -482,13 +482,13 @@ body {
 
 #section-story .scene-copy .number small {
   position: absolute;
-  top: -.12em;
-  right: -.04em;
-  left: auto;
-  font-size: .42em;
+  top: -.22em;
+  left: 100%;
+  right: auto;
+  font-size: .38em;
   line-height: 1;
   letter-spacing: 0;
-  margin: 0;
+  margin: 0 0 0 .06em;
   font-weight: 900;
 }
 
@@ -557,7 +557,7 @@ body {
   font-size: clamp(82px, 11.81vw, 170px) !important;
   font-family: "Montserrat Alternates", Arial, sans-serif;
   letter-spacing: 0;
-  padding-right: .18em;
+  padding-right: 0;
   overflow: visible;
 }
 
@@ -645,7 +645,7 @@ body {
     width: auto;
     font-size: clamp(70px, 20.5vw, 92px) !important;
     margin: 0 0 6px !important;
-    padding-right: .18em;
+    padding-right: 0;
   }
 
   #section-story .s1-br-desk {
@@ -754,20 +754,21 @@ body {
   position: relative;
   display: inline-block !important;
   width: auto !important;
-  padding-right: .42em;
+  padding-right: 0;
   overflow: visible;
 }
 
 #section-story #approvedTaiwanScene .growth-value #growthPlus {
   position: absolute;
-  top: -.28em;
-  right: -.22em;
+  top: -.22em;
+  left: 100%;
+  right: auto;
   font-family: "Montserrat Alternates", Arial, sans-serif;
   font-weight: 900 !important;
-  font-size: .84em !important;
+  font-size: .38em !important;
   line-height: 1 !important;
   letter-spacing: 0 !important;
-  margin: 0 !important;
+  margin: 0 0 0 .06em !important;
   width: auto !important;
 }
 
@@ -876,5 +877,48 @@ body {
     font-size: 8px;
     text-align: center;
     background: #f45500;
+  }
+}
+
+#section-story #approvedTaiwanScene .growth-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: fit-content;
+  max-width: 100%;
+}
+
+#section-story #approvedTaiwanScene .growth-years {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin: 0 0 8px;
+  padding: 0;
+  border: 0;
+  color: #17191d;
+  font-family: "Montserrat Alternates", Arial, sans-serif;
+  font-size: clamp(11px, 1vw, 14px) !important;
+  font-weight: 700 !important;
+  letter-spacing: .02em;
+  line-height: 1;
+}
+
+#section-story #approvedTaiwanScene .growth-years span {
+  font-weight: 700 !important;
+}
+
+#section-story #approvedTaiwanScene .growth-years-line {
+  flex: 1 1 auto;
+  height: 1px;
+  min-width: 20px;
+  background: #17191d;
+}
+
+@media (max-width: 760px) {
+  #section-story #approvedTaiwanScene .growth-years {
+    margin-bottom: 6px;
+    font-size: 11px !important;
   }
 }
