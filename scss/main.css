@@ -3629,19 +3629,36 @@ section#section-5 {
 
 #section-related {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   width: 100%;
   max-width: 1248px;
   margin: 0 auto 80px;
-  padding: 0 24px;
+  padding: 0 40px;
   box-sizing: border-box;
 }
 
+#section-related .related-heading {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 16px;
+}
+
+#section-related .related-heading::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  margin-left: 16px;
+  background: #808080;
+  transform: scaleY(.5);
+  transform-origin: center;
+}
+
 #section-related .related-label {
-  flex: 0 0 140px;
-  width: 140px;
-  margin: 0 12px 0 0;
-  padding-top: 4px;
+  flex: none;
+  width: auto;
+  margin: 0;
+  padding: 0;
   color: #808080;
   font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
   font-size: 16px;
@@ -3650,22 +3667,123 @@ section#section-5 {
   letter-spacing: .4px;
 }
 
-#section-related .related-list {
+#section-related .related-scroller {
+  position: relative;
+  overflow: visible;
+  padding-bottom: 36px;
+  container-type: inline-size;
+}
+
+#section-related .related-list:not(.slick-initialized) {
   display: flex;
-  flex: 1 1 auto;
-  min-width: 0;
   gap: 16px;
+  overflow: hidden;
+}
+
+#section-related .related-list:not(.slick-initialized) .related-item {
+  flex: 0 0 calc((100% - 32px) / 3);
+}
+
+#section-related .slick-list {
+  overflow: hidden;
+  margin: 0 -8px;
+}
+
+#section-related .slick-track {
+  display: flex !important;
+  align-items: stretch;
+}
+
+#section-related .slick-slide {
+  float: none;
+  height: auto;
+  padding: 0 8px;
 }
 
 #section-related .related-item {
   display: flex;
-  flex: 1 1 0;
   flex-direction: column;
+  height: 100%;
   min-width: 0;
   color: inherit;
   text-decoration: none;
-  border-bottom: 1px solid #e4e0d8;
-  padding-bottom: 28px;
+}
+
+#section-related .related-arrow {
+  position: absolute;
+  top: calc(100cqi / 3 * 9 / 16 / 2);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 48px;
+  padding: 0;
+  color: #17191d;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+#section-related .related-arrow svg {
+  width: 24px;
+  height: 24px;
+}
+
+#section-related .related-arrow-prev {
+  left: -28px;
+}
+
+#section-related .related-arrow-next {
+  right: -28px;
+}
+
+#section-related .related-arrow:hover {
+  color: #f55000;
+}
+
+#section-related .related-arrow.slick-disabled {
+  opacity: .28;
+  pointer-events: none;
+}
+
+#section-related .slick-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#section-related .slick-dots li {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+#section-related .slick-dots li button {
+  display: block;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+  background: #c8c4bc;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#section-related .slick-dots li.slick-active button {
+  background: #f55000;
 }
 
 #section-related .related-visual {
@@ -3681,9 +3799,16 @@ section#section-5 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 #section-related .related-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
   margin: 10px 4px 0 0;
   color: #404040;
   font-family: "Noto Serif TC", "Noto Serif CJK TC", "Source Han Serif TC", PMingLiU, serif;
@@ -3704,26 +3829,24 @@ section#section-5 {
   }
 
   #section-related {
-    flex-direction: column;
-    gap: 16px;
     margin-bottom: 48px;
-    padding: 0 20px;
+    padding: 0 32px;
   }
 
-  #section-related .related-label {
-    flex: none;
-    width: auto;
-    margin: 0;
-    padding-top: 0;
+  #section-related .related-list:not(.slick-initialized) .related-item {
+    flex-basis: 100%;
   }
 
-  #section-related .related-list {
-    flex-direction: column;
-    gap: 28px;
+  #section-related .related-arrow {
+    top: calc(100cqi * 9 / 16 / 2);
   }
 
-  #section-related .related-item {
-    padding-bottom: 20px;
+  #section-related .related-arrow-prev {
+    left: -24px;
+  }
+
+  #section-related .related-arrow-next {
+    right: -24px;
   }
 
   #section-related .related-title {
