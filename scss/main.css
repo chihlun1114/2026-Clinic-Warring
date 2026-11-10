@@ -3950,8 +3950,8 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   }
 
   .map-entry-title {
-    font-size: 20px;
-    line-height: 1.3;
+    font-size: 24px;
+    line-height: 1.25;
   }
 
   .map-title-break {
