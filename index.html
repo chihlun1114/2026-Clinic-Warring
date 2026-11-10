@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="charts/chart-1.css?v=accent1">
 	<link rel="stylesheet" href="charts/chart-4.css?v=accent1">
 	<link rel="stylesheet" href="charts/chart-5.css?v=accent1">
-	<link rel="stylesheet" href="charts/chart-3.css?v=accent1">
+	<link rel="stylesheet" href="charts/chart-3.css?v=brush2">
 	<link rel="stylesheet" href="charts/chart-6.css?v=accent1">
 	<link rel="stylesheet" href="charts/chart-story.css?v=endzoom1">
 	<!-- Google Tag Manager -->
@@ -936,32 +936,20 @@
             <div class="wrapper flex flex-col items-center">
                 <p>錢流向自費，人也跟著流向自費需求高的科別——精神科、泌尿科幾乎翻倍，復健與骨科大幅成長；同一時間發生的少子化現象，卻導致婦產科、兒科一路萎縮。</p>
                 <div id="chart-3" class="chart-block w-full maxw-590">
-                  <p class="eyebrow">診所戰國時代｜科別洗牌</p>
-                  <h3 class="chart-title">精神、泌尿、復健快速成長，婦產兒科反向萎縮</h3>
-                  <p class="dek">診所總數增加，不代表每個科別都同步擴張。2012到2024年間，不同科別的增減差距明顯，<br>精神科、泌尿科、復健科等快速增加，兒科與婦產科則呈現負成長。</p>
-                  <div class="chart-panel">
-                    <p class="chart-meta">2012 → 2024 年開設各科別的診所家數變化（%）</p>
-                    <div class="legend">
-                      <span><i style="background:var(--orange)"></i>快速成長</span>
-                      <span><i style="background:var(--blue)"></i>成長</span>
-                      <span><i style="background:var(--red)"></i>減少</span>
-                    </div>
-                    <div id="chart3-section" class="chart-wrap chart-style">
-                      <svg id="chart3-svg" viewBox="0 0 1040 700" role="img" aria-label="2012到2024年診所科別變遷正負向長條圖"></svg>
-                      <div class="tooltip" id="chart3-tooltip"></div>
-                    </div>
-                    <p class="tap-note">手機版：點選任一科別，可查看2012、2024家數與實際增減。</p>
-                    <div id="chart3-mobile-detail" class="mobile-detail" style="--detailColor:#f55000">
-                      <div class="title">精神科</div>
-                      <div class="stats">
-                        <div><span class="label">2012</span><span class="value">204 家</span></div>
-                        <div><span class="label">2024</span><span class="value">426 家</span></div>
-                        <div><span class="label">實際增減</span><span class="value">+222 家</span></div>
-                      </div>
+                  <p class="chart-kicker">2012 → 2024 年各科別診所家數變化</p>
+                  <h3 class="chart-title">精神、泌尿、復健診所快速成長，婦產兒科診所萎縮</h3>
+                  <div id="chart3-panel" class="chart-panel">
+                    <div class="chart3-bars" role="img" aria-label="2012到2024年各科別診所家數變化長條圖"></div>
+                    <div id="chart3-mobile-detail" class="chart3-mobile-detail">
+                      <strong>精神科</strong>
+                      <span>2012：204 家</span>
+                      <span>2024：426 家</span>
+                      <span>增加：222 家</span>
                     </div>
                     <p class="other-note">＊數字為「開設該科別的診所數」，一間診所可同時掛多個科別，因此各科加總不等於全國診所總數。已排除麻醉科、解剖病理科等極小基數科別，避免百分比造成誤讀。</p>
                   </div>
                   <p class="info">資料來源：衛生福利部統計處《診所科別統計》101年、113年。</p>
+                  <div id="chart3-detail" class="chart3-detail"></div>
                 </div>
                 <a class="related-inline related-inline--flip" href="https://www.commonhealth.com.tw/article/94505" data-article="94505">
                     <div class="related-visual">
@@ -1112,7 +1100,7 @@
 <script src="charts/chart-1.js?v=brush3"></script>
 <script src="charts/chart-4.js?v=coins7"></script>
 <script src="charts/chart-5.js?v=accent1"></script>
-<script src="charts/chart-3.js?v=accent1"></script>
+<script src="charts/chart-3.js?v=brush2"></script>
 <script src="charts/chart-6.js?v=accent1"></script>
 <script src="charts/chart-story.js?v=endzoom1"></script>
 <script>
