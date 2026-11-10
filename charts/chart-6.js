@@ -17,8 +17,8 @@
     { city: '連江縣', value: 1.47 }
   ];
 
-  const CLINIC_COLOR = 'images/Clinic.png?v=1';
-  const CLINIC_GRAY = 'images/Clinic2.png?v=1';
+  const CLINIC_COLOR = 'images/Clinic.png?v=2';
+  const CLINIC_GRAY = 'images/Clinic2.png?v=2';
   const panel = document.getElementById('chart6-panel');
   const topWrap = document.getElementById('chart6-top');
   const bottomWrap = document.getElementById('chart6-bottom');
