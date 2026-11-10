@@ -77,9 +77,9 @@
 
 #chart-5 .center-total .num {
   display: block;
-  color: #f55000;
+  color: #17191d;
   font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
-  font-size: 44px;
+  font-size: 42px;
   line-height: 1;
   font-weight: 700;
   letter-spacing: -.04em;
@@ -132,9 +132,9 @@
 #chart-5 .insight .big {
   display: block;
   margin-top: 6px;
-  color: #f55000;
+  color: #17191d;
   font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
-  font-size: 28px;
+  font-size: 26px;
   line-height: 1;
   font-weight: 700;
   letter-spacing: -.04em;
@@ -179,7 +179,7 @@
 #chart-5 .slice-label {
   fill: #fff;
   font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
   text-anchor: middle;
   pointer-events: none;
@@ -187,11 +187,11 @@
 }
 
 #chart-5 .slice-label.small {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 #chart-5 .slice-label.is-taipei {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: 700;
 }
 

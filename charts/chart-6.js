@@ -2,104 +2,150 @@
   const root = document.getElementById('chart-6');
   if (!root) return;
 
-  const points = [
-    { city: '連江縣', value: 1.47 },
-    { city: '金門縣', value: 4.26 },
-    { city: '嘉義縣', value: 5.74 },
-    { city: '苗栗縣', value: 7.0 },
-    { city: '桃園市', value: 7.09 },
-    { city: '臺南市', value: 10.26 },
-    { city: '高雄市', value: 10.51 },
-    { city: '臺中市', value: 11.68 },
+  const top = [
+    { city: '嘉義市', value: 13.99 },
     { city: '臺北市', value: 12.84 },
-    { city: '嘉義市', value: 13.99 }
+    { city: '臺中市', value: 11.68 },
+    { city: '高雄市', value: 10.51 },
+    { city: '臺南市', value: 10.26 }
   ];
-  const topNames = new Set(['嘉義市', '臺北市', '臺中市', '高雄市', '臺南市']);
-  const avg = 9.38;
+  const bottom = [
+    { city: '桃園市', value: 7.09 },
+    { city: '苗栗縣', value: 7.00 },
+    { city: '嘉義縣', value: 5.74 },
+    { city: '金門縣', value: 4.26 },
+    { city: '連江縣', value: 1.47 }
+  ];
 
-  const svg = document.getElementById('chart6-svg');
-  const tooltip = document.getElementById('chart6-tooltip');
-  const wrap = root.querySelector('.chart-wrap');
+  const CLINIC_COLOR = 'images/Clinic.png?v=1';
+  const CLINIC_GRAY = 'images/Clinic2.png?v=1';
+  const panel = document.getElementById('chart6-panel');
+  const topWrap = document.getElementById('chart6-top');
+  const bottomWrap = document.getElementById('chart6-bottom');
+  const detail = document.getElementById('chart6-detail');
+  const mobileDetail = document.getElementById('chart6-mobile-detail');
+  const rows = [];
 
-  const W = 1040;
-  const H = 320;
-  const m = { top: 54, right: 42, bottom: 62, left: 56 };
-  const innerW = W - m.left - m.right;
-  const min = 1;
-  const max = 14.5;
-  const x = v => m.left + (v - min) / (max - min) * innerW;
-
-  const yMap = {
-    '連江縣': 182,
-    '金門縣': 198,
-    '嘉義縣': 190,
-    '苗栗縣': 142,
-    '桃園市': 166,
-    '臺南市': 176,
-    '高雄市': 154,
-    '臺中市': 170,
-    '臺北市': 202,
-    '嘉義市': 188
-  };
-
-  function el(tag, attrs, text) {
-    const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
-    Object.entries(attrs).forEach(([k, v]) => e.setAttribute(k, v));
-    if (text) e.textContent = text;
-    return e;
+  function iconCount(value) {
+    return Math.max(1, Math.ceil(value - 1e-6));
   }
 
-  for (let v = 2; v <= 14; v += 2) {
-    const xx = x(v);
-    svg.appendChild(el('line', { x1: xx, y1: m.top, x2: xx, y2: H - m.bottom, class: 'grid' }));
-    svg.appendChild(el('text', { x: xx, y: H - 26, 'text-anchor': 'middle', class: 'axis' }, String(v)));
+  function makeIconRow(src, count) {
+    const row = document.createElement('div');
+    row.className = 'clinic-row';
+    for (let i = 0; i < count; i++) {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      row.appendChild(img);
+    }
+    return row;
   }
-  svg.appendChild(el('text', { x: m.left, y: H - 6, class: 'axis' }, '每萬人診所數'));
 
-  const ax = x(avg);
-  svg.appendChild(el('line', { x1: ax, y1: m.top - 12, x2: ax, y2: H - m.bottom + 12, class: 'avg-line' }));
-  svg.appendChild(el('text', { x: ax + 8, y: m.top - 18, class: 'avg-label' }, '全國平均 ' + avg.toFixed(2)));
+  function showDesktopDetail(d, e) {
+    detail.innerHTML =
+      '<strong>' + d.city + '</strong>' +
+      d.value.toFixed(2) + ' 間／每萬人';
+    detail.style.left = e.clientX + 'px';
+    detail.style.top = e.clientY + 'px';
+    detail.style.opacity = 1;
+  }
 
-  svg.appendChild(el('text', { x: m.left + 2, y: m.top + 18, class: 'direction' }, '較低'));
-  svg.appendChild(el('text', { x: W - m.right - 26, y: m.top + 18, 'text-anchor': 'end', class: 'direction' }, '較高'));
+  function hideDesktopDetail() {
+    detail.style.opacity = 0;
+  }
 
-  points.forEach(d => {
-    const xx = x(d.value);
-    const yy = yMap[d.city];
-    const isTop = topNames.has(d.city);
-    const color = isTop ? '#f55000' : '#7ea9a3';
+  function showMobileDetail(d) {
+    mobileDetail.innerHTML =
+      '<strong>' + d.city + '</strong>' +
+      '<span>每萬人 ' + d.value.toFixed(2) + ' 間診所</span>';
+  }
 
-    const g = el('g', { class: 'dot' });
-    g.appendChild(el('circle', {
-      cx: xx, cy: yy, r: 11, fill: color, stroke: '#f6f4ef', 'stroke-width': 3
-    }));
+  function buildRow(d, i) {
+    const count = iconCount(d.value);
+    const row = document.createElement('div');
+    row.className = 'data-row row-' + (i + 1);
+    row.style.setProperty('--delay', (0.08 + i * 0.08).toFixed(2) + 's');
+    row.style.setProperty('--value-delay', (0.55 + i * 0.08).toFixed(2) + 's');
 
-    let ty = yy - 16;
-    if (d.city === '苗栗縣') ty = yy - 20;
-    if (d.city === '桃園市') ty = yy + 24;
-    if (d.city === '連江縣') ty = yy - 18;
-    if (d.city === '金門縣') ty = yy + 22;
-    if (d.city === '臺南市') ty = yy + 22;
-    if (d.city === '高雄市') ty = yy - 20;
-    if (d.city === '臺北市') ty = yy - 18;
+    const label = document.createElement('div');
+    label.className = 'row-label';
+    label.textContent = d.city;
 
-    g.appendChild(el('text', {
-      x: xx, y: ty, 'text-anchor': 'middle', class: 'label ' + (isTop ? 'top' : 'bottom')
-    }, d.city + ' ' + d.value.toFixed(2)));
+    const zone = document.createElement('div');
+    zone.className = 'measure-zone';
 
-    g.addEventListener('mouseenter', () => {
-      tooltip.innerHTML = '<strong>' + d.city + '</strong>' + d.value.toFixed(2) + ' 間／每萬人<br>' + (isTop ? '前五名' : '倒數五名');
-      tooltip.style.opacity = 1;
+    const track = document.createElement('div');
+    track.className = 'clinic-track';
+    track.setAttribute('aria-hidden', 'true');
+
+    const stack = document.createElement('div');
+    stack.className = 'clinic-stack';
+
+    const gray = document.createElement('div');
+    gray.className = 'clinic-layer clinic-layer-gray';
+    gray.appendChild(makeIconRow(CLINIC_GRAY, count));
+
+    const color = document.createElement('div');
+    color.className = 'clinic-layer clinic-layer-color';
+    color.appendChild(makeIconRow(CLINIC_COLOR, count));
+
+    stack.append(gray, color);
+    track.appendChild(stack);
+
+    const value = document.createElement('div');
+    value.className = 'row-value';
+    value.textContent = d.value.toFixed(2);
+
+    zone.appendChild(track);
+    row.append(label, zone, value);
+
+    row.addEventListener('mouseenter', e => {
+      if (window.matchMedia('(max-width:768px)').matches) return;
+      showDesktopDetail(d, e);
     });
-    g.addEventListener('mousemove', e => {
-      const r = wrap.getBoundingClientRect();
-      tooltip.style.left = (e.clientX - r.left) + 'px';
-      tooltip.style.top = (e.clientY - r.top) + 'px';
+    row.addEventListener('mousemove', e => {
+      if (window.matchMedia('(max-width:768px)').matches) return;
+      showDesktopDetail(d, e);
     });
-    g.addEventListener('mouseleave', () => {
-      tooltip.style.opacity = 0;
-    });
+    row.addEventListener('mouseleave', hideDesktopDetail);
+    row.addEventListener('click', () => showMobileDetail(d));
 
-    svg.appendChild(g);
-  });
+    rows.push({ row: row, value: d.value, count: count, track: track });
+    return row;
+  }
+
+  top.forEach((d, i) => topWrap.appendChild(buildRow(d, i)));
+  bottom.forEach((d, i) => bottomWrap.appendChild(buildRow(d, i + top.length)));
+
+  function setRowWidths() {
+    rows.forEach(item => {
+      const base = item.row.querySelector('.clinic-layer-gray .clinic-row');
+      if (!base) return;
+      const fullW = base.scrollWidth;
+      if (!fullW) return;
+      const fill = (item.value / item.count) * fullW;
+      item.row.style.setProperty('--stack', fullW + 'px');
+      item.row.style.setProperty('--fill', fill + 'px');
+    });
+  }
+
+  function whenIconsReady(cb) {
+    const imgs = [...root.querySelectorAll('.clinic-track img')];
+    Promise.all(imgs.map(img => (img.decode ? img.decode() : Promise.resolve()).catch(() => {})))
+      .then(cb);
+  }
+
+  whenIconsReady(setRowWidths);
+  window.addEventListener('resize', setRowWidths);
+
+  let played = false;
+  new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !played) {
+        played = true;
+        panel.classList.add('is-visible');
+      }
+    });
+  }, { threshold: 0.2 }).observe(panel);
 })();

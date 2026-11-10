@@ -250,7 +250,8 @@
   top: 50%;
   transform: translateY(-50%) translateX(-6px);
   font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
-  font-size: 28px;
+  color: #17191d;
+  font-size: 26px;
   line-height: 1;
   font-weight: 700;
   letter-spacing: -.05em;

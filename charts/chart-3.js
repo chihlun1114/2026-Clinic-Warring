@@ -33,8 +33,8 @@
     return d.change < 0 ? INK : ORANGE;
   }
 
-  function valueColor(d) {
-    return d.change < 0 ? INK : ORANGE;
+  function valueColor() {
+    return INK;
   }
 
   function barPct(change) {
@@ -67,6 +67,12 @@
   }
 
   bars.style.setProperty('--zero', ZERO + '%');
+  bars.style.setProperty('--zero-ratio', String(ZERO / 100));
+
+  const axis = document.createElement('div');
+  axis.className = 'zero-axis';
+  axis.setAttribute('aria-hidden', 'true');
+  bars.appendChild(axis);
 
   data.forEach((d, i) => {
     const negative = d.change < 0;
@@ -83,10 +89,6 @@
 
     const zone = document.createElement('div');
     zone.className = 'measure-zone';
-
-    const zero = document.createElement('span');
-    zero.className = 'zero-line';
-    zone.appendChild(zero);
 
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('class', 'brush-svg');

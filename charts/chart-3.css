@@ -34,6 +34,11 @@
 
 #chart-3 .chart3-bars {
   --zero: 16.667%;
+  --zero-ratio: 0.16667;
+  --label-col: 108px;
+  --value-col: 76px;
+  --cols-gap: 12px;
+  position: relative;
   display: grid;
   gap: 8px;
   padding: 4px 0 2px;
@@ -62,15 +67,19 @@
   box-sizing: border-box;
 }
 
-#chart-3 .zero-line {
+#chart-3 .zero-axis {
   position: absolute;
-  left: var(--zero);
-  top: -4px;
-  bottom: -4px;
-  width: 1px;
+  top: 0;
+  bottom: 0;
+  left: calc(
+    var(--label-col) + var(--cols-gap) +
+    var(--zero-ratio) * (100% - var(--label-col) - var(--value-col) - 2 * var(--cols-gap))
+  );
+  width: 0.5px;
   background: #17191d;
-  opacity: .28;
+  transform: translateX(-0.25px);
   pointer-events: none;
+  z-index: 2;
 }
 
 #chart-3 .brush-svg {
@@ -103,8 +112,9 @@
 }
 
 #chart-3 .row-value {
+  color: #17191d;
   font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1;
   font-weight: 700;
   letter-spacing: -.05em;
@@ -193,6 +203,12 @@
     padding-top: 5px;
   }
 
+  #chart-3 .chart3-bars {
+    --label-col: 88px;
+    --value-col: 64px;
+    --cols-gap: 8px;
+  }
+
   #chart-3 .data-row {
     grid-template-columns: 88px minmax(0, 1fr) 64px;
     column-gap: 8px;
@@ -228,6 +244,12 @@
 }
 
 @media (max-width: 430px) {
+  #chart-3 .chart3-bars {
+    --label-col: 76px;
+    --value-col: 58px;
+    --cols-gap: 6px;
+  }
+
   #chart-3 .data-row {
     grid-template-columns: 76px minmax(0, 1fr) 58px;
     column-gap: 6px;
