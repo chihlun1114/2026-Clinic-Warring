@@ -192,15 +192,11 @@
 #chart-5 .slice-label {
   fill: #fff;
   font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 700;
   text-anchor: middle;
   pointer-events: none;
   opacity: 0;
-}
-
-#chart-5 .slice-label.small {
-  font-size: 20px;
 }
 
 #chart-5 .slice-label.is-taipei {
@@ -250,10 +246,6 @@
   }
 
   #chart-5 .slice-label {
-    font-size: 24px;
-  }
-
-  #chart-5 .slice-label.small {
     font-size: 20px;
   }
 
@@ -284,11 +276,7 @@
   }
 
   #chart-5 .slice-label {
-    font-size: 22px;
-  }
-
-  #chart-5 .slice-label.small {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   #chart-5 .slice-label.is-taipei {

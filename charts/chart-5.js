@@ -148,7 +148,6 @@
     const [lx, ly] = polar(168, mid);
     const shortName = d.name.replace('其他16縣市', '其他').replace('市', '');
     const isTaipei = d.name === '台北市';
-    const isSmall = d.value < 130;
     let label = null;
 
     if (d.value >= 100) {
@@ -157,15 +156,14 @@
         y: String(ly - 4),
         class: [
           'slice-label',
-          isTaipei ? 'is-taipei' : '',
-          isSmall ? 'small' : ''
+          isTaipei ? 'is-taipei' : ''
         ].filter(Boolean).join(' ')
       });
       const t1 = el('tspan', { x: String(lx) });
       t1.textContent = shortName;
       const t2 = el('tspan', {
         x: String(lx),
-        dy: isTaipei ? '46' : (isSmall ? '26' : '32')
+        dy: isTaipei ? '46' : '26'
       });
       t2.textContent = d.value.toLocaleString('zh-TW');
       label.append(t1, t2);
