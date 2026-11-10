@@ -4,10 +4,10 @@
 
   const top = [
     { city: '嘉義市', value: 13.99 },
-    { city: '臺北市', value: 12.84 },
-    { city: '臺中市', value: 11.68 },
+    { city: '台北市', value: 12.84 },
+    { city: '台中市', value: 11.68 },
     { city: '高雄市', value: 10.51 },
-    { city: '臺南市', value: 10.26 }
+    { city: '台南市', value: 10.26 }
   ];
   const bottom = [
     { city: '桃園市', value: 7.09 },

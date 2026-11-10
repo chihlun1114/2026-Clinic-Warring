@@ -121,6 +121,12 @@
   border-top: 1px solid #b0ada6;
 }
 
+#chart-5 .insight-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
 #chart-5 .insight .kicker {
   font-size: 16px;
   color: #171a1c;
@@ -130,14 +136,21 @@
 }
 
 #chart-5 .insight .big {
-  display: block;
-  margin-top: 6px;
   color: #17191d;
   font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
   font-size: 26px;
   line-height: 1;
   font-weight: 700;
   letter-spacing: -.04em;
+}
+
+#chart-5 .insight .big .num-unit {
+  margin-left: .12em;
+  color: #171a1c;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 #chart-5 .insight .text {

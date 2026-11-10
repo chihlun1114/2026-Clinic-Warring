@@ -4,10 +4,10 @@
 
   const data = [
     { name: '台北市', value: 818 },
-    { name: '臺中市', value: 339 },
+    { name: '台中市', value: 339 },
     { name: '高雄市', value: 193 },
     { name: '桃園市', value: 156 },
-    { name: '臺南市', value: 113 },
+    { name: '台南市', value: 113 },
     { name: '新北市', value: 101 },
     { name: '其他16縣市', value: 195 }
   ];
