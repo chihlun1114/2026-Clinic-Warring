@@ -76,7 +76,7 @@
   font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
   font-size: 44px;
   line-height: 1;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -.04em;
 }
 
@@ -131,7 +131,7 @@
   font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
   font-size: 28px;
   line-height: 1;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -.04em;
 }
 
@@ -175,7 +175,7 @@
   fill: #fff;
   font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 700;
   text-anchor: middle;
   pointer-events: none;
 }
@@ -185,7 +185,7 @@
 }
 
 #chart-5 .slice-label.on-light {
-  fill: #171a1c;
+  fill: #f55000;
 }
 
 @media only screen and (width <= 768px) {

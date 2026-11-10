@@ -18,9 +18,7 @@
   ];
 
   const ORANGE = '#f55000';
-  const GRAY_BAR = '#5d5d60';
-  const GRAY_DOWN = '#77777a';
-  const GRAY_NUM = '#4a4e52';
+  const INK = '#17191d';
   const MIN = -24;
   const MAX = 120;
   const RANGE = MAX - MIN;
@@ -32,12 +30,11 @@
   const fmt = n => n.toLocaleString('zh-TW');
 
   function rowColor(d) {
-    if (d.accent) return ORANGE;
-    return d.change < 0 ? GRAY_DOWN : GRAY_BAR;
+    return d.change < 0 ? INK : ORANGE;
   }
 
   function valueColor(d) {
-    return d.accent ? ORANGE : GRAY_NUM;
+    return d.change < 0 ? INK : ORANGE;
   }
 
   function barPct(change) {
