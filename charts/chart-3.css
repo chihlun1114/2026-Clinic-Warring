@@ -242,14 +242,3 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  #chart-3 .brush-svg {
-    transform: translateY(-50%) scaleX(1) !important;
-    animation: none !important;
-  }
-
-  #chart-3 .row-value {
-    opacity: 1 !important;
-    animation: none !important;
-  }
-}

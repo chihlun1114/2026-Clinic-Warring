@@ -59,7 +59,7 @@
 #chart-5 .pie-texture {
   mix-blend-mode: overlay;
   pointer-events: none;
-  opacity: .32;
+  opacity: 0;
 }
 
 #chart-5 .center-total {
@@ -68,6 +68,11 @@
   transform: translate(-50%, -50%);
   text-align: center;
   pointer-events: none;
+}
+
+#chart-5 .center-total .num,
+#chart-5 .center-total .unit {
+  opacity: 0;
 }
 
 #chart-5 .center-total .num {
@@ -174,18 +179,24 @@
 #chart-5 .slice-label {
   fill: #fff;
   font-family: "Montserrat Alternates", Arial, "Noto Sans TC", sans-serif;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
   text-anchor: middle;
   pointer-events: none;
+  opacity: 0;
 }
 
 #chart-5 .slice-label.small {
-  font-size: 18px;
+  font-size: 22px;
+}
+
+#chart-5 .slice-label.is-taipei {
+  font-size: 40px;
+  font-weight: 700;
 }
 
 #chart-5 .slice-label.on-light {
-  fill: #f55000;
+  fill: #fff;
 }
 
 @media only screen and (width <= 768px) {
@@ -226,11 +237,15 @@
   }
 
   #chart-5 .slice-label {
-    font-size: 21px;
+    font-size: 24px;
   }
 
   #chart-5 .slice-label.small {
-    font-size: 17px;
+    font-size: 20px;
+  }
+
+  #chart-5 .slice-label.is-taipei {
+    font-size: 34px;
   }
 }
 
@@ -256,16 +271,15 @@
   }
 
   #chart-5 .slice-label {
-    font-size: 19px;
+    font-size: 22px;
   }
 
   #chart-5 .slice-label.small {
-    font-size: 16px;
+    font-size: 18px;
+  }
+
+  #chart-5 .slice-label.is-taipei {
+    font-size: 32px;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  #chart-5 .slice {
-    transition: none;
-  }
-}

@@ -35,24 +35,28 @@
   const svg = document.getElementById('chart5-donut');
   const tooltip = document.getElementById('chart5-tooltip');
   const wrap = root.querySelector('.donut-wrap');
+  const center = root.querySelector('.center-total');
   const NS = 'http://www.w3.org/2000/svg';
   const PIE_SRC = 'images/Pie-chart.png?v=1';
+  const ORIGIN = -90;
+  const DURATION = 1.35;
 
   const cx = 260, cy = 260;
   const rOuter = 252, rInner = 84;
   const GAP = 0;
 
   function polar(r, a) {
-    const rad = (a - 90) * Math.PI / 180;
+    const rad = a * Math.PI / 180;
     return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)];
   }
 
   function arcPath(startAngle, endAngle) {
+    const end = endAngle < startAngle + 0.05 ? startAngle + 0.05 : endAngle;
     const [x1, y1] = polar(rOuter, startAngle);
-    const [x2, y2] = polar(rOuter, endAngle);
-    const [ix2, iy2] = polar(rInner, endAngle);
+    const [x2, y2] = polar(rOuter, end);
+    const [ix2, iy2] = polar(rInner, end);
     const [ix1, iy1] = polar(rInner, startAngle);
-    const large = endAngle - startAngle > 180 ? 1 : 0;
+    const large = end - startAngle > 180 ? 1 : 0;
     return [
       'M ' + x1 + ' ' + y1,
       'A ' + rOuter + ' ' + rOuter + ' 0 ' + large + ' 1 ' + x2 + ' ' + y2,
@@ -60,6 +64,10 @@
       'A ' + rInner + ' ' + rInner + ' 0 ' + large + ' 0 ' + ix1 + ' ' + iy1,
       'Z'
     ].join(' ');
+  }
+
+  function lerp(a, b, t) {
+    return a + (b - a) * t;
   }
 
   function el(name, attrs) {
@@ -114,46 +122,54 @@
   const labels = el('g', { class: 'labels' });
   svg.appendChild(labels);
 
-  let angle = 0;
+  const sliceItems = [];
+  let angle = ORIGIN;
 
   data.forEach(d => {
     const span = d.value / total * 360;
-    const start = angle + GAP;
-    const end = angle + span - GAP;
-    if (end <= start) {
+    const finalStart = angle + GAP;
+    const finalEnd = angle + span - GAP;
+    if (finalEnd <= finalStart) {
       angle += span;
       return;
     }
 
     const tone = sliceStyle(d);
     const path = el('path', {
-      d: arcPath(start, end),
+      d: arcPath(ORIGIN, ORIGIN),
       fill: tone.fill,
-      class: 'slice'
+      class: 'slice',
+      'data-start': String(finalStart),
+      'data-end': String(finalEnd)
     });
     slices.appendChild(path);
 
-    const mid = (start + end) / 2;
+    const mid = (finalStart + finalEnd) / 2;
     const [lx, ly] = polar(168, mid);
     const shortName = d.name.replace('其他16縣市', '其他').replace('市', '');
+    const isTaipei = d.name === '台北市';
     const isSmall = d.value < 130;
+    let label = null;
 
     if (d.value >= 100) {
-      const text = el('text', {
+      label = el('text', {
         x: String(lx),
         y: String(ly - 4),
         class: [
           'slice-label',
-          isSmall ? 'small' : '',
-          tone.onLight ? 'on-light' : ''
+          isTaipei ? 'is-taipei' : '',
+          isSmall ? 'small' : ''
         ].filter(Boolean).join(' ')
       });
       const t1 = el('tspan', { x: String(lx) });
       t1.textContent = shortName;
-      const t2 = el('tspan', { x: String(lx), dy: isSmall ? '24' : '30' });
+      const t2 = el('tspan', {
+        x: String(lx),
+        dy: isTaipei ? '46' : (isSmall ? '26' : '32')
+      });
       t2.textContent = d.value.toLocaleString('zh-TW');
-      text.append(t1, t2);
-      labels.appendChild(text);
+      label.append(t1, t2);
+      labels.appendChild(label);
     }
 
     path.addEventListener('mouseenter', () => {
@@ -170,8 +186,93 @@
       tooltip.style.opacity = 0;
     });
 
+    sliceItems.push({
+      path: path,
+      finalStart: finalStart,
+      finalEnd: finalEnd,
+      label: label
+    });
+
     angle += span;
   });
+
+  function renderSlices(progress) {
+    sliceItems.forEach(item => {
+      const start = lerp(ORIGIN, item.finalStart, progress);
+      const end = lerp(ORIGIN, item.finalEnd, progress);
+      item.path.setAttribute('d', arcPath(start, end));
+    });
+  }
+
+  function showFinal() {
+    renderSlices(1);
+    const labelEls = sliceItems.map(item => item.label).filter(Boolean);
+    if (typeof gsap !== 'undefined') {
+      if (center) gsap.set(center.querySelectorAll('.num, .unit'), { opacity: 1, y: 0 });
+      gsap.set(labelEls, { opacity: 1, y: 0 });
+      gsap.set(texture, { opacity: 0.32 });
+    } else {
+      if (center) {
+        center.querySelectorAll('.num, .unit').forEach(n => { n.style.opacity = '1'; });
+      }
+      labelEls.forEach(n => { n.style.opacity = '1'; });
+      texture.style.opacity = '0.32';
+    }
+    slices.style.pointerEvents = '';
+  }
+
+  function playIntro() {
+    if (typeof gsap === 'undefined') {
+      showFinal();
+      return;
+    }
+
+    slices.style.pointerEvents = 'none';
+    const anim = { p: 0 };
+    const centerBits = center ? center.querySelectorAll('.num, .unit') : [];
+    const labelEls = sliceItems.map(item => item.label).filter(Boolean);
+
+    gsap.set(centerBits, { opacity: 0, y: 8 });
+    gsap.set(labelEls, { opacity: 0, y: 8 });
+    gsap.set(texture, { opacity: 0 });
+
+    gsap.to(anim, {
+      p: 1,
+      duration: DURATION,
+      ease: 'power2.out',
+      onUpdate: function () {
+        renderSlices(anim.p);
+      },
+      onComplete: function () {
+        renderSlices(1);
+        slices.style.pointerEvents = '';
+      }
+    });
+
+    gsap.to(centerBits, {
+      opacity: 1,
+      y: 0,
+      duration: 0.45,
+      delay: DURATION * 0.75,
+      ease: 'power2.out',
+      stagger: 0.04
+    });
+
+    gsap.to(texture, {
+      opacity: 0.32,
+      duration: 0.4,
+      delay: DURATION * 0.8,
+      ease: 'power2.out'
+    });
+
+    gsap.to(labelEls, {
+      opacity: 1,
+      y: 0,
+      duration: 0.45,
+      delay: DURATION + 0.2,
+      ease: 'power2.out'
+    });
+  }
 
   function applyBrushMask(dataUrl) {
     maskImage.setAttribute('href', dataUrl);
@@ -210,4 +311,14 @@
     console.warn('chart-5 could not load', PIE_SRC);
   };
   brush.src = PIE_SRC;
+
+  let played = false;
+  new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !played) {
+        played = true;
+        playIntro();
+      }
+    });
+  }, { threshold: 0.28 }).observe(root);
 })();

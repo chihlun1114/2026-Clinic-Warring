@@ -114,8 +114,3 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  #chart-6 .dot {
-    transition: none;
-  }
-}

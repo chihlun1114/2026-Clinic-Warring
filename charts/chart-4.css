@@ -414,20 +414,3 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  #chart-4 .anim-line { stroke-dashoffset: 0; }
-  #chart-4 .chart-annotation { opacity: 1; transform: none; }
-  #chart-4 .coin-stack {
-    opacity: 1 !important;
-    animation: none !important;
-  }
-  #chart-4 .coin-layer-orange {
-    width: var(--fill) !important;
-    animation: none !important;
-  }
-  #chart-4 .row-value {
-    opacity: 1 !important;
-    transform: translateY(-50%) !important;
-    animation: none !important;
-  }
-}
