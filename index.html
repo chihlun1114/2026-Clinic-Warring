@@ -8,6 +8,7 @@
 	<title>康健</title>
 	<meta name="description" content="康健">
 	<meta name="keywords" content="康健">
+  <link rel="canonical" href="https://www.commonhealth.com.tw/" />
 	<meta property="og:url" content="https://www.commonhealth.com.tw/">
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="康健">
@@ -36,6 +37,17 @@
 				'//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 		})(window, document, 'script', 'dataLayer', 'GTM-MCMN77');</script>
 	<!-- End Google Tag Manager -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+	<script src="charts/chart-1.js?v=brush3" defer></script>
+	<script src="charts/chart-4.js?v=coins9" defer></script>
+	<script src="charts/chart-5.js?v=gray1" defer></script>
+	<script src="charts/chart-3.js?v=numblk1" defer></script>
+	<script src="charts/chart-6.js?v=name1" defer></script>
+	<script src="charts/chart-story.js?v=endzoom1" defer></script>
+	<script src="js/main.js?v=1" defer></script>
 </head>
 
 <body>
@@ -73,67 +85,6 @@
       </ul>
   </div>
 </header>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
-<script>
-  // 點擊選單開關按鈕
-  $('#ch-button-toggle').click(function (e) {
-      e.preventDefault();
-      $(this).toggleClass('active');
-      $('#ch-nav-wrap').toggleClass('opening');
-  });
-
-  // 點擊導覽區塊收合選單
-  $('#ch-nav-wrap').click(function () {
-      $(this).toggleClass('opening');
-      $('#ch-button-toggle').toggleClass('active');
-  });
-
-  // 點擊導覽內部連結，平滑滾動
-  $('#ch-nav-wrap a[href^="#"]').on('click', function (e) {
-      const target = $(this.getAttribute('href'));
-      if (target.length) {
-          e.preventDefault();
-          $('html, body').stop().animate({
-              scrollTop: target.offset().top
-          }, 1000);
-      }
-  });
-</script>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId: '788399774562640',
-      cookie: true,
-      xfbml: false,
-      version: 'v24.0'
-    });
-    console.log('Facebook SDK ready');
-  };
-
-  // 載入 Facebook SDK
-  (function(d, s, id) {
-    var js,
-      fjs = d.getElementsByTagName(s)[0];
-
-    if (d.getElementById(id)) {
-      return;
-    }
-
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://connect.facebook.net/zh_TW/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  // 點擊分享
-  document.getElementById('facebookShare').onclick = function() {
-    FB.ui({
-      display: 'popup',
-      method: 'share',
-      href: '網址',
-    }, function(response) {});
-  }
-</script>
     <main class="flex flex-col items-center">
         <section id="section-banner">
             <div class="banner-block">
@@ -911,9 +862,9 @@
                         </div>
                       </aside>
                     </div>
-                    <p class="other-note">＊「其他16縣市」合計195家：新竹縣45、新竹市32、彰化縣28、嘉義市28、屏東縣16、基隆市9、宜蘭縣9、雲林縣8、南投縣6、苗栗縣5、嘉義縣4、花蓮縣4、澎湖縣1、台東縣0、金門縣0、連江縣0。</p>
-                  </div>
-                  <p class="info">資料來源：健保署《表51 特約醫事服務機構家數》113年底、衛生福利部統計處《診所科別統計》113年。未與健保特約診所家數＝登記診所家數－健保特約診所家數。</p>
+                    <p class="other-note">＊「其他16縣市」合計195家：新竹縣45、新竹市3 ㄩㄝ2、彰化縣28、嘉義市28、屏東縣16、基隆市9、宜蘭縣9、雲林縣8 ㄩㄝ、南投縣6、苗栗縣5、嘉義縣4、花蓮縣4、澎湖縣1、台東縣0、金門 ㄩㄝ縣0、連江縣0。</p>
+                  </div> ㄩㄝ
+                  <p class="inf ㄩㄝo">資料來源：健保署《表51 特約醫事服務機構家數》113年底、 ㄩㄝ衛生福利部統計處《診所科別統計》113年。未與健保特約診所家數＝登記診所家數－健保特約診所家數。</p>
                 </div>
                 <p>診所如雨後春筍大量冒出，和年輕醫師從醫院大量出走有關，也造成醫院急重症人力短缺。曾任台大醫院院長、台大醫學院院長吳明賢受訪時甚至斷言，台灣醫療崩盤可能發生在X世代全面退出職場的2045年。這不僅是醫療現象，而是攸關你我未來生重病時，是否找得到醫生的國安危機。</p>
                 <a class="related-inline" href="https://www.commonhealth.com.tw/article/94506" data-article="94506">
@@ -1112,105 +1063,6 @@
     <li><a href="https://member.cwg.tw/register-rule" target="_blank">會員服務條款</a></li>
   </ul>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script src="charts/chart-1.js?v=brush3"></script>
-<script src="charts/chart-4.js?v=coins9"></script>
-<script src="charts/chart-5.js?v=gray1"></script>
-<script src="charts/chart-3.js?v=numblk1"></script>
-<script src="charts/chart-6.js?v=name1"></script>
-<script src="charts/chart-story.js?v=endzoom1"></script>
-<script>
-  (function () {
-    const links = Array.from(document.querySelectorAll('.deep-rail-inner a[data-article]'));
-    const dots = Array.from(document.querySelectorAll('.deep-rail-dot[data-article]'));
-    const cards = Array.from(document.querySelectorAll('.related-inline[data-article]'));
-    if (!links.length || !cards.length) return;
-
-    let current = null;
-
-    function setActive(id) {
-      if (current === id) return;
-      current = id;
-      links.forEach(function (a) {
-        const on = a.dataset.article === id;
-        a.classList.toggle('is-active', on);
-        if (on) a.setAttribute('aria-current', 'true');
-        else a.removeAttribute('aria-current');
-      });
-      dots.forEach(function (d) {
-        d.classList.toggle('is-active', d.dataset.article === id);
-      });
-    }
-
-    function update() {
-      const rail = document.querySelector('.deep-rail-inner');
-      if (!rail) {
-        setActive(null);
-        return;
-      }
-      const railBox = rail.getBoundingClientRect();
-      if (railBox.bottom <= 0 || railBox.top >= window.innerHeight) {
-        setActive(null);
-        return;
-      }
-      const triggerY = railBox.top;
-      let id = null;
-      for (let i = 0; i < cards.length; i++) {
-        const box = cards[i].getBoundingClientRect();
-        if (box.top <= triggerY + 1 && box.bottom > triggerY) {
-          id = cards[i].dataset.article;
-        }
-      }
-      setActive(id);
-    }
-
-    let ticking = false;
-    window.addEventListener('scroll', function () {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        update();
-        ticking = false;
-      });
-    }, { passive: true });
-    window.addEventListener('resize', update);
-    window.addEventListener('load', update);
-    update();
-  })();
-
-  $(function () {
-    var $list = $('#section-related .related-list');
-    if (!$list.length || typeof $.fn.slick !== 'function') return;
-    $list.slick({
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      infinite: false,
-      dots: true,
-      arrows: true,
-      swipe: true,
-      draggable: true,
-      touchMove: true,
-      swipeToSlide: true,
-      speed: 350,
-      cssEase: 'ease-out',
-      appendArrows: $list.closest('.related-scroller'),
-      appendDots: $list.closest('.related-scroller'),
-      prevArrow: '<button type="button" class="related-arrow related-arrow-prev" aria-label="上一則"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 8 12l7 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>',
-      nextArrow: '<button type="button" class="related-arrow related-arrow-next" aria-label="下一則"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l7 8-7 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>',
-      responsive: [
-        {
-          breakpoint: 769,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-    });
-  });
-</script>
 </body>
 
 </html>
