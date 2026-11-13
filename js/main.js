@@ -102,8 +102,9 @@ $(function () {
     const target = $(this.getAttribute('href'));
     if (target.length) {
       e.preventDefault();
+      const headerH = $('#ch-header').outerHeight() || 64;
       $('html, body').stop().animate({
-        scrollTop: target.offset().top
+        scrollTop: target.offset().top - headerH
       }, 1000);
     }
   });
