@@ -953,7 +953,12 @@ body {
   #section-story #approvedTaiwanScene .growth-desc,
   #section-story #bridgeBlack p,
   #section-story #searchScene .search-copy-fixed p {
-    font-size: 27px !important;
+    font-size: 23px !important;
+    line-height: 1.55 !important;
+  }
+
+  #section-story #searchScene .search-copy-fixed p {
+    margin-top: 32px !important;
   }
 
   #section-story .scene-copy h2 {
@@ -966,5 +971,15 @@ body {
 
   #section-story .h2-keep {
     white-space: nowrap;
+  }
+}
+
+@media (max-width: 760px) {
+  #section-story .scene-copy p,
+  #section-story #approvedTaiwanScene .growth-desc,
+  #section-story #bridgeBlack p,
+  #section-story #searchScene .search-copy-fixed p {
+    font-size: 27px !important;
+    line-height: 1.55 !important;
   }
 }
