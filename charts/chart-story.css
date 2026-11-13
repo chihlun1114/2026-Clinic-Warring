@@ -230,7 +230,7 @@ body {
 #approvedTaiwanScene .locked-art{top:35%;height:65%;left:-20%;width:145%}
 #approvedTaiwanScene .growth-value{font-size:clamp(65px,16vw,105px)!important}
 #approvedTaiwanScene .growth-desc{font-size:16px!important;margin-top:8px!important}
-#searchScene .search-copy-fixed{padding:22px 25px!important;justify-content:center!important}
+#searchScene .search-copy-fixed{padding:22px 25px!important;justify-content:center!important;align-items:center!important;text-align:center!important}#searchScene .search-copy-fixed h2,#searchScene .search-copy-fixed p{text-align:center!important}
 }
 #section-story /* V11 correction: the background has no pre-rendered labels or clinic pins. */
 #approvedTaiwanScene .locked-base{filter:none!important;opacity:1!important;transform:none!important;}
@@ -357,6 +357,13 @@ body {
     height: auto !important;
     padding: 16px 22px calc(22px + env(safe-area-inset-bottom, 0px)) !important;
     justify-content: flex-start !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  #section-story #searchScene .search-copy-fixed h2,
+  #section-story #searchScene .search-copy-fixed p {
+    text-align: center !important;
   }
 
   #section-story #searchScene .search-copy-fixed h2 {
