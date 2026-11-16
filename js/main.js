@@ -56,6 +56,109 @@
   update();
 })();
 
+(function () {
+  var gifs = Array.from(document.querySelectorAll('img.related-gif'));
+  if (!gifs.length) return;
+  var nonce = 0;
+
+  function fileSrc(img) {
+    return img.getAttribute('data-gif-src') || (img.getAttribute('src') || '').split('#')[0].split('?')[0];
+  }
+
+  function stampBlob(blob) {
+    nonce += 1;
+    var mark = String(Date.now()) + '-' + nonce;
+    return blob.arrayBuffer().then(function (buf) {
+      var src = new Uint8Array(buf);
+      var payload = [];
+      var i;
+      for (i = 0; i < mark.length; i++) payload.push(mark.charCodeAt(i) & 255);
+      var comment = new Uint8Array(4 + payload.length);
+      comment[0] = 0x21;
+      comment[1] = 0xFE;
+      comment[2] = payload.length;
+      comment.set(payload, 3);
+      comment[3 + payload.length] = 0;
+      var out = new Uint8Array(src.length + comment.length);
+      if (src.length && src[src.length - 1] === 0x3B) {
+        out.set(src.subarray(0, src.length - 1), 0);
+        out.set(comment, src.length - 1);
+        out[out.length - 1] = 0x3B;
+      } else {
+        out.set(src, 0);
+        out.set(comment, src.length);
+      }
+      return new Blob([out], { type: 'image/gif' });
+    });
+  }
+
+  function play(img) {
+    if (!img._gifBlob) return;
+    stampBlob(img._gifBlob).then(function (unique) {
+      if (img._gifObjectUrl) URL.revokeObjectURL(img._gifObjectUrl);
+      img._gifObjectUrl = URL.createObjectURL(unique);
+      img.src = img._gifObjectUrl;
+    });
+  }
+
+  function ensureAndPlay(img) {
+    if (img._gifBlob) {
+      play(img);
+      return;
+    }
+    if (img._gifFetch) {
+      img._gifFetch.then(function () { play(img); });
+      return;
+    }
+    var src = fileSrc(img);
+    img.setAttribute('data-gif-src', src);
+    img._gifFetch = fetch(src, { cache: 'force-cache' })
+      .then(function (res) { return res.blob(); })
+      .then(function (blob) {
+        img._gifBlob = blob;
+        play(img);
+      })
+      .catch(function () {
+        img._gifFetch = null;
+        img.src = src + '?r=' + Date.now();
+      });
+  }
+
+  function enter(img) {
+    if (img._gifInView) return;
+    img._gifInView = true;
+    ensureAndPlay(img);
+  }
+
+  function leave(img) {
+    img._gifInView = false;
+  }
+
+  gifs.forEach(function (img) {
+    img.setAttribute('data-gif-src', fileSrc(img));
+  });
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) enter(entry.target);
+        else leave(entry.target);
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+    gifs.forEach(function (img) { io.observe(img); });
+  } else {
+    gifs.forEach(enter);
+  }
+
+  window.addEventListener('pageshow', function () {
+    gifs.forEach(function (img) {
+      img._gifInView = false;
+      var box = img.getBoundingClientRect();
+      if (box.width > 0 && box.bottom > 40 && box.top < window.innerHeight - 40) enter(img);
+    });
+  });
+})();
+
 window.fbAsyncInit = function () {
   FB.init({
     appId: '788399774562640',

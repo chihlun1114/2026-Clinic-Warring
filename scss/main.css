@@ -3890,7 +3890,7 @@ section#section-5 {
   height: auto;
 }
 
-.related-inline .related-visual img.related-gif {
+.related-inline .related-visual--gif {
   mix-blend-mode: multiply;
 }
 
