@@ -3821,8 +3821,8 @@ section#section-5 {
 
 #section-related .article-credit {
   width: 100%;
-  margin: 16px 0 0;
-  padding: 16px 0 0;
+  margin: 32px 0 0;
+  padding: 64px 0 0;
   text-align: center;
 }
 
@@ -3873,7 +3873,8 @@ section#section-5 {
   }
 
   #section-related .article-credit {
-    padding-top: 16px;
+    margin-top: 24px;
+    padding-top: 48px;
   }
 
   #section-related .article-credit p {
