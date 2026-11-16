@@ -3819,6 +3819,25 @@ section#section-5 {
   text-align: left;
 }
 
+#section-related .article-credit {
+  width: 100%;
+  margin: 16px 0 0;
+  padding: 16px 0 0;
+  text-align: center;
+}
+
+#section-related .article-credit p {
+  margin: 0;
+  color: #6a6a6a;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  letter-spacing: .04em;
+  text-align: center;
+  text-justify: auto;
+}
+
 #section-related .related-item:hover .related-title {
   color: #f45500;
 }
@@ -3851,6 +3870,16 @@ section#section-5 {
 
   #section-related .related-title {
     font-size: 18px;
+  }
+
+  #section-related .article-credit {
+    padding-top: 16px;
+  }
+
+  #section-related .article-credit p {
+    font-size: 13px;
+    letter-spacing: .02em;
+    text-align: center;
   }
 }
 
