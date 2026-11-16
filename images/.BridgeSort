@@ -3,18 +3,12 @@
 <files>
 	<item key='hero-desktop.webp20261102145332' />
 	<item key='hero-mobile.webp20261102145819' />
-	<item key='map.png20261007150630' />
 	<item key='pin.svg20261007150630' />
-	<item key='related-01-arsenal.jpg20261006045555' />
-	<item key='related-02-gen-y.jpg20261006045555' />
-	<item key='related-03-gen-x.jpg20261006045555' />
-	<item key='related-04-imbalance.jpg20261006045555' />
 	<item key='story-clinic-pin.svg20261022070819' />
 	<item key='story-taiwan-base.png20261022070819' />
-	<item key='p05.webp20261103073716' />
 	<item key='article-01.webp20261102111541' />
 	<item key='article-02.webp20261102111526' />
-	<item key='article-03.webp20261102111604' />
+	<item key='article-03.webp20261105170329' />
 	<item key='article-04.webp20261102111504' />
 	<item key='brushstrokes-article.svg20261102193047' />
 	<item key='brushstrokes01.svg20261102144258' />
@@ -23,6 +17,24 @@
 	<item key='story-taiwan-desk.png20261030175129' />
 	<item key='story-taiwan-mobile.png20261030175220' />
 	<item key='title.png20261102145458' />
-	<item key='p01.webp20261103073407' />
+	<item key='Animation-01.gif20261116112926' />
+	<item key='Animation-03.gif20261116111742' />
+	<item key='Animation-02.gif20261113160700' />
+	<item key='Animation-04.gif20261116113004' />
+	<item key='brushstrokes-deep.svg20261105145652' />
+	<item key='Click.svg20261113174750' />
+	<item key='Clinic.png20261110151140' />
+	<item key='Clinic2.png20261110151058' />
+	<item key='coin.png20261109142006' />
+	<item key='coin2.png20261109143127' />
+	<item key='cover-90362.jpg20261110161423' />
+	<item key='cover-92774.webp20261110161423' />
+	<item key='cover-92863.webp20261110161423' />
+	<item key='cover-93334.webp20261110161423' />
+	<item key='cover-93370.webp20261110161423' />
+	<item key='cover-94390.webp20261104181921' />
+	<item key='Pie chart.svg20261109151954' />
+	<item key='Pie-chart.png20261109185923' />
+	<item key='Query.png20261105182754' />
 </files>
 </dirinfo>

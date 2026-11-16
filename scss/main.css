@@ -3890,6 +3890,10 @@ section#section-5 {
   height: auto;
 }
 
+.related-inline .related-visual img.related-gif {
+  mix-blend-mode: multiply;
+}
+
 .related-inline .related-copy {
   width: 100%;
   max-width: 590px;
