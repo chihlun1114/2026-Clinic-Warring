@@ -2889,6 +2889,13 @@ section:not(#section-banner, .section-bottom, #section-related, #section-story) 
   max-width: 100%;
 }
 
+@media only screen and (width >= 769px) {
+  #section-banner .banner-copy {
+    transform: scale(0.9);
+    transform-origin: center center;
+  }
+}
+
 #section-banner .banner-title h1 {
   margin: 12px 0 2px;
   font-size: 0;
