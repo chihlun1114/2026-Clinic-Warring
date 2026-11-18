@@ -61,8 +61,10 @@
   if (!gifs.length) return;
   var nonce = 0;
 
+  var PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
   function fileSrc(img) {
-    return img.getAttribute('data-gif-src') || (img.getAttribute('src') || '').split('#')[0].split('?')[0];
+    return img.getAttribute('data-gif-src') || (img.getAttribute('src') || '').split('#')[0];
   }
 
   function stampBlob(blob) {
@@ -109,7 +111,7 @@
     if (img._gifFetch) return img._gifFetch;
     var src = fileSrc(img);
     img.setAttribute('data-gif-src', src);
-    img._gifFetch = fetch(src, { cache: 'force-cache' })
+    img._gifFetch = fetch(src, { cache: 'force-cache', priority: src.indexOf('Animation-02') !== -1 ? 'high' : 'low' })
       .then(function (res) { return res.blob(); })
       .then(function (blob) {
         img._gifBlob = blob;
@@ -140,6 +142,14 @@
     });
   }
 
+  function lookingAt(entry) {
+    var box = entry.boundingClientRect;
+    var vh = window.innerHeight;
+    if (!entry.isIntersecting || box.height <= 0) return false;
+    var mid = box.top + box.height * 0.4;
+    return entry.intersectionRatio >= 0.4 || (mid < vh * 0.72 && box.bottom > vh * 0.22);
+  }
+
   function enter(img) {
     if (img._gifInView) return;
     img._gifInView = true;
@@ -152,6 +162,7 @@
 
   gifs.forEach(function (img) {
     img.setAttribute('data-gif-src', fileSrc(img));
+    if ((img.getAttribute('src') || '').indexOf('data:') !== 0) img.src = PLACEHOLDER;
   });
 
   if ('IntersectionObserver' in window) {
@@ -159,7 +170,9 @@
     function prime() {
       if (primed) return;
       primed = true;
-      gifs.forEach(prefetch);
+      var order = gifs.slice();
+      if (order[1]) order.unshift(order.splice(1, 1)[0]);
+      order.forEach(prefetch);
       if (prepIo) prepIo.disconnect();
     }
     var prepIo = new IntersectionObserver(function (entries) {
@@ -171,10 +184,10 @@
 
     var playIo = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) enter(entry.target);
+        if (lookingAt(entry)) enter(entry.target);
         else leave(entry.target);
       });
-    }, { threshold: 0, rootMargin: '0px' });
+    }, { threshold: [0, 0.2, 0.4, 0.6, 1], rootMargin: '0px' });
     gifs.forEach(function (img) { playIo.observe(img); });
   } else {
     gifs.forEach(prefetch);
@@ -185,7 +198,7 @@
     gifs.forEach(function (img) {
       img._gifInView = false;
       var box = img.getBoundingClientRect();
-      if (box.width > 0 && box.bottom > 0 && box.top < window.innerHeight) enter(img);
+      if (box.width > 0 && box.top < window.innerHeight * 0.72 && box.bottom > window.innerHeight * 0.22) enter(img);
     });
   });
 })();

@@ -3925,6 +3925,7 @@ section#section-5 {
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 1200 / 750;
 }
 
 .related-inline .related-visual--gif {
