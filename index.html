@@ -66,7 +66,7 @@
           <li><a href="#section-4">醫療失衡</a></li>
           <li id="ch-social-group">
               <div class="ch-social">
-			      <a id="facebookShare" class="gtm-event">
+			      <a id="facebookShare" class="gtm-event" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fweb.commonhealth.com.tw%2F2026-Clinic-Warring%2Findex.html" target="_blank" rel="noopener">
                       <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
                           <path
                               d="M22.67 2.667h-3.49c-3.922 0-6.454 2.574-6.454 6.562v3.028H9.215a.546.546 0 0 0-.548.541v4.385c0 .302.245.54.548.54h3.511v11.07c0 .302.246.54.548.54h4.58a.546.546 0 0 0 .548-.54v-11.07h4.103a.546.546 0 0 0 .548-.54v-4.385a.54.54 0 0 0-.548-.54h-4.103V9.69c0-1.233.295-1.86 1.918-1.86h2.35a.548.548 0 0 0 .549-.548V3.207a.542.542 0 0 0-.548-.54Z"
@@ -111,19 +111,15 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-  document.getElementById('facebookShare').onclick = function() {
-    var href = 'https://web.commonhealth.com.tw/2026-Clinic-Warring/index.html';
-    if (typeof FB !== 'undefined' && FB.ui && window.location.hostname === 'www.commonhealth.com.tw') {
-      FB.ui({
-        display: 'popup',
-        method: 'share',
-        href: href,
-      }, function(response) {});
-      return;
-    }
-    var share = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(href);
-    var popup = window.open(share, '_blank');
-    if (!popup) window.location.href = share;
+  document.getElementById('facebookShare').onclick = function(e) {
+    var canUseSdk = typeof FB !== 'undefined' && FB.ui && window.location.hostname === 'www.commonhealth.com.tw' && !/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (!canUseSdk) return;
+    e.preventDefault();
+    FB.ui({
+      display: 'popup',
+      method: 'share',
+      href: 'https://web.commonhealth.com.tw/2026-Clinic-Warring/index.html',
+    }, function(response) {});
   }
 </script>
     <main class="flex flex-col items-center">
