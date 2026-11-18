@@ -92,42 +92,58 @@
     });
   }
 
-  function play(img) {
-    if (!img._gifBlob) return;
-    stampBlob(img._gifBlob).then(function (unique) {
-      if (img._gifObjectUrl) URL.revokeObjectURL(img._gifObjectUrl);
-      img._gifObjectUrl = URL.createObjectURL(unique);
-      img.src = img._gifObjectUrl;
+  function prepareReady(img) {
+    if (!img._gifBlob || img._gifReadyUrl || img._gifPreparing) return img._gifPreparing;
+    img._gifPreparing = stampBlob(img._gifBlob).then(function (unique) {
+      img._gifReadyUrl = URL.createObjectURL(unique);
+      img._gifPreparing = null;
     });
+    return img._gifPreparing;
   }
 
-  function ensureAndPlay(img) {
+  function prefetch(img) {
     if (img._gifBlob) {
-      play(img);
-      return;
+      prepareReady(img);
+      return img._gifFetch;
     }
-    if (img._gifFetch) {
-      img._gifFetch.then(function () { play(img); });
-      return;
-    }
+    if (img._gifFetch) return img._gifFetch;
     var src = fileSrc(img);
     img.setAttribute('data-gif-src', src);
     img._gifFetch = fetch(src, { cache: 'force-cache' })
       .then(function (res) { return res.blob(); })
       .then(function (blob) {
         img._gifBlob = blob;
-        play(img);
+        return prepareReady(img);
       })
       .catch(function () {
         img._gifFetch = null;
-        img.src = src + '?r=' + Date.now();
       });
+    return img._gifFetch;
+  }
+
+  function play(img) {
+    function assign() {
+      if (!img._gifReadyUrl) return;
+      if (img._gifObjectUrl) URL.revokeObjectURL(img._gifObjectUrl);
+      img._gifObjectUrl = img._gifReadyUrl;
+      img._gifReadyUrl = null;
+      img.src = img._gifObjectUrl;
+      prepareReady(img);
+    }
+    if (img._gifReadyUrl) {
+      assign();
+      return;
+    }
+    prefetch(img).then(function () {
+      if (img._gifReadyUrl) assign();
+      else if (img._gifPreparing) img._gifPreparing.then(assign);
+    });
   }
 
   function enter(img) {
     if (img._gifInView) return;
     img._gifInView = true;
-    ensureAndPlay(img);
+    play(img);
   }
 
   function leave(img) {
@@ -139,14 +155,29 @@
   });
 
   if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
+    var primed = false;
+    function prime() {
+      if (primed) return;
+      primed = true;
+      gifs.forEach(prefetch);
+      if (prepIo) prepIo.disconnect();
+    }
+    var prepIo = new IntersectionObserver(function (entries) {
+      if (entries.some(function (entry) { return entry.isIntersecting; })) prime();
+    }, { rootMargin: '2500px 0px 2500px 0px', threshold: 0 });
+    prepIo.observe(gifs[0]);
+    if (window.requestIdleCallback) requestIdleCallback(prime, { timeout: 1800 });
+    else setTimeout(prime, 1200);
+
+    var playIo = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) enter(entry.target);
         else leave(entry.target);
       });
-    }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
-    gifs.forEach(function (img) { io.observe(img); });
+    }, { threshold: 0, rootMargin: '0px' });
+    gifs.forEach(function (img) { playIo.observe(img); });
   } else {
+    gifs.forEach(prefetch);
     gifs.forEach(enter);
   }
 
@@ -154,7 +185,7 @@
     gifs.forEach(function (img) {
       img._gifInView = false;
       var box = img.getBoundingClientRect();
-      if (box.width > 0 && box.bottom > 40 && box.top < window.innerHeight - 40) enter(img);
+      if (box.width > 0 && box.bottom > 0 && box.top < window.innerHeight) enter(img);
     });
   });
 })();
