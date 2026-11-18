@@ -228,7 +228,7 @@ if (facebookShare) {
     FB.ui({
       display: 'popup',
       method: 'share',
-      href: '網址'
+      href: 'https://web.commonhealth.com.tw/2026-Clinic-Warring/index.html'
     }, function () {});
   };
 }
