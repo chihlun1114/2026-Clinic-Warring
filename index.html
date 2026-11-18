@@ -39,7 +39,7 @@
 	<script src="charts/chart-3.js?v=numblk1" defer></script>
 	<script src="charts/chart-6.js?v=name1" defer></script>
 	<script src="charts/chart-story.js?v=endzoom1" defer></script>
-	<script src="js/main.js?v=ogshare1" defer></script>
+	<script src="js/main.js?v=ogshare4" defer></script>
 	<!-- Google Tag Manager -->
 	<script>(function (w, d, s, l, i) {
 		w[l] = w[l] || []; w[l].push({
@@ -88,6 +88,44 @@
       </ul>
   </div>
 </header>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: '788399774562640',
+      cookie: true,
+      xfbml: false,
+      version: 'v24.0'
+    });
+    console.log('Facebook SDK ready');
+  };
+
+  (function(d, s, id) {
+    var js,
+      fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {
+      return;
+    }
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://connect.facebook.net/zh_TW/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  document.getElementById('facebookShare').onclick = function() {
+    var href = 'https://web.commonhealth.com.tw/2026-Clinic-Warring/index.html';
+    if (typeof FB !== 'undefined' && FB.ui && window.location.hostname === 'www.commonhealth.com.tw') {
+      FB.ui({
+        display: 'popup',
+        method: 'share',
+        href: href,
+      }, function(response) {});
+      return;
+    }
+    var share = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(href);
+    var popup = window.open(share, '_blank');
+    if (!popup) window.location.href = share;
+  }
+</script>
     <main class="flex flex-col items-center">
         <section id="section-banner">
             <div class="banner-block">
